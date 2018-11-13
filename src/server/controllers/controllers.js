@@ -12,6 +12,8 @@ db.connect = (req, res, next) => {
   client.connect(err => {
     if (err) return console.log("Could not connect to postgres ", err);
   });
+
+  console.log("First");
   next();
 };
 
@@ -21,25 +23,30 @@ db.getTables = (req, res, next) => {
     (err, result) => {
       if (err) throw new Error("Error querying database");
       result.rows.map(table => (tables[table.tablename] = {}));
+      next();
     }
   );
-  next();
 };
 
 db.getFields = (req, res) => {
-  Object.keys(tables).map(element => {
+  Object.keys(tables).map((element, index) => {
     client.query(
       `SELECT column_name, data_type FROM information_schema.columns WHERE table_name = '${element}'`,
       (err, result) => {
-        if (err) return console.log("Error");
+        if (err) reject(err);
+
         tables[element] = result.rows.reduce((acc, curr) => {
           acc[curr.column_name] = curr.data_type;
           return acc;
         }, {});
+
+        console.log(index, tables, Object.keys(tables).length);
+        if (index === Object.keys(tables).length - 1) {
+          res.end(JSON.stringify(tables));
+        }
       }
     );
   });
-  console.log("Tables from last call ", tables);
-  res.end(JSON.stringify(tables));
 };
+
 module.exports = db;
