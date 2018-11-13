@@ -1,12 +1,17 @@
 const React = require("react");
 const ReactDOM = require("react-dom");
+import {Component} from "react";
 require("./index.css");
+import Navbar from "./components/Navbar"
+import TextBox from "./components/TextBox"
+import {Button, Icon, Input, Checkbox, Form, Menu} from "semantic-ui-react";
 
-class App extends React.Component {
+class App extends Component {
   render() {
     return (
       <div>
-        <h1>Hello TentaQL - React</h1>
+        <Navbar/>
+        <TextBox/>
       </div>
     );
   }

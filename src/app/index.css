@@ -1,3 +1,7 @@
 body {
   background: pink;
 }
+
+input[type="text"] {
+  width: 500px;
+}
