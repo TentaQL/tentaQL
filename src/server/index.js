@@ -10,7 +10,7 @@ app.get("/", (req, res) => {
 });
 
 //this queries all tables and fields
-app.get("/db", db.connect, db.getTables, db.getFields);
+app.get("/db", db.connect, db.getTables, db.getFields, db.filterAssociations);
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);

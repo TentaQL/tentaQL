@@ -2,6 +2,7 @@ const pg = require("pg");
 const db = {};
 
 let tables = {};
+let foreignTables = {};
 let uri;
 let client;
 
@@ -28,7 +29,7 @@ db.getTables = (req, res, next) => {
   );
 };
 
-db.getFields = (req, res) => {
+db.getFields = (req, res, next) => {
   Object.keys(tables).map((element, index) => {
     client.query(
       `SELECT column_name, data_type FROM information_schema.columns WHERE table_name = '${element}'`,
@@ -39,14 +40,32 @@ db.getFields = (req, res) => {
           acc[curr.column_name] = curr.data_type;
           return acc;
         }, {});
-
-        console.log(index, tables, Object.keys(tables).length);
         if (index === Object.keys(tables).length - 1) {
-          res.end(JSON.stringify(tables));
+          next();
         }
       }
     );
   });
 };
 
+db.filterAssociations = async (req, res) => {
+  let filteredResults = await new Promise((resolve, reject) => {
+    client.query(
+      "SELECT tc.table_schema, tc.constraint_name, tc.table_name, kcu.column_name, ccu.table_name AS foreign_table_name, ccu.column_name AS foreign_column_name FROM information_schema.table_constraints tc JOIN information_schema.key_column_usage kcu ON tc.constraint_name = kcu.constraint_name JOIN information_schema.constraint_column_usage ccu ON ccu.constraint_name = tc.constraint_name WHERE constraint_type = 'FOREIGN KEY';",
+      (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(result.rows);
+        }
+      }
+    );
+  });
+  await filteredResults.map(el => {
+    foreignTables[el.table_name] = el.foreign_table_name;
+  });
+
+  tables.foreignTables = foreignTables;
+  res.end(JSON.stringify(tables));
+};
 module.exports = db;
