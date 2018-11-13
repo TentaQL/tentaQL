@@ -1,41 +1,45 @@
 const pg = require("pg");
 const db = {};
-const uri =
-  "postgres://dbomqaen:FUKYQ_vrQCHbBzHwBpBDAHfUw5R6DzO6@elmer.db.elephantsql.com:5432/dbomqaen";
-const client = new pg.Client(uri);
-let tables = {};
 
-db.getTables = (req, res) => {
+let tables = {};
+let uri;
+let client;
+
+db.connect = (req, res, next) => {
+  uri =
+    "postgres://dbomqaen:FUKYQ_vrQCHbBzHwBpBDAHfUw5R6DzO6@elmer.db.elephantsql.com:5432/dbomqaen";
+  client = new pg.Client(uri);
   client.connect(err => {
     if (err) return console.log("Could not connect to postgres ", err);
+  });
+  next();
+};
+
+db.getTables = (req, res, next) => {
+  client.query(
+    "SELECT*FROM pg_catalog.pg_tables WHERE schemaname = 'public'",
+    (err, result) => {
+      if (err) throw new Error("Error querying database");
+      result.rows.map(table => (tables[table.tablename] = {}));
+    }
+  );
+  next();
+};
+
+db.getFields = (req, res) => {
+  Object.keys(tables).map(element => {
     client.query(
-      "SELECT*FROM pg_catalog.pg_tables WHERE schemaname = 'public'",
+      `SELECT column_name, data_type FROM information_schema.columns WHERE table_name = '${element}'`,
       (err, result) => {
-        if (err) throw new Error("Error querying database");
-        //TABLE NAMES
-        result.rows.map(table => (tables[table.tablename] = {}));
-        console.log(tables);
-        Object.keys(tables).map(element => {
-          console.log(element);
-          client.query(`SELECT*FROM ${element}`, (err, result) => {
-            if (err) return console.log("Error");
-            console.log(result.fields);
-            tables[element] = result.fields.reduce((acc, curr) => {
-              let format = "";
-              if (curr.format === "text") {
-                console.log("Hello");
-                format = "String";
-              }
-              acc[curr.name] = format;
-              return acc;
-            }, {});
-            console.log("Tables:", tables);
-          });
-        });
+        if (err) return console.log("Error");
+        tables[element] = result.rows.reduce((acc, curr) => {
+          acc[curr.column_name] = curr.data_type;
+          return acc;
+        }, {});
       }
     );
   });
-  res.end("Done");
+  console.log("Tables from last call ", tables);
+  res.end(JSON.stringify(tables));
 };
-
 module.exports = db;

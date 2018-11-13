@@ -9,7 +9,8 @@ app.get("/", (req, res) => {
   res.end("Hello TentaQL");
 });
 
-app.get("/db", db.getTables);
+//this queries all tables and fields
+app.get("/db", db.connect, db.getTables, db.getFields);
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
