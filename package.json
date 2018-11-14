@@ -36,6 +36,7 @@
     "pg": "^4.5.7",
     "prop-types": "^15.6.2",
     "react": "^16.6.1",
+    "react-codemirror": "^1.0.0",
     "react-dom": "^16.6.1",
     "react-redux": "^5.1.1",
     "redux": "^4.0.1",
