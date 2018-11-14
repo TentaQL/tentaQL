@@ -6,7 +6,7 @@ input[type="text"] {
   width: 500px;
 }
 
-.ReactCodeMirror {
+.CodeMirror.cm-s-default {
   background:  #282c34;
   color: white;
   margin-left: 2em;
