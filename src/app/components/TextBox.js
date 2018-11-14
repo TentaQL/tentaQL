@@ -4,8 +4,6 @@ import {Component} from "react";
 import {Button, Icon, Input, Checkbox, Form, Menu, Sticky} from "semantic-ui-react";
 const CodeMirror = require('react-codemirror');
 
-
-
 class TextBox extends Component{
   constructor (props) {
     super(props)

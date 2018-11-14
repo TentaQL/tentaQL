@@ -3,34 +3,7 @@ const ReactDOM = require("react-dom");
 import { Component } from "react";
 import { ModalExampleDimmer } from "./components/Modal.js";
 require("./index.css");
-<<<<<<< HEAD
-import Navbar from "./components/Navbar"
-import TextBox from "./components/TextBox"
-import {Button, Icon, Input, Checkbox, Form, Menu} from "semantic-ui-react";
-var CodeMirror = require('react-codemirror');
-
-class App extends Component {
-
-
-  // var App = React.createClass({
-  //   getInitialState: function() {
-  //     return {
-  //       code: "// Code",
-  //     };
-  //   },
-  //   updateCode: function(newCode) {
-  //     this.setState({
-  //       code: newCode,
-  //     });
-  //   },
-  //   render: function() {
-  //     var options = {
-  //       lineNumbers: true,
-  //     };
-  //     return <CodeMirror value={this.state.code} onChange={this.updateCode} options={options} />
-  //   }
-  // });
-=======
+// require("./codemirror.css");
 import Navbar from "./components/Navbar";
 import TextBox from "./components/TextBox";
 import { Button, Icon, Input, Checkbox, Form, Menu } from "semantic-ui-react";
@@ -83,16 +56,15 @@ class App extends Component {
         console.log(err);
       });
   }
->>>>>>> f8ad2c9708f5a3f9615e478d3120525e70a54952
 
   render() {
     return (
       <div>
-        <ModalExampleDimmer
+         <ModalExampleDimmer
           data={this.state}
           credentialsHandler={this.credentialsHandler}
-          connectionHandler={this.connectionHandler}
-        />
+         connectionHandler={this.connectionHandler}
+        />  
         <Navbar />
         <TextBox />
       </div>
