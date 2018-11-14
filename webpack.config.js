@@ -18,7 +18,7 @@ module.exports = {
   devServer: {
     port: 3000,
     proxy: {
-      "/app": "http://localhost:8080"
+      "/db": "http://localhost:8080"
     }
   },
   mode: "development",
