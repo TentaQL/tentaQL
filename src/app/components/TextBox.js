@@ -16,9 +16,8 @@ class TextBox extends Component{
       <div>
         <CodeMirror class="textarea" value={this.state} />
       </div>
-      )
+    );
   }
-
 }
 
 export default TextBox;

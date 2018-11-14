@@ -1,24 +1,35 @@
 const pg = require("pg");
 const db = {};
-
 let tables = {};
 let foreignTables = {};
 let uri;
 let client;
+let alan =
+  "postgres://ysejjgvv:6WhT4YhfwqO01EDsGE7-0SEsnAfcrW2g@pellefant.db.elephantsql.com:5432/ysejjgvv";
 
-db.connect = (req, res, next) => {
-  uri =
-    "postgres://dbomqaen:FUKYQ_vrQCHbBzHwBpBDAHfUw5R6DzO6@elmer.db.elephantsql.com:5432/dbomqaen";
+//CONNECT
+db.connect = (req, res) => {
+  console.log("I got here ", req.body);
+  //   uri = `postgres://${req.body.user}:${req.body.password}@${req.body.host}:${
+  //     req.body.port
+  //   }/${req.body.dbName}`;
+  uri = alan;
+  // "postgres://dbomqaen:FUKYQ_vrQCHbBzHwBpBDAHfUw5R6DzO6@elmer.db.elephantsql.com:5432/dbomqaen";
   client = new pg.Client(uri);
   client.connect(err => {
     if (err) return console.log("Could not connect to postgres ", err);
   });
-
-  console.log("First");
-  next();
+  console.log(uri);
+  res.end();
 };
 
+//GET DATA
 db.getTables = (req, res, next) => {
+  client = new pg.Client(uri);
+  console.log("Client: ", client);
+  client.connect(err => {
+    if (err) return console.log("Could not connect to postgres ", err);
+  });
   client.query(
     "SELECT*FROM pg_catalog.pg_tables WHERE schemaname = 'public'",
     (err, result) => {
