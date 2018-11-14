@@ -9,7 +9,7 @@ let alan =
 
 //CONNECT
 db.connect = (req, res) => {
-  console.log("I got here ", req.body);
+  // console.log("I got here ", req.body);
   //   uri = `postgres://${req.body.user}:${req.body.password}@${req.body.host}:${
   //     req.body.port
   //   }/${req.body.dbName}`;
@@ -19,14 +19,14 @@ db.connect = (req, res) => {
   client.connect(err => {
     if (err) return console.log("Could not connect to postgres ", err);
   });
-  console.log(uri);
+  // console.log(uri);
   res.end();
 };
 
 //GET DATA
 db.getTables = (req, res, next) => {
   client = new pg.Client(uri);
-  console.log("Client: ", client);
+  // console.log("Client: ", client);
   client.connect(err => {
     if (err) return console.log("Could not connect to postgres ", err);
   });
