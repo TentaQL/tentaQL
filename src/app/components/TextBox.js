@@ -1,6 +1,7 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 import { Component } from 'react';
+import { UnControlled as CodeMirror } from 'react-codemirror2';
 import {
   Button,
   Icon,
@@ -10,17 +11,19 @@ import {
   Menu,
   Sticky
 } from 'semantic-ui-react';
-const CodeMirror = require('react-codemirror');
 import 'codemirror/addon/hint/show-hint';
 import 'codemirror/addon/lint/lint';
 import 'codemirror-graphql/hint';
 import 'codemirror-graphql/lint';
 import 'codemirror-graphql/mode';
+// require('codemirror/mode/javascript/javascript');
 
 class TextBox extends Component {
   constructor(props) {
     super(props);
-    this.state = null
+    this.state = {
+      name: ''
+    };
   }
 
   render() {
@@ -29,11 +32,21 @@ class TextBox extends Component {
     // })
     return (
       <div>
-        <CodeMirror className="codeeditor" mode="javascript" value={this.state} />
+        <CodeMirror
+          className="codeeditor"
+          value={this.state.name}
+          options={{
+            // mode: 'javascript',
+            lineNumbers: true,
+            readOnly: false,
+          }}
+          onChange={(editor, metadata, value) => {
+            this.setState({ value });
+          }}
+        />
       </div>
     );
   }
 }
 
 export default TextBox;
-
