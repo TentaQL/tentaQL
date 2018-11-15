@@ -1,7 +1,17 @@
 body {
-  background: pink;
+  background: white;
 }
 
 input[type="text"] {
   width: 500px;
 }
+
+.CodeMirror.cm-s-default {
+  background:  #282c34;
+  color: white;
+  margin-left: 2em;
+  margin-top: 2em;
+  height: 600px;
+  width: 600px;
+} 
+
