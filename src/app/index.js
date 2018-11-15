@@ -5,8 +5,8 @@ import { ModalExampleDimmer } from "./components/Modal.js";
 import Navbar from "./components/Navbar";
 import TextBox from "./components/TextBox";
 import { Button, Icon, Input, Checkbox, Form, Menu } from "semantic-ui-react";
-require("./index.css");
-require("../codemirror/lib/codemirror.css")
+require('./index.css');
+require('../codemirror/lib/codemirror.css')
 require('codemirror/mode/javascript/javascript')
 
 

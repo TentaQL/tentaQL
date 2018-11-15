@@ -1,12 +1,12 @@
 /* BASICS */
 
-.CodeMirror {
+/* .CodeMirror { */
   /* Set height, width, borders, and global font properties here */
-  font-family: monospace;
+  /* font-family: monospace;
   height: 300px;
   color: black;
   direction: ltr;
-}
+} */
 
 /* PADDING */
 
@@ -33,17 +33,17 @@
   padding: 0 3px 0 5px;
   min-width: 20px;
   text-align: right;
-  color: #999;
+  color: #606366;;
   white-space: nowrap;
 }
 
-.CodeMirror-guttermarker { color: black; }
-.CodeMirror-guttermarker-subtle { color: #999; }
+.CodeMirror-guttermarker { color:#FFEE80; }
+.CodeMirror-guttermarker-subtle { color: #D0D0D0; }
 
 /* CURSOR */
 
 .CodeMirror-cursor {
-  border-left: 1px solid white;
+  border-left: 1px solid #A9B7C6;;
   border-right: none;
   width: 0;
 }
@@ -116,39 +116,39 @@
 .cm-link {text-decoration: underline;}
 .cm-strikethrough {text-decoration: line-through;}
 
-.cm-s-default .cm-keyword {color: #708;}
-.cm-s-default .cm-atom {color: #219;}
-.cm-s-default .cm-number {color: #164;}
-.cm-s-default .cm-def {color: #00f;}
-.cm-s-default .cm-variable,
+.cm-s-default .cm-keyword {color: #CC7832; line-height: 1em; font-weight: bold;}
+.cm-s-default .cm-atom { color: #CC7832; }
+.cm-s-default .cm-number {color: #6897BB;}
+.cm-s-default .cm-def {color: #A9B7C6; font-style: italic;}
+.cm-s-default .cm-variable {color: #A9B7C6;}
 .cm-s-default .cm-punctuation,
-.cm-s-default .cm-property,
-.cm-s-default .cm-operator {}
-.cm-s-default .cm-variable-2 {color: #05a;}
-.cm-s-default .cm-variable-3, .cm-s-default .cm-type {color: #085;}
-.cm-s-default .cm-comment {color: #a50;}
-.cm-s-default .cm-string {color: #a11;}
-.cm-s-default .cm-string-2 {color: #f50;}
-.cm-s-default .cm-meta {color: #555;}
-.cm-s-default .cm-qualifier {color: #555;}
-.cm-s-default .cm-builtin {color: #30a;}
-.cm-s-default .cm-bracket {color: #997;}
-.cm-s-default .cm-tag {color: #170;}
-.cm-s-default .cm-attribute {color: #00c;}
+.cm-s-default .cm-property {color: #FFC66D;}
+.cm-s-default .cm-operator {color: #A9B7C6; }
+.cm-s-default .cm-variable-2 {color: #A9B7C6;}
+.cm-s-default .cm-variable-3, .cm-s-default .cm-type {color: #9876AA; }
+.cm-s-default .cm-comment {color: #61A151; font-style: italic;}
+.cm-s-default .cm-string {color: #6A8759; }
+.cm-s-default .cm-string-2 {color: #6A8759;}
+.cm-s-default .cm-meta {color: #BBB529;}
+.cm-s-default .cm-qualifier {color: #6A8759;}
+.cm-s-default .cm-builtin {color: #FF9E59;}
+.cm-s-default .cm-bracket {color: #A9B7C6;}
+.cm-s-default .cm-tag {color: #629755; font-weight: bold; font-style: italic; text-decoration: underline;}
+.cm-s-default .cm-attribute {color: #6897bb;}
 .cm-s-default .cm-hr {color: #999;}
-.cm-s-default .cm-link {color: #00c;}
+.cm-s-default .cm-link {color: #CC7832;}
 
-.cm-s-default .cm-error {color: #f00;}
-.cm-invalidchar {color: #f00;}
+.cm-s-default .cm-error {color: #BC3F3C;}
+/* .cm-invalidchar {color: #f00;} */
 
 .CodeMirror-composing { border-bottom: 2px solid; }
 
 /* Default styles for common addons */
 
 div.CodeMirror span.CodeMirror-matchingbracket {color: #0b0;}
-div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #a22;}
+div.CodeMirror span.CodeMirror-nonmatchingbracket {background-color: #3B514D; color: #FFEF28 !important; font-weight: bold;}
 .CodeMirror-matchingtag { background: rgba(255, 150, 0, .3); }
-.CodeMirror-activeline-background {background: #e8f2ff;}
+.CodeMirror-activeline-background {background: #323232;}
 
 /* STOP */
 
@@ -202,6 +202,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #a22;}
 }
 
 .CodeMirror-gutters {
+  background: #313335; border-right: 1px solid #313335;
   position: absolute; left: 0; top: 0;
   min-height: 100%;
   z-index: 3;
@@ -221,6 +222,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #a22;}
 }
 .CodeMirror-gutter-background {
   position: absolute;
+  background: #4e4e4e;
   top: 0; bottom: 0;
   z-index: 4;
 }
@@ -318,7 +320,7 @@ div.CodeMirror-dragcursors {
   visibility: visible;
 }
 
-.CodeMirror-selected { background: #d9d9d9; }
+.CodeMirror-selected { background: #214283; }
 .CodeMirror-focused .CodeMirror-selected { background: #d7d4f0; }
 .CodeMirror-crosshair { cursor: crosshair; }
 .CodeMirror-line::selection, .CodeMirror-line > span::selection, .CodeMirror-line > span > span::selection { background: #d7d4f0; }
