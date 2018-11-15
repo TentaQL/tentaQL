@@ -1,28 +1,28 @@
 const pluralize = require("pluralize");
 
-//TESTING DATABASE
-// const allTypes = {
-//   customers: {
-//     customerid: "integer",
-//     lastname: "character varying",
-//     firstname: "character varying",
-//     phone: "character varying"
-//   },
-//   orders: {
-//     orderid: "integer",
-//     amount: "character varying",
-//     customerid: "integer"
-//   },
-//   stores: {
-//     storeid: "integer",
-//     region: "character varying",
-//     orderid: "integer"
-//   },
-//   foreignTables: {
-//     orders: "customers",
-//     stores: "orders"
-//   }
-// };
+// TESTING DATABASE
+const allTypes = {
+  customers: {
+    customerid: "integer",
+    lastname: "character varying",
+    firstname: "character varying",
+    phone: "character varying"
+  },
+  orders: {
+    orderid: "integer",
+    amount: "character varying",
+    customerid: "integer"
+  },
+  stores: {
+    storeid: "integer",
+    region: "character varying",
+    orderid: "integer"
+  },
+  foreignTables: {
+    orders: "customers",
+    stores: "orders"
+  }
+};
 
 // const allTypes = {
 //   players: {
@@ -58,18 +58,67 @@ const pluralize = require("pluralize");
 //   }
 // };
 
+function initialCapitalizer(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+function valueChecker(str) {
+  switch (str) {
+    case "character varying":
+      return "String";
+      break;
+    case "text":
+      return "String";
+      break;
+    case "integer":
+      return "Integer";
+      break;
+    case "date":
+      return "String";
+      break;
+  }
+}
+
 function tranformObj(obj) {
   let output = {};
   output["type Query"] = {};
+  output["type Mutation"] = {};
   for (key in obj) {
+    let input = "";
+    let i = 0;
     if (key != "foreignTables")
       for (field in obj[key]) {
+        let count = Object.keys(obj[key]).length;
+        if (field.slice(field.length - 2) != "id") {
+          input += `    ${field}: ${valueChecker(obj[key][field])} \r\n`;
+        }
+        if (i >= count - 1) {
+          //CREATE
+          output["type Mutation"][
+            `create${initialCapitalizer(key)}(\r\n${input}   )`
+          ] = pluralize.singular(initialCapitalizer(key));
+
+          output["type Mutation"][
+            `update${pluralize.singular(
+              initialCapitalizer(key)
+            )}(\r\n${input}   )`
+          ] = key;
+
+          input = "";
+        }
+
+        i++;
+
+        output["type Mutation"][
+          `delete${pluralize.singular(initialCapitalizer(key))}(id:ID)`
+        ] = pluralize.singular(initialCapitalizer(key));
+
         let singular = pluralize.singular(key);
-        output[`type ` + key.charAt(0).toUpperCase() + key.slice(1)] = obj[key];
-        output["type Query"][pluralize.singular(key)] =
-          singular.charAt(0).toUpperCase() + singular.slice(1);
-        output["type Query"][key] = `[${singular.charAt(0).toUpperCase() +
-          singular.slice(1)}]`;
+        output[`type ` + initialCapitalizer(key)] = obj[key];
+        output["type Query"][pluralize.singular(key)] = initialCapitalizer(
+          singular
+        );
+        output["type Query"][key] = `[${initialCapitalizer(singular)}]`;
       }
   }
   return output;
@@ -98,10 +147,10 @@ function mergeToString(obj) {
 function relations(obj1, obj2) {
   let output = obj1;
   for (let key in obj2) {
-    let check = "type " + key.charAt(0).toUpperCase() + key.slice(1);
+    let check = "type " + initialCapitalizer(key);
     if (obj1.hasOwnProperty(check)) {
       let type = pluralize.singular(obj2[key]);
-      obj1[check][type] = `[${type.charAt(0).toUpperCase() + type.slice(1)}]`;
+      obj1[check][type] = `[${initialCapitalizer(type)}]`;
     }
   }
   return output;
@@ -155,6 +204,6 @@ const transform = obj => {
   return "const typeDefs = ` " + string + "\r\n `;";
 };
 
-// console.log(transform(allTypes));
+console.log(transform(allTypes));
 
-module.exports = transform;
+// module.exports = transform;
