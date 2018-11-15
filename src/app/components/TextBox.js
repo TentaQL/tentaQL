@@ -2,7 +2,9 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 import { Component } from 'react';
 import { UnControlled as CodeMirror } from 'react-codemirror2';
+
 import Clipboard from 'react-clipboard.js';
+
 import {
   Button,
   Icon,
@@ -33,12 +35,12 @@ class TextBox extends Component {
     // })
     return (
       <div>
+
         <Clipboard className="clipboard" component="a" button-href="#" data-clipboard-text={this.state.value}>
           <Button>
             Copy to Clipboard
                </Button>
         </Clipboard>
-
         <CodeMirror
           className="codeeditor"
           value={this.state.name}
@@ -56,4 +58,6 @@ class TextBox extends Component {
   }
 }
 
+
 export default TextBox;
+

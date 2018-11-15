@@ -27,6 +27,7 @@
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "classnames": "^2.2.6",
+    "codemirror": "^5.41.0",
     "codemirror-graphql": "^0.8.3",
     "concurrently": "^4.0.1",
     "cors": "^2.8.5",
