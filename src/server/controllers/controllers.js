@@ -1,4 +1,8 @@
 const pg = require("pg");
+const path = require("path");
+const PATH = path.join(__dirname, "../../");
+const fs = require("fs");
+const typesCreator = require("../functions/typesCreator");
 const db = {};
 let tables = {};
 let foreignTables = {};
@@ -9,12 +13,8 @@ let alan =
 
 //CONNECT
 db.connect = (req, res) => {
-  console.log("I got here ", req.body);
-  //   uri = `postgres://${req.body.user}:${req.body.password}@${req.body.host}:${
-  //     req.body.port
-  //   }/${req.body.dbName}`;
-  uri = alan;
-  // "postgres://dbomqaen:FUKYQ_vrQCHbBzHwBpBDAHfUw5R6DzO6@elmer.db.elephantsql.com:5432/dbomqaen";
+  uri =
+    "postgres://dbomqaen:FUKYQ_vrQCHbBzHwBpBDAHfUw5R6DzO6@elmer.db.elephantsql.com:5432/dbomqaen";
   client = new pg.Client(uri);
   client.connect(err => {
     if (err) return console.log("Could not connect to postgres ", err);
@@ -77,6 +77,9 @@ db.filterAssociations = async (req, res) => {
   });
 
   tables.foreignTables = foreignTables;
+  console.log("SERVER>>>>>", typesCreator(tables));
+
+  fs.writeFileSync(path.join(PATH, `toZip.js`), typesCreator(tables));
   res.end(JSON.stringify(tables));
 };
 module.exports = db;

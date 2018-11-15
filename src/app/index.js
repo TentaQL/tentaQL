@@ -17,16 +17,22 @@ class App extends Component {
       host: "",
       port: "",
       dbName: "",
+      url: "",
       data: {}
     };
     this.credentialsHandler = this.credentialsHandler.bind(this);
     this.connectionHandler = this.connectionHandler.bind(this);
+    this.searchBarHandler = this.searchBarHandler.bind(this);
   }
 
   credentialsHandler(event) {
     event.preventDefault();
     this.setState({ [event.target.name]: event.target.value });
   }
+  searchBarHandler(event) {
+    this.setState({ url: event.target.value });
+  }
+
   connectionHandler() {
     console.log("Hello");
     let credentials = {
@@ -64,7 +70,7 @@ class App extends Component {
           credentialsHandler={this.credentialsHandler}
           connectionHandler={this.connectionHandler}
         />
-        <Navbar />
+        <Navbar url={this.state.url} searchBarHandler={this.searchBarHandler} />
         <TextBox />
       </div>
     );
