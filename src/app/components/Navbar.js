@@ -1,35 +1,48 @@
 const React = require("react");
 const ReactDOM = require("react-dom");
-import {Component} from "react";
-import {Button, Icon, Input, Checkbox, Form, Menu, Sticky} from "semantic-ui-react";
+import { Component } from "react";
+import {
+  Button,
+  Icon,
+  Input,
+  Checkbox,
+  Form,
+  Menu,
+  Sticky
+} from "semantic-ui-react";
 
-class Navbar extends Component{
-
+class Navbar extends Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
-      return (
-        <Sticky>
+    return (
+      <Sticky>
         <Menu>
-          <Menu.Item position='left'>
-            <Input action={{ type: 'submit', content: 'Convert' }} placeholder='Enter a Database URL ...' />
+          <Menu.Item position="left">
+            <Input
+              onChange={this.props.searchBarHandler}
+              value={this.props.url}
+              placeholder="Enter a Database URL ..."
+            />
+            <Button>Connect</Button>
           </Menu.Item>
-          <Menu.Item position='left'>
+          <Menu.Item position="left">
             <h1>TentaQL</h1>
           </Menu.Item>
-          <Menu.Item position='left'>
+          <Menu.Item position="left">
             <Button>TentaQL</Button>
           </Menu.Item>
-          <Menu.Item position='left'>
-          <Button size='small' color='green'>
-              <Icon name='download' />
+          <Menu.Item position="left">
+            <Button size="small" color="green">
+              <Icon name="download" />
               Download
             </Button>
-            </Menu.Item>
+          </Menu.Item>
         </Menu>
-        </Sticky>
-      )
+      </Sticky>
+    );
   }
-
 }
 
 export default Navbar;
-
