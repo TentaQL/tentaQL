@@ -20,13 +20,16 @@ import 'codemirror-graphql/mode';
 class TextBox extends Component {
   constructor(props) {
     super(props);
-    this.state = null;
+    this.state = null
   }
 
   render() {
+    // let myCodeMirror = CodeMirror(document.body, {
+    //   lineNumbers: true,
+    // })
     return (
       <div>
-        <CodeMirror className="codeeditor" value={this.state} />
+        <CodeMirror className="codeeditor" mode="javascript" value={this.state} />
       </div>
     );
   }

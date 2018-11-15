@@ -6,9 +6,11 @@ input[type="text"] {
   width: 500px;
 }
 
+
 .CodeMirror.cm-s-default {
-  background:  #282c34;
-  color: white;
+  font-family: monospace;
+  background: #2B2B2B;
+  color: #A9B7C6;
   margin-left: 2em;
   margin-top: 2em;
   height: 600px;
