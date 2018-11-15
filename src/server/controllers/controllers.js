@@ -2,10 +2,12 @@ const pg = require("pg");
 const path = require("path");
 const PATH = path.join(__dirname, "../../");
 const fs = require("fs");
-const typesCreator = require("../functions/typesCreator");
+const { transform, queryResolver } = require("../functions/typesCreator");
+
 const db = {};
 let tables = {};
 let foreignTables = {};
+
 let uri;
 let client;
 let alan =
@@ -75,11 +77,31 @@ db.filterAssociations = async (req, res) => {
   await filteredResults.map(el => {
     foreignTables[el.table_name] = el.foreign_table_name;
   });
+  let primaryKeys = await new Promise((resolve, reject) => {
+    client.query(
+      "SELECT c.table_name, c.column_name FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name where constraint_type = 'PRIMARY KEY';",
+      (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(result.rows);
+        }
+      }
+    );
+  });
+
+  let filter = {};
+  let filteredKeys = await primaryKeys.map(el => {
+    filter[el.table_name] = el.column_name;
+  });
 
   tables.foreignTables = foreignTables;
-  console.log("SERVER>>>>>", typesCreator(tables));
-
-  fs.writeFileSync(path.join(PATH, `toZip.js`), typesCreator(tables));
+  tables.primaryKeys = filter;
+  fs.writeFileSync(path.join(PATH, `typesZip.js`), transform(tables));
+  fs.writeFileSync(
+    path.join(PATH, `queryZip.js`),
+    queryResolver(transform(tables), tables)
+  );
   res.end(JSON.stringify(tables));
 };
 module.exports = db;
