@@ -12,8 +12,8 @@ require('codemirror/mode/javascript/javascript')
 
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       modal: true,
       user: "",
@@ -69,13 +69,13 @@ class App extends Component {
   render() {
     return (
       <div>
-    {/* <ModalExampleDimmer
+    <ModalExampleDimmer
           data={this.state}
           credentialsHandler={this.credentialsHandler}
           connectionHandler={this.connectionHandler}
-    /> */}
+    /> 
         <Navbar url={this.state.url} searchBarHandler={this.searchBarHandler} />
-        <TextBox />
+        <TextBox className="textbox" data = {JSON.stringify(this.state.data)}/>
     
 
       </div>

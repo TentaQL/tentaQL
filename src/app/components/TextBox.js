@@ -25,11 +25,25 @@ class TextBox extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: ''
+      name: ""
     };
   }
 
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   console.log("I'm here")
+  //   console.log(this.props.data)
+  //   if (this.props.data != nextProps.data) {
+  //     this.setState({
+  //       name: nextProps.data
+  //     })
+  //     return true
+  //   } else {
+  //     return false
+  //   }
+  // }
+
   render() {
+    console.log(this.props.data)
     // let myCodeMirror = CodeMirror(document.body, {
     //   lineNumbers: true,
     // })
@@ -43,7 +57,7 @@ class TextBox extends Component {
         </Clipboard>
         <CodeMirror
           className="codeeditor"
-          value={this.state.name}
+          value= {this.props.data}
           options={{
             // mode: 'javascript',
             lineNumbers: true,

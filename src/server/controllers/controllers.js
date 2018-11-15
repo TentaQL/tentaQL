@@ -17,6 +17,8 @@ db.connect = (req, res) => {
   uri =
     "postgres://dbomqaen:FUKYQ_vrQCHbBzHwBpBDAHfUw5R6DzO6@elmer.db.elephantsql.com:5432/dbomqaen";
 
+  // uri = "postgres://dlvadkbx:3frjYrvq30ikbBTwNrwoB0Qx_v0-Dj6o@baasu.db.elephantsql.com:5432/dlvadkbx"
+
   // console.log("I got here ", req.body);
   //   uri = `postgres://${req.body.user}:${req.body.password}@${req.body.host}:${
   //     req.body.port
