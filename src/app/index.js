@@ -5,11 +5,9 @@ import { ModalExampleDimmer } from "./components/Modal.js";
 import Navbar from "./components/Navbar";
 import TextBox from "./components/TextBox";
 import { Button, Icon, Input, Checkbox, Form, Menu } from "semantic-ui-react";
-require('./index.css');
-require('../codemirror/lib/codemirror.css')
-require('codemirror/mode/javascript/javascript')
-
-
+require("./index.css");
+require("../codemirror/lib/codemirror.css");
+require("codemirror/mode/javascript/javascript");
 
 class App extends Component {
   constructor(props) {
@@ -22,7 +20,8 @@ class App extends Component {
       port: "",
       dbName: "",
       url: "",
-      data: ""
+      data: "",
+      clipBoardData: ""
     };
     this.credentialsHandler = this.credentialsHandler.bind(this);
     this.connectionHandler = this.connectionHandler.bind(this);
@@ -58,7 +57,8 @@ class App extends Component {
             return res.json();
           })
           .then(res => {
-            this.setState({ data: res, modal: false });
+            let replaced = res.replace(/\r\n/g, "λ");
+            this.setState({ data: replaced, modal: false, clipBoardData: res });
           });
       })
       .catch(err => {
@@ -69,15 +69,17 @@ class App extends Component {
   render() {
     return (
       <div>
-    <ModalExampleDimmer
+        <ModalExampleDimmer
           data={this.state}
           credentialsHandler={this.credentialsHandler}
           connectionHandler={this.connectionHandler}
-    /> 
+        />
         <Navbar url={this.state.url} searchBarHandler={this.searchBarHandler} />
-        <TextBox className="textbox" data = {JSON.stringify(this.state.data)}/>
-    
-
+        <TextBox
+          className="textbox"
+          data={this.state.data}
+          clipboardData={this.state.clipboardData}
+        />
       </div>
     );
   }

@@ -112,7 +112,7 @@ db.filterAssociations = async (req, res) => {
   console.log(tables.primaryKeys);
   fs.writeFileSync(
     path.join(PATH, `mutationZip.js`),
-    mutationResolver(transformedToString, tables.primaryKeys)
+    mutationResolver(transformedToString, tables)
   );
   res.end(JSON.stringify(transform(tables)));
 };
