@@ -73,17 +73,17 @@ function tranformObj(obj) {
       for (field in obj[key]) {
         let count = Object.keys(obj[key]).length;
         if (field.slice(field.length - 2) != "id") {
-          input += `    ${field}: ${valueChecker(obj[key][field])} \n`;
+          input += `${field}: ${valueChecker(obj[key][field])} `;
         }
         if (i >= count - 1) {
           //CREATE
           output["type Mutation"][
-            `create${pluralize.singular(initialCapitalizer(key))}(${input}   )`
-          ] = pluralize.singular(initialCapitalizer(key));
-          console.log(key);
+            `create${pluralize.singular(initialCapitalizer(key))}(${input})`
+          ] = ` ${pluralize.singular(initialCapitalizer(key))}`;
+
           output["type Mutation"][
-            `update${pluralize.singular(initialCapitalizer(key))}(${input}   )`
-          ] = `${[pluralize.singular(initialCapitalizer(key))]}`;
+            `update${pluralize.singular(initialCapitalizer(key))}(${input})`
+          ] = ` ${[pluralize.singular(initialCapitalizer(key))]}`;
 
           input = "";
         }
@@ -92,7 +92,7 @@ function tranformObj(obj) {
 
         output["type Mutation"][
           `delete${pluralize.singular(initialCapitalizer(key))}(id:ID)`
-        ] = pluralize.singular(initialCapitalizer(key));
+        ] = ` ` + pluralize.singular(initialCapitalizer(key));
 
         let singular = pluralize.singular(key);
         output[`type ` + initialCapitalizer(key)] = obj[key];
@@ -130,11 +130,9 @@ function relations(obj1, obj2) {
 
   for (let key in obj2) {
     let check = "type " + initialCapitalizer(obj2[key]);
-    console.log("RELATION ", check);
+
     if (obj1.hasOwnProperty(check)) {
-      console.log("HELLO", key);
       let type = pluralize.singular(key);
-      console.log("TYPE ", type);
       obj1[check][key] = `[${initialCapitalizer(type)}]`;
     }
   }
@@ -209,7 +207,6 @@ function queryResolver(str, obj) {
 
   let output = ``;
   final.map((el, index) => {
-    console.log(el[0]);
     if (index % 2 === 0) {
       output += `
       ${el[0]}(parent, {id}, ctx, info) {
@@ -252,48 +249,48 @@ function mutationResolver(str, obj) {
 
   fieldsSplitted.map((el, index) => {
     let element = el.split("):");
+    let pluralized =
+      obj.primaryKeys[pluralize(element[1].trim()).toLowerCase()];
 
-    if (element[0].toString().startsWith(" delete")) {
-      output += `delete${
-        element[element.length - 1]
-      }(parent, args, {id}, info) {
+    if (element[0].toString().startsWith(" delete") && pluralized) {
+      output += `delete${element[
+        element.length - 1
+      ].trim()}(parent, args, {id}, info) {
   client.query("DELETE FROM ${pluralize(
     element[element.length - 1].toLowerCase()
-  )} WHERE SOMETHING = id", (err,result)=>{
+  )} WHERE ${pluralized} = id", (err,result)=>{
     if(err) throw new Error("Error deleting");
     return result;
   })
   },
   `;
-    } else if (element[0].toString().startsWith(" create")) {
+    } else if (element[0].toString().startsWith(" create") && pluralized) {
       output += `create${pluralize.singular(
-        element[element.length - 1]
+        element[element.length - 1].trim()
       )}(parent, args, {id}, info) {
   client.query("create FROM ${pluralize(
     element[element.length - 1].toLowerCase()
-  )} WHERE SOMETHING = id", (err,result)=>{
+  )} WHERE ${pluralized} = id", (err,result)=>{
     if(err) throw new Error("Error creating");
     return result;
   })
   },
   `;
-    } else if (element[0].toString().startsWith(" upda")) {
-      let pluralized = pluralize(element[element.length - 1].toLowerCase());
-      output += `update${
-        element[element.length - 1]
-      }(parent, args, {id}, info) {
-  client.query("update FROM ${pluralized} WHERE SOMETHING = ${
-        obj[pluralized]
-      }", (err,result)=>{
-    if(err) throw new Error("Error updating");
-    return result;
-  })
-  },
-  `;
+    } else if (element[0].toString().startsWith(" upda") && pluralized) {
+      output += `update${element[
+        element.length - 1
+      ].trim()}(parent, args, {id}, info) {
+        client.query("update FROM ${pluralize(
+          element[element.length - 1].toLowerCase()
+        )} WHERE ${pluralized} = id", (err,result)=>{
+            if(err) throw new Error("Error creating");
+            return result;
+          })
+          },
+          `;
     }
   });
   return `const Mutation = { \r\n ${output} \r\n};
-
 module.exports = Mutation;`;
 }
 

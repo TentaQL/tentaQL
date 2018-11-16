@@ -16,13 +16,9 @@ class App extends Component {
     super(props);
     this.state = {
       modal: true,
-      user: "",
-      password: "",
-      host: "",
-      port: "",
-      dbName: "",
+      data: "",
       url: "",
-      data: ""
+
     };
     this.credentialsHandler = this.credentialsHandler.bind(this);
     this.connectionHandler = this.connectionHandler.bind(this);
@@ -40,12 +36,8 @@ class App extends Component {
   connectionHandler() {
     console.log("Hello");
     let credentials = {
-      user: this.state.user,
-      password: this.state.password,
-      host: this.state.host,
-      port: this.state.port,
-      dbName: this.state.dbName
-    };
+      url: this.state.url,
+    }
     fetch("http://localhost:8080/db", {
       headers: { "Content-Type": "application/json; charset=utf-8" },
       method: "POST",
