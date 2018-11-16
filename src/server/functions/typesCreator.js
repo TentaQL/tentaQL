@@ -2,76 +2,76 @@ const pluralize = require("pluralize");
 
 // TESTING DATABASE
 // const allTypes = {
-//   players: {
-//     player_id: "integer",
-//     firstname: "character varying",
-//     lastname: "character varying",
-//     birthdate: "date",
-//     country: "character varying"
+//   players:  {
+//     player_id:  "integer",
+//     firstname:  "character varying",
+//     lastname:  "character varying",
+//     birthdate:  "date",
+//     country:  "character varying"
 //   },
-//   dogs: {
-//     dog_id: "integer",
-//     firstname: "character varying",
-//     lastname: "character varying",
-//     birthdate: "date"
+//   dogs:  {
+//     dog_id:  "integer",
+//     firstname:  "character varying",
+//     lastname:  "character varying",
+//     birthdate:  "date"
 //   },
-//   students: {
-//     student_id: "integer",
-//     player_name: "text"
+//   students:  {
+//     student_id:  "integer",
+//     player_name:  "text"
 //   },
-//   cats: {
-//     cat_id: "integer",
-//     firstname: "character varying",
-//     lastname: "character varying",
-//     birthdate: "date"
+//   cats:  {
+//     cat_id:  "integer",
+//     firstname:  "character varying",
+//     lastname:  "character varying",
+//     birthdate:  "date"
 //   },
-//   tests: {
-//     subject_id: "integer",
-//     subject_name: "text",
-//     higheststudent_id: "integer"
+//   tests:  {
+//     subject_id:  "integer",
+//     subject_name:  "text",
+//     higheststudent_id:  "integer"
 //   },
-//   foreignTables: {
-//     tests: "students"
+//   foreignTables:  {
+//     tests:  "students"
 //   },
-//   primaryKeys: {
-//     players: "player_id",
-//     dogs: "dog_id",
-//     cats: "cat_id",
-//     students: "student_id"
+//   primaryKeys:  {
+//     players:  "player_id",
+//     dogs:  "dog_id",
+//     cats:  "cat_id",
+//     students:  "student_id"
 //   }
 // };
 
 // const allTypes = {
-//   players: {
-//     player_id: "integer",
-//     firstname: "character varying",
-//     lastname: "character varying",
-//     birthdate: "date",
-//     country: "character varying"
+//   players:  {
+//     player_id:  "integer",
+//     firstname:  "character varying",
+//     lastname:  "character varying",
+//     birthdate:  "date",
+//     country:  "character varying"
 //   },
-//   dogs: {
-//     dog_id: "integer",
-//     firstname: "character varying",
-//     lastname: "character varying",
-//     birthdate: "date"
+//   dogs:  {
+//     dog_id:  "integer",
+//     firstname:  "character varying",
+//     lastname:  "character varying",
+//     birthdate:  "date"
 //   },
-//   students: {
-//     student_id: "integer",
-//     player_name: "text"
+//   students:  {
+//     student_id:  "integer",
+//     player_name:  "text"
 //   },
-//   cats: {
-//     cat_id: "integer",
-//     firstname: "character varying",
-//     lastname: "character varying",
-//     birthdate: "date"
+//   cats:  {
+//     cat_id:  "integer",
+//     firstname:  "character varying",
+//     lastname:  "character varying",
+//     birthdate:  "date"
 //   },
-//   tests: {
-//     subject_id: "integer",
-//     subject_name: "text",
-//     higheststudent_id: "integer"
+//   tests:  {
+//     subject_id:  "integer",
+//     subject_name:  "text",
+//     higheststudent_id:  "integer"
 //   },
-//   foreignTables: {
-//     tests: "students"
+//   foreignTables:  {
+//     tests:  "students"
 //   }
 // };
 
@@ -81,16 +81,16 @@ function initialCapitalizer(str) {
 
 function valueChecker(str) {
   switch (str) {
-    case "character varying":
+    case "character varying": 
       return "String";
       break;
-    case "text":
+    case "text": 
       return "String";
       break;
-    case "integer":
+    case "integer": 
       return "Integer";
       break;
-    case "date":
+    case "date": 
       return "String";
       break;
   }
@@ -107,18 +107,18 @@ function tranformObj(obj) {
       for (field in obj[key]) {
         let count = Object.keys(obj[key]).length;
         if (field.slice(field.length - 2) != "id") {
-          input += `    ${field}: ${valueChecker(obj[key][field])} \r\n`;
+          input += `    ${field}: ${valueChecker(obj[key][field])} λ`;
         }
         if (i >= count - 1) {
           //CREATE
           output["type Mutation"][
-            `create${initialCapitalizer(key)}(\r\n${input}   )`
+            `create${initialCapitalizer(key)}(λ${input}   )`
           ] = pluralize.singular(initialCapitalizer(key));
 
           output["type Mutation"][
             `update${pluralize.singular(
               initialCapitalizer(key)
-            )}(\r\n${input}   )`
+            )}(λ${input}   )`
           ] = key;
 
           input = "";
@@ -127,7 +127,7 @@ function tranformObj(obj) {
         i++;
 
         output["type Mutation"][
-          `delete${pluralize.singular(initialCapitalizer(key))}(id:ID)`
+          `delete${pluralize.singular(initialCapitalizer(key))}(id: ID)`
         ] = pluralize.singular(initialCapitalizer(key));
 
         let singular = pluralize.singular(key);
@@ -145,19 +145,19 @@ function mergeToString(obj) {
   let output = ``;
   let i = 0;
   for (key in obj) {
-    output += `\r\n` + key + ` { `;
+    output += `λ` + key + ` { `;
 
     for (field in obj[key]) {
       let counts = Object.keys(obj[key]).length;
       i++;
-      output += `\r\n   ${field}:${obj[key][field]}`;
+      output += `λ   ${field}: ${obj[key][field]}`;
       if (i === counts) {
-        output += "\r\n     }";
+        output += "λ     }";
         i = 0;
       }
     }
   }
-  output += " \r\n }";
+  output += " λ }";
   return output;
 }
 
@@ -218,7 +218,7 @@ const transform = obj => {
   let singularized = finalSingulizer(related);
   let queryTypeAdded = addQueryType(singularized);
   let string = mergeToString(related);
-  return "const typeDefs = ` " + string + "\r\n `;";
+  return "const typeDefs = ` " + string + "λ `;";
 };
 
 function queryResolver(str, obj) {
@@ -232,7 +232,7 @@ function queryResolver(str, obj) {
     .replace(/]/g, "")
     .replace(/\}/g, "")
     .replace(/\[/g, "")
-    .replace(/\r\n/g, "")
+    .replace(/λ/g, "")
     .replace(/  +/g, " ")
     .trim();
   let splitted = fields.split(" ");
@@ -265,7 +265,7 @@ function queryResolver(str, obj) {
         `;
     }
   });
-  return `const Query = { ${output} \r\n };`;
+  return `const Query = { ${output} λ };`;
 }
 
 module.exports = { transform, queryResolver };
