@@ -2,7 +2,11 @@ const pg = require("pg");
 const path = require("path");
 const PATH = path.join(__dirname, "../../");
 const fs = require("fs");
-const { transform, queryResolver } = require("../functions/typesCreator");
+const {
+  transform,
+  queryResolver,
+  mutationResolver
+} = require("../functions/typesCreator");
 
 const db = {};
 let tables = {};
@@ -10,13 +14,13 @@ let foreignTables = {};
 
 let uri;
 let client;
-let alan =
-  "postgres://cwfmwiaw:AHwoqc41Cx3L7nMV5oSfz-KQZewSqQGx@baasu.db.elephantsql.com:5432/cwfmwiaw";
+// let alan =
+//   "postgres://cwfmwiaw:AHwoqc41Cx3L7nMV5oSfz-KQZewSqQGx@baasu.db.elephantsql.com:5432/cwfmwiaw";
 
 //CONNECT
 db.connect = (req, res) => {
   uri =
-    "postgres://cwfmwiaw:AHwoqc41Cx3L7nMV5oSfz-KQZewSqQGx@baasu.db.elephantsql.com:5432/cwfmwiaw";
+    "postgres://dbomqaen:FUKYQ_vrQCHbBzHwBpBDAHfUw5R6DzO6@elmer.db.elephantsql.com:5432/dbomqaen";
   client = new pg.Client(uri);
   client.connect(err => {
     if (err) return console.log("Could not connect to postgres ", err);
@@ -97,11 +101,19 @@ db.filterAssociations = async (req, res) => {
 
   tables.foreignTables = foreignTables;
   tables.primaryKeys = filter;
-  // fs.writeFileSync(path.join(PATH, `typesZip.js`), transform(tables));
-  // fs.writeFileSync(
-  //   path.join(PATH, `queryZip.js`),
-  //   queryResolver(transform(tables), tables)
-  // );
+
+  fs.writeFileSync(path.join(PATH, `typesZip.js`), transform(tables));
+  fs.writeFileSync(
+    path.join(PATH, `queryZip.js`),
+    queryResolver(transform(tables), tables)
+  );
+  let transformedToString = transform(tables);
+  console.log(transformedToString);
+  console.log(tables.primaryKeys);
+  fs.writeFileSync(
+    path.join(PATH, `mutationZip.js`),
+    mutationResolver(transformedToString, tables.primaryKeys)
+  );
   res.end(JSON.stringify(transform(tables)));
 };
 module.exports = db;

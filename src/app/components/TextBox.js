@@ -46,12 +46,17 @@ class TextBox extends Component {
   render() {
     console.log("props.data", this.props.data)
     let unStrung = (this.props.data).replace(/['"]+/g,'')
+    unStrung = unStrung.replace(/\\r\\n/g, 'λ')
+    unStrung = unStrung.replace(/\\n/g, 'λ')
+    unStrung = unStrung.replace(/:/g, ': ')
     // unStrung = unStrung.replace(/["\r\n"]+/g,'                                                                           ')
     console.log("unString", unStrung)
     // let myCodeMirror = CodeMirror(document.body, {
     //   lineNumbers: true,
     // })
-    let lambdaLess = this.state.value.replace(/λ/g, '\n');
+    let lambdaLess = this.state.value.replace(/\\r\\n/g, 'λ');
+    console.log(lambdaLess);
+    lambdaLess = lambdaLess.replace(/λ/g, '\n');
     return (
       <div>
 
