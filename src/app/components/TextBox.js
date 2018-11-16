@@ -71,7 +71,7 @@ class TextBox extends Component {
           options={{
             // mode: 'javascript',
             lineSeparator: `λ`,
-            // lineWrapping: true,
+            lineWrapping: false,
             lineNumbers: true,
             readOnly: false,
           }}

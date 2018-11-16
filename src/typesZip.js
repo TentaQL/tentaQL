@@ -12,45 +12,21 @@ const typeDefs = `
    tests:[Test]
      }
  type Mutation { 
-   deletePlayer(id:ID):Player
-   createPlayer(    firstname: String 
-    lastname: String 
-    birthdate: String 
-    country: String 
-   ):Player
-   updatePlayer(    firstname: String 
-    lastname: String 
-    birthdate: String 
-    country: String 
-   ):Player
-   deleteDog(id:ID):Dog
-   createDog(    firstname: String 
-    lastname: String 
-    birthdate: String 
-   ):Dog
-   updateDog(    firstname: String 
-    lastname: String 
-    birthdate: String 
-   ):Dog
-   deleteStudent(id:ID):Student
-   createStudent(    player_name: String 
-   ):Student
-   updateStudent(    player_name: String 
-   ):Student
-   deleteCat(id:ID):Cat
-   createCat(    firstname: String 
-    lastname: String 
-    birthdate: String 
-   ):Cat
-   updateCat(    firstname: String 
-    lastname: String 
-    birthdate: String 
-   ):Cat
-   deleteTest(id:ID):Test
-   createTest(    subject_name: String 
-   ):Test
-   updateTest(    subject_name: String 
-   ):Test
+   deletePlayer(id:ID): Player
+   createPlayer(firstname: String lastname: String birthdate: String country: String ): Player
+   updatePlayer(firstname: String lastname: String birthdate: String country: String ): Player
+   deleteDog(id:ID): Dog
+   createDog(firstname: String lastname: String birthdate: String ): Dog
+   updateDog(firstname: String lastname: String birthdate: String ): Dog
+   deleteStudent(id:ID): Student
+   createStudent(player_name: String ): Student
+   updateStudent(player_name: String ): Student
+   deleteCat(id:ID): Cat
+   createCat(firstname: String lastname: String birthdate: String ): Cat
+   updateCat(firstname: String lastname: String birthdate: String ): Cat
+   deleteTest(id:ID): Test
+   createTest(subject_name: String ): Test
+   updateTest(subject_name: String ): Test
      }
  type Player { 
    player_id:Integer
