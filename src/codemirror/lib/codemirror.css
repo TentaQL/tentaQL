@@ -139,7 +139,7 @@
 .cm-s-default .cm-link {color: #CC7832;}
 
 .cm-s-default .cm-error {color: #BC3F3C;}
-/* .cm-invalidchar {color: #f00;} */
+.cm-invalidchar {color: #A9B7C6;}
 
 .CodeMirror-composing { border-bottom: 2px solid; }
 

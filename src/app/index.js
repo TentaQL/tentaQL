@@ -22,7 +22,7 @@ class App extends Component {
       port: "",
       dbName: "",
       url: "",
-      data: {}
+      data: ""
     };
     this.credentialsHandler = this.credentialsHandler.bind(this);
     this.connectionHandler = this.connectionHandler.bind(this);

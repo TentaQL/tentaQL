@@ -43,7 +43,10 @@ class TextBox extends Component {
   // }
 
   render() {
-    console.log(this.props.data)
+    console.log("props.data", this.props.data)
+    let unStrung = (this.props.data).replace(/['"]+/g,'')
+    // unStrung = unStrung.replace(/["\r\n"]+/g,'                                                                           ')
+    console.log("unString", unStrung)
     // let myCodeMirror = CodeMirror(document.body, {
     //   lineNumbers: true,
     // })
@@ -57,7 +60,7 @@ class TextBox extends Component {
         </Clipboard>
         <CodeMirror
           className="codeeditor"
-          value= {this.props.data}
+          value= {unStrung}
           options={{
             // mode: 'javascript',
             lineNumbers: true,
