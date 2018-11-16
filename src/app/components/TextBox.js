@@ -1,9 +1,9 @@
-const React = require('react');
-const ReactDOM = require('react-dom');
-import { Component } from 'react';
-import { UnControlled as CodeMirror } from 'react-codemirror2';
+const React = require("react");
+const ReactDOM = require("react-dom");
+import { Component } from "react";
+import { UnControlled as CodeMirror } from "react-codemirror2";
 
-import Clipboard from 'react-clipboard.js';
+import Clipboard from "react-clipboard.js";
 
 import {
   Button,
@@ -13,19 +13,20 @@ import {
   Form,
   Menu,
   Sticky
-} from 'semantic-ui-react';
-import 'codemirror/addon/hint/show-hint';
-import 'codemirror/addon/lint/lint';
-import 'codemirror-graphql/hint';
-import 'codemirror-graphql/lint';
-import 'codemirror-graphql/mode';
+} from "semantic-ui-react";
+import "codemirror/addon/hint/show-hint";
+import "codemirror/addon/lint/lint";
+import "codemirror-graphql/hint";
+import "codemirror-graphql/lint";
+import "codemirror-graphql/mode";
 // require('codemirror/mode/javascript/javascript');
 
 class TextBox extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: ""
+      name: "",
+      value: ""
     };
   }
 
@@ -43,28 +44,34 @@ class TextBox extends Component {
   // }
 
   render() {
-    console.log("props.data", this.props.data)
-    let unStrung = (this.props.data).replace(/['"]+/g,'')
+    console.log("props.data", this.props.data);
+    let unStrung = this.props.data.replace(/['"]+/g, "");
     // unStrung = unStrung.replace(/["\r\n"]+/g,'                                                                           ')
-    console.log("unString", unStrung)
+    console.log("unString", unStrung);
     // let myCodeMirror = CodeMirror(document.body, {
     //   lineNumbers: true,
     // })
+    let lambdaLess = this.state.value.replace(/\r\n/g, "λ");
+    lambdaLess.replace(/λ/g, "\n");
     return (
       <div>
-
-        <Clipboard className="clipboard" component="a" button-href="#" data-clipboard-text={this.state.value}>
-          <Button>
-            Copy to Clipboard
-               </Button>
+        <Clipboard
+          className="clipboard"
+          component="a"
+          button-href="#"
+          data-clipboard-text={lambdaLess}
+        >
+          <Button>Copy to Clipboard</Button>
         </Clipboard>
         <CodeMirror
           className="codeeditor"
-          value= {unStrung}
+          value={unStrung}
           options={{
             // mode: 'javascript',
+            lineSeparator: `λ`,
+            // lineWrapping: true,
             lineNumbers: true,
-            readOnly: false,
+            readOnly: false
           }}
           onChange={(editor, metadata, value) => {
             this.setState({ value });
@@ -75,6 +82,4 @@ class TextBox extends Component {
   }
 }
 
-
 export default TextBox;
-

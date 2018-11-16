@@ -234,9 +234,7 @@ function queryResolver(str, obj) {
       `;
     }
   });
-  return `const Query = { ${output} \n };
-  \r\n module.exports = Query
-  `;
+  return `const Query = { ${output} \n };`;
 }
 console.log(queryResolver(transformedTostring, allTypes));
 
@@ -295,8 +293,8 @@ function mutationResolver(str, obj) {
     }
   });
   return `const Mutation = { \r\n ${output} \r\n};
-  \r\n module.exports = Mutation;
-  `;
+
+module.exports = Mutation;`;
 }
 
 module.exports = { transform, queryResolver, mutationResolver };
