@@ -2,14 +2,18 @@ const React = require("react");
 const ReactDOM = require("react-dom");
 import { Component } from "react";
 import { ModalExampleDimmer } from "./components/Modal.js";
-require("./index.css");
 import Navbar from "./components/Navbar";
 import TextBox from "./components/TextBox";
 import { Button, Icon, Input, Checkbox, Form, Menu } from "semantic-ui-react";
+require('./index.css');
+require('../codemirror/lib/codemirror.css')
+require('codemirror/mode/javascript/javascript')
+
+
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       modal: true,
       user: "",
@@ -18,7 +22,7 @@ class App extends Component {
       port: "",
       dbName: "",
       url: "",
-      data: {}
+      data: ""
     };
     this.credentialsHandler = this.credentialsHandler.bind(this);
     this.connectionHandler = this.connectionHandler.bind(this);
@@ -65,13 +69,15 @@ class App extends Component {
   render() {
     return (
       <div>
-        <ModalExampleDimmer
+    <ModalExampleDimmer
           data={this.state}
           credentialsHandler={this.credentialsHandler}
           connectionHandler={this.connectionHandler}
-        />
+    /> 
         <Navbar url={this.state.url} searchBarHandler={this.searchBarHandler} />
-        <TextBox />
+        <TextBox className="textbox" data = {JSON.stringify(this.state.data)}/>
+    
+
       </div>
     );
   }

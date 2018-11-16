@@ -2,7 +2,11 @@ const pg = require("pg");
 const path = require("path");
 const PATH = path.join(__dirname, "../../");
 const fs = require("fs");
-const { transform, queryResolver } = require("../functions/typesCreator");
+const {
+  transform,
+  queryResolver,
+  mutationResolver
+} = require("../functions/typesCreator");
 
 const db = {};
 let tables = {};
@@ -15,8 +19,8 @@ let alan =
 
 //CONNECT
 db.connect = (req, res) => {
-  uri =
-    "postgres://dbomqaen:FUKYQ_vrQCHbBzHwBpBDAHfUw5R6DzO6@elmer.db.elephantsql.com:5432/dbomqaen";
+  uri = alan;
+  // "postgres://dbomqaen:FUKYQ_vrQCHbBzHwBpBDAHfUw5R6DzO6@elmer.db.elephantsql.com:5432/dbomqaen";
   client = new pg.Client(uri);
   client.connect(err => {
     if (err) return console.log("Could not connect to postgres ", err);
@@ -97,11 +101,19 @@ db.filterAssociations = async (req, res) => {
 
   tables.foreignTables = foreignTables;
   tables.primaryKeys = filter;
-  fs.writeFileSync(path.join(PATH, `typesZip.js`), transform(tables));
-  fs.writeFileSync(
-    path.join(PATH, `queryZip.js`),
-    queryResolver(transform(tables), tables)
-  );
-  res.end(JSON.stringify(tables));
+
+  //   fs.writeFileSync(path.join(PATH, `typesZip.js`), transform(tables));
+  //   fs.writeFileSync(
+  //     path.join(PATH, `queryZip.js`),
+  //     queryResolver(transform(tables), tables)
+  //   );
+  //   let transformedToString = transform(tables);
+  //   console.log(transformedToString);
+  //   console.log(tables.primaryKeys);
+  //   fs.writeFileSync(
+  //     path.join(PATH, `mutationZip.js`),
+  //     mutationResolver(transformedToString, tables.primaryKeys)
+  //   );
+  res.end(JSON.stringify(transform(tables)));
 };
 module.exports = db;
