@@ -25,7 +25,8 @@ class TextBox extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: ""
+      name: "",
+      value: ""
     };
   }
 
@@ -50,10 +51,11 @@ class TextBox extends Component {
     // let myCodeMirror = CodeMirror(document.body, {
     //   lineNumbers: true,
     // })
+    let lambdaLess = this.state.value.replace(/λ/g, '\n');
     return (
       <div>
 
-        <Clipboard className="clipboard" component="a" button-href="#" data-clipboard-text={this.state.value}>
+        <Clipboard className="clipboard" component="a" button-href="#" data-clipboard-text={lambdaLess}>
           <Button>
             Copy to Clipboard
                </Button>
@@ -63,6 +65,8 @@ class TextBox extends Component {
           value= {unStrung}
           options={{
             // mode: 'javascript',
+            lineSeparator: `λ`,
+            // lineWrapping: true,
             lineNumbers: true,
             readOnly: false,
           }}
