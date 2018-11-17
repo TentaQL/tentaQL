@@ -12,8 +12,9 @@ input[type="text"] {
   background: #2B2B2B;
   color: #A9B7C6;
   margin-left: 2em;
+  margin-right: 2em;
   margin-top: 2em;
   height: 600px;
-  width: 600px;
+  width: 100%;
 } 
 

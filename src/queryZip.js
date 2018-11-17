@@ -1,50 +1,74 @@
 const Query = { 
-      customer(parent, {id}, ctx, info) {
-        client.query("SELECT*FROM customers where customerid= id", 
+      company(parent, {id}, ctx, info) {
+        client.query("SELECT*FROM companies where undefined= id", 
         (err,result)=> {
-          if(err) throw new Error("Error querying all customer")
+          if(err) throw new Error("Error querying all company")
           return result;
         });
       },
       
-      customers(parent, args, ctx, info) {
-          client.query("SELECT*FROM customers", (err,result)=>{
-            if(err) throw new Error("Error querying all customers")
+      department(parent, args, ctx, info) {
+          client.query("SELECT*FROM department", (err,result)=>{
+            if(err) throw new Error("Error querying all department")
             return result;
           })
       
       },
       
-      order(parent, {id}, ctx, info) {
-        client.query("SELECT*FROM orders where orderid= id", 
+      newcompany(parent, {id}, ctx, info) {
+        client.query("SELECT*FROM newcompanies where undefined= id", 
         (err,result)=> {
-          if(err) throw new Error("Error querying all order")
+          if(err) throw new Error("Error querying all newcompany")
           return result;
         });
       },
       
-      orders(parent, args, ctx, info) {
-          client.query("SELECT*FROM orders", (err,result)=>{
-            if(err) throw new Error("Error querying all orders")
+      jpcompany(parent, args, ctx, info) {
+          client.query("SELECT*FROM jpcompany", (err,result)=>{
+            if(err) throw new Error("Error querying all jpcompany")
             return result;
           })
       
       },
       
-      store(parent, {id}, ctx, info) {
-        client.query("SELECT*FROM stores where storeid= id", 
+      test1(parent, {id}, ctx, info) {
+        client.query("SELECT*FROM test1S where undefined= id", 
         (err,result)=> {
-          if(err) throw new Error("Error querying all store")
+          if(err) throw new Error("Error querying all test1")
           return result;
         });
       },
       
-      stores(parent, args, ctx, info) {
-          client.query("SELECT*FROM stores", (err,result)=>{
-            if(err) throw new Error("Error querying all stores")
+      bill(parent, args, ctx, info) {
+          client.query("SELECT*FROM bill", (err,result)=>{
+            if(err) throw new Error("Error querying all bill")
             return result;
           })
       
+      },
+      
+      stock_availability(parent, {id}, ctx, info) {
+        client.query("SELECT*FROM stock_availabilities where undefined= id", 
+        (err,result)=> {
+          if(err) throw new Error("Error querying all stock_availability")
+          return result;
+        });
+      },
+      
+      product(parent, args, ctx, info) {
+          client.query("SELECT*FROM product", (err,result)=>{
+            if(err) throw new Error("Error querying all product")
+            return result;
+          })
+      
+      },
+      
+      bill_product(parent, {id}, ctx, info) {
+        client.query("SELECT*FROM bill_products where undefined= id", 
+        (err,result)=> {
+          if(err) throw new Error("Error querying all bill_product")
+          return result;
+        });
       },
        
  };
