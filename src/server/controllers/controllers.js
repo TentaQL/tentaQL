@@ -101,19 +101,19 @@ db.filterAssociations = async (req, res) => {
 
   tables.foreignTables = foreignTables;
   tables.primaryKeys = filter;
-
-  fs.writeFileSync(path.join(PATH, `typesZip.js`), transform(tables));
+  let frontEndVersion = transform(tables);
+  fs.writeFileSync(path.join(PATH, `typesZip.js`), frontEndVersion);
   fs.writeFileSync(
     path.join(PATH, `queryZip.js`),
-    queryResolver(transform(tables), tables)
-  );
-  let transformedToString = transform(tables);
-  console.log(transformedToString);
-  console.log(tables.primaryKeys);
+    queryResolver(frontEndVersion, tables)
+    );
+    // console.log(transformedToString);
+    // console.log(tables.primaryKeys);
+    // let transformedToString = transform(tables);
   fs.writeFileSync(
     path.join(PATH, `mutationZip.js`),
-    mutationResolver(transformedToString, tables)
+    mutationResolver(frontEndVersion, tables)
   );
-  res.end(JSON.stringify(transform(tables)));
+  res.end(JSON.stringify(frontEndVersion));
 };
 module.exports = db;
