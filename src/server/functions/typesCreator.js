@@ -54,15 +54,36 @@ function valueChecker(str) {
       return "String";
       break;
     case "integer":
-      return "Integer";
+      return "Int";
       break;
     case "date":
       return "String";
       break;
+    case "real":
+      return "Float";
+      break;
+    case "character":
+      return "String";
+      break;
+    case "bool":
+      return "Boolean";
+      break;
+    case "boolean":
+      return "Boolean";
+      break;
+    case "Bool":
+      return "Boolean";
+      break;
+    case "numeric":
+      return "Float";
+      break;
+    case "int":
+      return "Int";
+      break;
   }
 }
 
-function tranformObj(obj) {
+function transformObj(obj) {
   let output = {};
   output["type Query"] = {};
   output["type Mutation"] = {};
@@ -73,7 +94,7 @@ function tranformObj(obj) {
       for (field in obj[key]) {
         let count = Object.keys(obj[key]).length;
         if (field.slice(field.length - 2) != "id") {
-          input += `${field}: ${valueChecker(obj[key][field])} `;
+          input += `${field}:${valueChecker(obj[key][field])}, `;
         }
         if (i >= count - 1) {
           //CREATE
@@ -122,6 +143,8 @@ function mergeToString(obj) {
     }
   }
   output += " \r\n }";
+  output = output.replace(/\, \)/g, ')');
+  output = output.replace(/\: /g, ': ');
   return output;
 }
 
@@ -145,13 +168,18 @@ function changeValues(obj) {
     for (field in obj[key]) {
       if (
         obj[key][field] === "character varying" ||
-        obj[key][field] === "text"
+        obj[key][field] === "text" ||
+        obj[key][field].includes("char")
       ) {
         obj[key][field] = "String";
       } else if (obj[key][field] === "integer") {
-        obj[key][field] = "Integer";
+        obj[key][field] = "Int";
       } else if (obj[key][field] === "date") {
         obj[key][field] = "String";
+      } else if (obj[key][field] === "real") {
+        obj[key][field] = "Float";
+      }  else if (obj[key][field] === "boolean") {
+        obj[key][field] = "Boolean";
       }
     }
   }
@@ -178,7 +206,7 @@ function finalSingulizer(obj) {
 }
 
 const transform = obj => {
-  let typeDefs = tranformObj(obj);
+  let typeDefs = transformObj(obj);
   let final = changeValues(typeDefs);
   let related = relations(final, obj["foreignTables"]);
   let singularized = finalSingulizer(related);

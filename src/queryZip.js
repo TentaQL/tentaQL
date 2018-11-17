@@ -1,82 +1,74 @@
 const Query = { 
-      player(parent, {id}, ctx, info) {
-        client.query("SELECT*FROM players where player_id= id", 
+      company(parent, {id}, ctx, info) {
+        client.query("SELECT*FROM companies where undefined= id", 
         (err,result)=> {
-          if(err) throw new Error("Error querying all player")
+          if(err) throw new Error("Error querying all company")
           return result;
         });
       },
       
-      players(parent, args, ctx, info) {
-          client.query("SELECT*FROM players", (err,result)=>{
-            if(err) throw new Error("Error querying all players")
+      department(parent, args, ctx, info) {
+          client.query("SELECT*FROM department", (err,result)=>{
+            if(err) throw new Error("Error querying all department")
             return result;
           })
       
       },
       
-      dog(parent, {id}, ctx, info) {
-        client.query("SELECT*FROM dogs where dog_id= id", 
+      newcompany(parent, {id}, ctx, info) {
+        client.query("SELECT*FROM newcompanies where undefined= id", 
         (err,result)=> {
-          if(err) throw new Error("Error querying all dog")
+          if(err) throw new Error("Error querying all newcompany")
           return result;
         });
       },
       
-      dogs(parent, args, ctx, info) {
-          client.query("SELECT*FROM dogs", (err,result)=>{
-            if(err) throw new Error("Error querying all dogs")
+      jpcompany(parent, args, ctx, info) {
+          client.query("SELECT*FROM jpcompany", (err,result)=>{
+            if(err) throw new Error("Error querying all jpcompany")
             return result;
           })
       
       },
       
-      student(parent, {id}, ctx, info) {
-        client.query("SELECT*FROM students where student_id= id", 
+      test1(parent, {id}, ctx, info) {
+        client.query("SELECT*FROM test1S where undefined= id", 
         (err,result)=> {
-          if(err) throw new Error("Error querying all student")
+          if(err) throw new Error("Error querying all test1")
           return result;
         });
       },
       
-      students(parent, args, ctx, info) {
-          client.query("SELECT*FROM students", (err,result)=>{
-            if(err) throw new Error("Error querying all students")
+      bill(parent, args, ctx, info) {
+          client.query("SELECT*FROM bill", (err,result)=>{
+            if(err) throw new Error("Error querying all bill")
             return result;
           })
       
       },
       
-      cat(parent, {id}, ctx, info) {
-        client.query("SELECT*FROM cats where cat_id= id", 
+      stock_availability(parent, {id}, ctx, info) {
+        client.query("SELECT*FROM stock_availabilities where undefined= id", 
         (err,result)=> {
-          if(err) throw new Error("Error querying all cat")
+          if(err) throw new Error("Error querying all stock_availability")
           return result;
         });
       },
       
-      cats(parent, args, ctx, info) {
-          client.query("SELECT*FROM cats", (err,result)=>{
-            if(err) throw new Error("Error querying all cats")
+      product(parent, args, ctx, info) {
+          client.query("SELECT*FROM product", (err,result)=>{
+            if(err) throw new Error("Error querying all product")
             return result;
           })
       
       },
       
-      test(parent, {id}, ctx, info) {
-        client.query("SELECT*FROM tests where undefined= id", 
+      bill_product(parent, {id}, ctx, info) {
+        client.query("SELECT*FROM bill_products where undefined= id", 
         (err,result)=> {
-          if(err) throw new Error("Error querying all test")
+          if(err) throw new Error("Error querying all bill_product")
           return result;
         });
-      },
-      
-      tests(parent, args, ctx, info) {
-          client.query("SELECT*FROM tests", (err,result)=>{
-            if(err) throw new Error("Error querying all tests")
-            return result;
-          })
-      
       },
        
  };

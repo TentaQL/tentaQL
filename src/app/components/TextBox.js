@@ -44,24 +44,19 @@ class TextBox extends Component {
   // }
 
   render() {
-<<<<<<< HEAD
-    let unstrung = this.props.data;
-    console.log("HELLO WORLD", this.props.data);
-=======
-    console.log("props.data", this.props.data)
-    let unStrung = (this.props.data).replace(/['"]+/g,'')
-    unStrung = unStrung.replace(/\\r\\n/g, 'λ')
-    unStrung = unStrung.replace(/\\n/g, 'λ')
-    unStrung = unStrung.replace(/:/g, ': ')
+    console.log("props.data", this.props.data);
+    // let unStrung = this.props.data.replace(/['"]+/g, "");
+    // unStrung = unStrung.replace(/\\r\\n/g, "λ");
+    // unStrung = unStrung.replace(/\\n/g, "λ");
+    // unStrung = unStrung.replace(/:/g, ": ");
     // unStrung = unStrung.replace(/["\r\n"]+/g,'                                                                           ')
-    console.log("unString", unStrung)
+    // console.log("unString", unStrung);
     // let myCodeMirror = CodeMirror(document.body, {
     //   lineNumbers: true,
     // })
-    let lambdaLess = this.state.value.replace(/\\r\\n/g, 'λ');
+    let lambdaLess = this.state.value.replace(/\\r\\n/g, "λ");
     console.log(lambdaLess);
-    lambdaLess = lambdaLess.replace(/λ/g, '\n');
->>>>>>> 1250110e2b140221b3652ec284f28a175950baa6
+    lambdaLess = lambdaLess.replace(/λ/g, "\n");
     return (
       <div>
         <Clipboard
@@ -74,7 +69,7 @@ class TextBox extends Component {
         </Clipboard>
         <CodeMirror
           className="codeeditor"
-          value={unstrung}
+          // value={unstrung}
           options={{
             // mode: 'javascript',
             lineSeparator: `λ`,
