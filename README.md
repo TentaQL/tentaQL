@@ -1,5 +1,5 @@
-![alt text](OctopusCircle.png)
-<img src="https://github.com/TentaQL/tentaQL/blob/master/OctopusCircle.png" height="200">
+
+<img src="https://github.com/TentaQL/tentaQL/blob/master/OctopusCircle.png" align="center" height="400">
 
 # TentaQL 
 Automated PostgreSQL analyzer, creating backend simpified project structure based on user's database
