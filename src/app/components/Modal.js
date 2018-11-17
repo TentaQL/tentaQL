@@ -10,7 +10,7 @@ class ModalExampleDimmer extends Component {
     return (
       <div>
         <Modal open={this.props.data.modal}>
-          <Modal.Header>Welcome to TentaQL</Modal.Header>
+          <Modal.Header color="blue">Welcome to TentaQL</Modal.Header>
           <Modal.Content>
             <form className="ui form">
               <div className="field">
@@ -18,7 +18,8 @@ class ModalExampleDimmer extends Component {
                 <input
                   type="text"
                   name="url"
-                  placeholder="Database url."
+                  placeholder={this.props.placeholder}
+                  style = {this.props.placeholderColor}
                   value={this.props.data.url}
                   onChange={this.props.credentialsHandler}
                 />
@@ -26,13 +27,9 @@ class ModalExampleDimmer extends Component {
             </form>
           </Modal.Content>
           <Modal.Actions>
-            <Button
+            <button className = "medium ui green button"
               onClick={this.props.connectionHandler}
-              positive
-              labelPosition="right"
-              icon="checkmark"
-              content="Connect"
-            />
+              positive>Connect</button>
           </Modal.Actions>
         </Modal>
       </div>
@@ -41,3 +38,8 @@ class ModalExampleDimmer extends Component {
 }
 
 export { ModalExampleDimmer };
+
+
+// labelPosition="right"
+              // icon="checkmark"
+              // content="Connect"

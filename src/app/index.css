@@ -6,15 +6,21 @@ input[type="text"] {
   width: 500px;
 }
 
+.clipboard {
+  padding: 20px;
+}
+
+/* .ui.form .field>label {
+  color: blue;
+} */
 
 .CodeMirror.cm-s-default {
   font-family: monospace;
   background: #2B2B2B;
   color: #A9B7C6;
-  margin-left: 2em;
-  margin-top: 2em;
-  height: 600px;
-  width: 100%;
+  margin-top: 4em;
+  margin: auto;
+  width: 90%;
 } 
 
 
