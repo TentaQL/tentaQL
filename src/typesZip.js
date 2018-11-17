@@ -1,61 +1,52 @@
 const typeDefs = ` 
  type Query { 
-   player:Player
-   players:[Player]
-   dog:Dog
-   dogs:[Dog]
-   student:Student
-   students:[Student]
-   cat:Cat
-   cats:[Cat]
-   test:Test
-   tests:[Test]
+   customer:Customer
+   customers:[Customer]
+   order:Order
+   orders:[Order]
+   store:Store
+   stores:[Store]
+   spatial_ref_sy:Spatial_ref_sy
+   spatial_ref_sys:[Spatial_ref_sy]
      }
  type Mutation { 
-   deletePlayer(id:ID): Player
-   createPlayer(firstname: String lastname: String birthdate: String country: String ): Player
-   updatePlayer(firstname: String lastname: String birthdate: String country: String ): Player
-   deleteDog(id:ID): Dog
-   createDog(firstname: String lastname: String birthdate: String ): Dog
-   updateDog(firstname: String lastname: String birthdate: String ): Dog
-   deleteStudent(id:ID): Student
-   createStudent(player_name: String ): Student
-   updateStudent(player_name: String ): Student
-   deleteCat(id:ID): Cat
-   createCat(firstname: String lastname: String birthdate: String ): Cat
-   updateCat(firstname: String lastname: String birthdate: String ): Cat
-   deleteTest(id:ID): Test
-   createTest(subject_name: String ): Test
-   updateTest(subject_name: String ): Test
+   deleteCustomer(id:ID): Customer
+   createCustomer(lastname: String firstname: String phone: String ): Customer
+   updateCustomer(lastname: String firstname: String phone: String ): Customer
+   deleteOrder(id:ID): Order
+   createOrder(amount: String ): Order
+   updateOrder(amount: String ): Order
+   deleteStore(id:ID): Store
+   createStore(region: String ): Store
+   updateStore(region: String ): Store
+   deleteSpatial_ref_sy(id:ID): Spatial_ref_sy
+   createSpatial_ref_sy(auth_name: String srtext: String proj4text: String ): Spatial_ref_sy
+   updateSpatial_ref_sy(auth_name: String srtext: String proj4text: String ): Spatial_ref_sy
      }
- type Player { 
-   player_id:Integer
-   firstname:String
+ type Customer { 
+   customerid:Integer
    lastname:String
-   birthdate:String
-   country:String
-     }
- type Dog { 
-   dog_id:Integer
    firstname:String
-   lastname:String
-   birthdate:String
+   phone:String
+   orders:[Order]
      }
- type Student { 
-   student_id:Integer
-   player_name:String
-   tests:[Test]
+ type Order { 
+   orderid:Integer
+   amount:String
+   customerid:Integer
+   stores:[Store]
      }
- type Cat { 
-   cat_id:Integer
-   firstname:String
-   lastname:String
-   birthdate:String
+ type Store { 
+   storeid:Integer
+   region:String
+   orderid:Integer
      }
- type Test { 
-   subject_id:Integer
-   subject_name:String
-   higheststudent_id:Integer
+ type Spatial_ref_sy { 
+   srid:Integer
+   auth_name:String
+   auth_srid:Integer
+   srtext:String
+   proj4text:String
      } 
  }
  `;
