@@ -45,12 +45,12 @@ class TextBox extends Component {
 
   render() {
     console.log("props.data", this.props.data);
-    // let unStrung = this.props.data.replace(/['"]+/g, "");
-    // unStrung = unStrung.replace(/\\r\\n/g, "λ");
-    // unStrung = unStrung.replace(/\\n/g, "λ");
-    // unStrung = unStrung.replace(/:/g, ": ");
+    let unStrung = this.props.data.replace(/['"]+/g, "");
+    unStrung = unStrung.replace(/\\r\\n/g, "λ");
+    unStrung = unStrung.replace(/\\n/g, "λ");
+    unStrung = unStrung.replace(/:/g, ": ");
     // unStrung = unStrung.replace(/["\r\n"]+/g,'                                                                           ')
-    // console.log("unString", unStrung);
+    console.log("unString", unStrung);
     // let myCodeMirror = CodeMirror(document.body, {
     //   lineNumbers: true,
     // })
@@ -63,13 +63,13 @@ class TextBox extends Component {
           className="clipboard"
           component="a"
           button-href="#"
-          data-clipboard-text={this.props.clipBoardData}
+          data-clipboard-text={lambdaLess}
         >
           <Button>Copy to Clipboard</Button>
         </Clipboard>
         <CodeMirror
           className="codeeditor"
-          // value={unstrung}
+          value={unStrung}
           options={{
             // mode: 'javascript',
             lineSeparator: `λ`,
