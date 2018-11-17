@@ -5,7 +5,9 @@ const fs = require("fs");
 const {
   transform,
   queryResolver,
-  mutationResolver
+  mutationResolver,
+  serverCreator,
+  indexCreator
 } = require("../functions/typesCreator");
 
 const db = {};
@@ -134,13 +136,25 @@ db.filterAssociations = async (req, res) => {
 
   let frontEndVersion = transform(tables);
 
-  fs.writeFileSync(path.join(PATH, `typesZip.js`), frontEndVersion);
+  //ZIPABILITY
+  // zip directory => client directory => graphql directory=>
+  fs.mkdirSync(path.join(PATH, "zip"));
+  fs.mkdirSync(path.join(PATH, "zip", "client"));
+  fs.mkdirSync(path.join(PATH, "zip", "client", "graphql"));
+
+  fs.writeFileSync(path.join(PATH, "zip", "server.js"), serverCreator());
+  fs.writeFileSync(path.join(PATH, "zip/graphql", "index.js"), indexCreator());
+
   fs.writeFileSync(
-    path.join(PATH, `queryZip.js`),
+    path.join(PATH, "zip/client/graphql", `schema.js`),
+    frontEndVersion
+  );
+  fs.writeFileSync(
+    path.join(PATH, "zip/client/graphql", `queryZip.js`),
     queryResolver(frontEndVersion, tables)
   );
   fs.writeFileSync(
-    path.join(PATH, `mutationZip.js`),
+    path.join(PATH, "zip/client/graphql", `mutationZip.js`),
     mutationResolver(frontEndVersion, tables)
   );
 
