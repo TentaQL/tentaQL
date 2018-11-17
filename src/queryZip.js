@@ -46,21 +46,5 @@ const Query = {
           })
       
       },
-      
-      spatial_ref_sy(parent, {id}, ctx, info) {
-        client.query("SELECT*FROM spatial_ref_sies where undefined= id", 
-        (err,result)=> {
-          if(err) throw new Error("Error querying all spatial_ref_sy")
-          return result;
-        });
-      },
-      
-      spatial_ref_sys(parent, args, ctx, info) {
-          client.query("SELECT*FROM spatial_ref_sys", (err,result)=>{
-            if(err) throw new Error("Error querying all spatial_ref_sys")
-            return result;
-          })
-      
-      },
        
  };

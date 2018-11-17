@@ -6,47 +6,35 @@ const typeDefs = `
    orders:[Order]
    store:Store
    stores:[Store]
-   spatial_ref_sy:Spatial_ref_sy
-   spatial_ref_sys:[Spatial_ref_sy]
      }
  type Mutation { 
    deleteCustomer(id:ID): Customer
-   createCustomer(lastname: String firstname: String phone: String ): Customer
-   updateCustomer(lastname: String firstname: String phone: String ): Customer
+   createCustomer(lastname:String, firstname:String, phone:String): Customer
+   updateCustomer(lastname:String, firstname:String, phone:String): Customer
    deleteOrder(id:ID): Order
-   createOrder(amount: String ): Order
-   updateOrder(amount: String ): Order
+   createOrder(amount:String): Order
+   updateOrder(amount:String): Order
    deleteStore(id:ID): Store
-   createStore(region: String ): Store
-   updateStore(region: String ): Store
-   deleteSpatial_ref_sy(id:ID): Spatial_ref_sy
-   createSpatial_ref_sy(auth_name: String srtext: String proj4text: String ): Spatial_ref_sy
-   updateSpatial_ref_sy(auth_name: String srtext: String proj4text: String ): Spatial_ref_sy
+   createStore(region:String): Store
+   updateStore(region:String): Store
      }
  type Customer { 
-   customerid:Integer
+   customerid:Int
    lastname:String
    firstname:String
    phone:String
    orders:[Order]
      }
  type Order { 
-   orderid:Integer
+   orderid:Int
    amount:String
-   customerid:Integer
+   customerid:Int
    stores:[Store]
      }
  type Store { 
-   storeid:Integer
+   storeid:Int
    region:String
-   orderid:Integer
-     }
- type Spatial_ref_sy { 
-   srid:Integer
-   auth_name:String
-   auth_srid:Integer
-   srtext:String
-   proj4text:String
+   orderid:Int
      } 
  }
  `;
