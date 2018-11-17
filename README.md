@@ -1,4 +1,4 @@
-![alt text](OctopusCircle.png){:height="100px" width="100px"}
+![alt text](OctopusCircle.png)
 
 # TentaQL 
 Automated PostgreSQL analyzer, creating backend simpified project structure based on user's database
