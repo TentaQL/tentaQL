@@ -12,9 +12,12 @@ With only one simple input - database uri, TentaQL connects to your database, re
 
 # Authors
 
-[Anna Brakowska @AnnaBrakowska](https://github.com/AnnaBrakowska) 
+[Anna Brakowska @AnnaBrakowska](https://github.com/AnnaBrakowska)
+
 [Jonathan Schwartz @filmboy3](https://github.com/filmboy3)
+
 [Jonah Wilkof - @jwilkof](https://github.com/jwilkof)
+
 [Alan Thompson - @PabloSphere](https://github.com/PabloSphere)
 
 
