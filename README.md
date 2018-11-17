@@ -1,1 +1,1 @@
-![alt text](OctopusCircle.png=250x250)
+![alt text](OctopusCircle.png =250x250)
