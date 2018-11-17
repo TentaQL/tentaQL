@@ -3,11 +3,10 @@ function serverCreator() {
   
   const express = require("express");
   const expressGraphQL = require("express-graphql");
-  const mongoose = require("mongoose");
   const bodyParser = require("body-parser");
   const cors = require("cors");
 
-  const schema from "./graphql/";
+  const schema = require("./graphql/schema");
   const app = express();
 
 
@@ -21,4 +20,4 @@ function serverCreator() {
   `;
   return index;
 }
-module.exports = indexCreator;
+module.exports = serverCreator;
