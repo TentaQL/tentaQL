@@ -1,45 +1,45 @@
 const pluralize = require("pluralize");
 
 // TESTING DATABASE
-const allTypes = {
-  players: {
-    player_id: "integer",
-    firstname: "character varying",
-    lastname: "character varying",
-    birthdate: "date",
-    country: "character varying"
-  },
-  dogs: {
-    dog_id: "integer",
-    firstname: "character varying",
-    lastname: "character varying",
-    birthdate: "date"
-  },
-  students: {
-    student_id: "integer",
-    player_name: "text"
-  },
-  cats: {
-    cat_id: "integer",
-    firstname: "character varying",
-    lastname: "character varying",
-    birthdate: "date"
-  },
-  tests: {
-    subject_id: "integer",
-    subject_name: "text",
-    higheststudent_id: "integer"
-  },
-  foreignTables: {
-    tests: "students"
-  },
-  primaryKeys: {
-    players: "player_id",
-    dogs: "dog_id",
-    cats: "cat_id",
-    students: "student_id"
-  }
-};
+// const allTypes = {
+//   players: {
+//     player_id: "integer",
+//     firstname: "character varying",
+//     lastname: "character varying",
+//     birthdate: "date",
+//     country: "character varying"
+//   },
+//   dogs: {
+//     dog_id: "integer",
+//     firstname: "character varying",
+//     lastname: "character varying",
+//     birthdate: "date"
+//   },
+//   students: {
+//     student_id: "integer",
+//     player_name: "text"
+//   },
+//   cats: {
+//     cat_id: "integer",
+//     firstname: "character varying",
+//     lastname: "character varying",
+//     birthdate: "date"
+//   },
+//   tests: {
+//     subject_id: "integer",
+//     subject_name: "text",
+//     higheststudent_id: "integer"
+//   },
+//   foreignTables: {
+//     tests: "students"
+//   },
+//   primaryKeys: {
+//     players: "player_id",
+//     dogs: "dog_id",
+//     cats: "cat_id",
+//     students: "student_id"
+//   }
+// };
 
 function initialCapitalizer(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -216,7 +216,7 @@ const transform = obj => {
   let string = mergeToString(related);
   return "const typeDefs = ` " + string + "\r\n `;";
 };
-let transformedTostring = transform(allTypes);
+// let transformedTostring = transform(allTypes);
 
 function queryResolver(str, obj) {
   //PROCESSING QUERY PORTION
@@ -263,7 +263,7 @@ function queryResolver(str, obj) {
   });
   return `const Query = { ${output} \n };`;
 }
-console.log(queryResolver(transformedTostring, allTypes));
+// console.log(queryResolver(transformedTostring, allTypes));
 
 function mutationResolver(str, obj) {
   let splitted = str.split("type")[3];

@@ -7,6 +7,8 @@ const {
   queryResolver,
   mutationResolver
 } = require("../functions/typesCreator");
+const serverCreator = require("../functions/serverCreator");
+const schemaCreator = require("../functions/schemaCreator");
 
 const db = {};
 let tables = {};
@@ -133,15 +135,31 @@ db.filterAssociations = async (req, res) => {
   console.log(tables);
 
   let frontEndVersion = transform(tables);
+  let mutationResolvers = mutationResolver(frontEndVersion, tables);
+  let queryResolvers = queryResolver(frontEndVersion, tables);
+  let resolvers = queryResolvers + mutationResolvers;
 
-  fs.writeFileSync(path.join(PATH, `typesZip.js`), frontEndVersion);
+  //ZIPABILITY
+  // zip directory => client directory => graphql directory=>
+  fs.mkdirSync(path.join(PATH, "zip"));
+  fs.mkdirSync(path.join(PATH, "zip", "client"));
+  fs.mkdirSync(path.join(PATH, "zip", "client", "graphql"));
+  fs.mkdirSync(path.join(PATH, "zip", "client", "graphql", "schema"));
+  fs.mkdirSync(path.join(PATH, "zip", "client", "graphql", "resolvers"));
+
+  fs.writeFileSync(path.join(PATH, "zip", "server.js"), serverCreator());
   fs.writeFileSync(
-    path.join(PATH, `queryZip.js`),
-    queryResolver(frontEndVersion, tables)
+    path.join(PATH, "zip/client/graphql", "index.js"),
+    schemaCreator()
+  );
+
+  fs.writeFileSync(
+    path.join(PATH, "zip/client/graphql/schema", `schema.js`),
+    frontEndVersion
   );
   fs.writeFileSync(
-    path.join(PATH, `mutationZip.js`),
-    mutationResolver(frontEndVersion, tables)
+    path.join(PATH, "zip/client/graphql/resolvers", `resolvers.js`),
+    resolvers
   );
 
   res.end(JSON.stringify(frontEndVersion));
