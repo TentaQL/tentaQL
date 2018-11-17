@@ -143,8 +143,8 @@ function mergeToString(obj) {
     }
   }
   output += " \r\n }";
-  output = output.replace(/\, \)/g, ')');
-  output = output.replace(/\: /g, ': ');
+  output = output.replace(/\, \)/g, ")");
+  output = output.replace(/\: /g, ": ");
   return output;
 }
 
@@ -282,48 +282,61 @@ function mutationResolver(str, obj) {
     let pluralized =
       obj.primaryKeys[pluralize(element[1].trim()).toLowerCase()];
     let singularized = obj.primaryKeys[element[1].trim().toLowerCase()];
-    if (element[0].toString().startsWith(" delete") && (pluralized || singularized) ) {
+    let tableName = element[1].trim().toLowerCase();
+    let tableNamePl = pluralize(element[1].trim().toLowerCase());
+    let from;
+    if (obj[tableName]) {
+      from = tableName;
+    } else {
+      from = tableNamePl;
+    }
+
+    if (
+      element[0].toString().startsWith(" delete") &&
+      (pluralized || singularized)
+    ) {
       output += `delete${element[
         element.length - 1
       ].trim()}(parent, args, {id}, info) {
-  client.query("DELETE FROM ${pluralize(
-    element[element.length - 1].toLowerCase()
-  ) || singularize(
-    element[element.length - 1].toLowerCase()
-  )} WHERE ${pluralized || singularized} = id", (err,result)=>{
-    if(err) throw new Error("Error deleting");
-    return result;
-  })
-  },
-  `;
-    } else if (element[0].toString().startsWith(" create") && (pluralized || singularized)) {
+    client.query("DELETE FROM ${from} WHERE ${pluralized ||
+        singularized} = id", (err,result)=>{
+      if(err) throw new Error("Error deleting");
+      return result;
+    })
+    },
+    `;
+    } else if (
+      element[0].toString().startsWith(" create") &&
+      (pluralized || singularized)
+    ) {
       output += `create${pluralize.singular(
         element[element.length - 1].trim()
       )}(parent, args, {id}, info) {
-  client.query("create FROM ${pluralized || singularized} WHERE ${pluralized || singularized} = id", (err,result)=>{
-    if(err) throw new Error("Error creating");
-    return result;
-  })
-  },
-  `;
-    } else if (element[0].toString().startsWith(" upda") && (pluralized || singularized)) {
+    client.query("create FROM ${from} WHERE ${pluralized ||
+        singularized} = id", (err,result)=>{
+      if(err) throw new Error("Error creating");
+      return result;
+    })
+    },
+    `;
+    } else if (
+      element[0].toString().startsWith(" upda") &&
+      (pluralized || singularized)
+    ) {
       output += `update${element[
         element.length - 1
       ].trim()}(parent, args, {id}, info) {
-        client.query("update FROM ${pluralize(
-          element[element.length - 1].toLowerCase()
-        ) || singularize(
-          element[element.length - 1].toLowerCase()
-        )} WHERE ${pluralized || singularized} = id", (err,result)=>{
-            if(err) throw new Error("Error creating");
-            return result;
-          })
-          },
-          `;
+          client.query("update FROM ${from} WHERE ${pluralized ||
+        singularized} = id", (err,result)=>{
+              if(err) throw new Error("Error creating");
+              return result;
+            })
+            },
+            `;
     }
   });
   return `const Mutation = { \r\n ${output} \r\n};
-module.exports = Mutation;`;
+  module.exports = Mutation;`;
 }
 
 module.exports = { transform, queryResolver, mutationResolver };
