@@ -14,3 +14,5 @@ Automated PostgreSQL analyzer, creating backend simpified project structure base
 * Javascript / ES6
 * NodeJS, ExpressJS
 * GraphQL
+* PostgreSQL
+* Webpack, Babel
