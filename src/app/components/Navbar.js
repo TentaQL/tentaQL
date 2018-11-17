@@ -23,9 +23,9 @@ class Navbar extends Component {
             <Input
               onChange={this.props.searchBarHandler}
               value={this.props.url}
-              placeholder="Enter a Database URL ..."
+              placeholder="To setup additional databases, please enter the URL ..."
             />
-            <Button>Connect</Button>
+            <Button onClick={this.props.connectionHandler}>Connect</Button>
           </Menu.Item>
           <Menu.Item position="left">
             <h1>TentaQL</h1>

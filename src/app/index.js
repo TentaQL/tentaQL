@@ -48,7 +48,7 @@ class App extends Component {
           })
           .then(res => {
             let replaced = res.replace(/\r\n/g, "λ");
-            this.setState({ data: replaced, modal: false, clipBoardData: res });
+            this.setState({ data: replaced, modal: false, clipBoardData: res, url: "" });
           });
       })
       .catch(err => {
@@ -64,7 +64,7 @@ class App extends Component {
           credentialsHandler={this.credentialsHandler}
           connectionHandler={this.connectionHandler}
         />
-        <Navbar url={this.state.url} searchBarHandler={this.searchBarHandler} />
+        <Navbar url={this.state.url} searchBarHandler={this.searchBarHandler} connectionHandler={this.connectionHandler} />
         <TextBox
           className="textbox"
           data={this.state.data}
