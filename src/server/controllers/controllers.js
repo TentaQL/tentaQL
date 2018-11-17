@@ -14,13 +14,17 @@ let foreignTables = {};
 
 let uri;
 let client;
-// let alan =
-//   "postgres://cwfmwiaw:AHwoqc41Cx3L7nMV5oSfz-KQZewSqQGx@baasu.db.elephantsql.com:5432/cwfmwiaw";
 
 //CONNECT
 db.connect = (req, res) => {
-  uri =
-    "postgres://dbomqaen:FUKYQ_vrQCHbBzHwBpBDAHfUw5R6DzO6@elmer.db.elephantsql.com:5432/dbomqaen";
+  console.log("Body here");
+  console.log(req.body.url);
+  uri = req.body.url;
+  // AnnaHardcoded postgres://tbpsxkue:TBTE6vwArK31H7dVlizemHoMn9LP_TWC@baasu.db.elephantsql.com:5432/tbpsxkue
+  // JonahHardcoded postgres://imggdlvc:VSxvN8VJsQNK32MXVCNvWRfAF_sj_Amz@baasu.db.elephantsql.com:5432/imggdlvc
+  // JonathanHardcoded postgres://cwfmwiaw:AHwoqc41Cx3L7nMV5oSfz-KQZewSqQGx@baasu.db.elephantsql.com:5432/cwfmwiaw
+
+
   client = new pg.Client(uri);
   client.connect(err => {
     if (err) return console.log("Could not connect to postgres ", err);
