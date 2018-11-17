@@ -237,7 +237,6 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {background-color: #3B514D; co
 .CodeMirror-lines {
   cursor: text;
   min-height: 1px; /* prevents collapsing before first draw */
-  color: blue;
 }
 .CodeMirror pre {
   /* Reset some styles that the rest of the page might have set */

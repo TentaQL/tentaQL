@@ -1,0 +1,37 @@
+type Query { 
+   players:[players]
+   dogs:[dogs]
+   students:[students]
+   cats:[cats]
+   tests:[tests]
+     }
+ type Players { 
+   player_id:Integer
+   firstname:String
+   lastname:String
+   birthdate:String
+   country:String
+     }
+ type Dogs { 
+   dog_id:Integer
+   firstname:String
+   lastname:String
+   birthdate:String
+     }
+ type Students { 
+   student_id:Integer
+   player_name:String
+     }
+ type Cats { 
+   cat_id:Integer
+   firstname:String
+   lastname:String
+   birthdate:String
+     }
+ type Tests { 
+   subject_id:Integer
+   subject_name:String
+   higheststudent_id:Integer
+   students:[Students]
+     } 
+ }

@@ -18,8 +18,8 @@ const typeDefs = `
    createDepartment(dept:String): Department
    updateDepartment(dept:String): Department
    deleteNewcompany(id:ID): Newcompany
-   createNewcompany(name:String, age:Int, address:String, salary:Float): Newcompany
-   updateNewcompany(name:String, age:Int, address:String, salary:Float): Newcompany
+   createNewcompany(name:String, age:Int, address:String, salary:undefined): Newcompany
+   updateNewcompany(name:String, age:Int, address:String, salary:undefined): Newcompany
    deleteJpcompany(id:ID): Jpcompany
    createJpcompany(name:String, age:Int, address:String, salary:Float, join_date:String): Jpcompany
    updateJpcompany(name:String, age:Int, address:String, salary:Float, join_date:String): Jpcompany
@@ -56,7 +56,7 @@ const typeDefs = `
    name:String
    age:Int
    address:String
-   salary:numeric
+   salary:Float
      }
  type Jpcompany { 
    id:Int
