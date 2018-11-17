@@ -14,7 +14,7 @@ app.get("/", (req, res) => {
 //this queries all tables and fields
 app.post("/db", db.connect);
 
-app.get("/db/all", db.getTables, db.getFields, db.getConstraints, db.filterAssociations);
+app.get("/db/all", db.getTables, db.getFields, db.filterAssociations);
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
