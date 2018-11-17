@@ -12,7 +12,7 @@ With only one simple input - database uri, TentaQL connects to your database, re
 
 ### Authors
 ---
-Anna Brakowska - @AnnaBrakowska
+[Anna Brakowska @AnnaBrakowska](https://github.com/AnnaBrakowska) 
 Jonathan Schwartz - @filmboy3
 Jonah Wilkof - @jwilkof
 Alan Thompson - @PabloSphere
