@@ -30,32 +30,13 @@ class TextBox extends Component {
     };
   }
 
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   console.log("I'm here")
-  //   console.log(this.props.data)
-  //   if (this.props.data != nextProps.data) {
-  //     this.setState({
-  //       name: nextProps.data
-  //     })
-  //     return true
-  //   } else {
-  //     return false
-  //   }
-  // }
-
   render() {
-    console.log("props.data", this.props.data);
     let unStrung = this.props.data.replace(/['"]+/g, "");
     unStrung = unStrung.replace(/\\r\\n/g, "λ");
     unStrung = unStrung.replace(/\\n/g, "λ");
     unStrung = unStrung.replace(/:/g, ": ");
-    // unStrung = unStrung.replace(/["\r\n"]+/g,'                                                                           ')
-    console.log("unString", unStrung);
-    // let myCodeMirror = CodeMirror(document.body, {
-    //   lineNumbers: true,
-    // })
+
     let lambdaLess = this.state.value.replace(/\\r\\n/g, "λ");
-    console.log(lambdaLess);
     lambdaLess = lambdaLess.replace(/λ/g, "\n");
     return (
       <div>
@@ -65,7 +46,7 @@ class TextBox extends Component {
           button-href="#"
           data-clipboard-text={lambdaLess}
         >
-          <Button>Copy to Clipboard</Button>
+        <Button>Copy Changes To Clipboard</Button>
         </Clipboard>
         <CodeMirror
           className="codeeditor"

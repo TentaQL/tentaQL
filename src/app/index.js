@@ -3,9 +3,14 @@ const ReactDOM = require("react-dom");
 import { Component } from "react";
 import { ModalExampleDimmer } from "./components/Modal.js";
 import Navbar from "./components/Navbar";
+const FileSaver = require('file-saver');
+const serverCreator = require("./boilerFunc/serverCreator");
+const schemaCreator = require("./boilerFunc/schemaCreator");
+import $ from "jquery";
 import TextBox from "./components/TextBox";
 import { Button, Icon, Input, Checkbox, Form, Menu, Placeholder } from "semantic-ui-react";
 require("./index.css");
+const JSZip = require("jszip");
 require("../codemirror/lib/codemirror.css");
 require("codemirror/mode/javascript/javascript");
 
@@ -17,11 +22,17 @@ class App extends Component {
       data: "",
       url: "",
       placeholder: "Enter Your Database URL Here...",
-      // placeholderColor: 
+      persistedURL: "",
+      schema: "",
+      resolvers: "",
+
+      lambdaLess: "",
+      originalSchema: ""
     };
     this.credentialsHandler = this.credentialsHandler.bind(this);
     this.connectionHandler = this.connectionHandler.bind(this);
     this.searchBarHandler = this.searchBarHandler.bind(this);
+    this.downloadZip = this.downloadZip.bind(this);
   }
 
   credentialsHandler(event) {
@@ -30,6 +41,20 @@ class App extends Component {
   }
   searchBarHandler(event) {
     this.setState({ url: event.target.value });
+  }
+
+  downloadZip() {
+    console.log("Zip was clicked.")
+    var zip = new JSZip();
+    let schema = this.state.clipBoardData;
+    zip.folder("tentaQL").folder("client").folder("graphql").file("schema.js", schemaCreator());
+    zip.folder("tentaQL").file("server.js", serverCreator(this.state.persistedURL));
+    zip.folder("tentaQL").folder("client").folder("graphql").file("resolvers.js", this.state.resolvers);
+    zip.folder("tentaQL").folder("client").folder("graphql").file("schema.graphql", schema);
+
+    zip.generateAsync({type:"blob"}).then(function (blob) { 
+        saveAs(blob, "TentaQL.zip");                          
+    });
   }
 
   connectionHandler() {
@@ -45,13 +70,16 @@ class App extends Component {
       body: JSON.stringify(credentials)
     })
       .then(res => {
+        this.setState({persistedURL: this.state.url})
         fetch("http://localhost:8080/db/all")
           .then(res => {
             return res.json();
           })
           .then(res => {
-            let replaced = res.replace(/\r\n/g, "λ");
-            this.setState({ data: replaced, modal: false, clipBoardData: res, url: "" });
+            let replaced = res.frontEnd.replace(/\r\n/g, "λ");
+            this.setState({ data: replaced, modal: false, schema: res.schema, resolvers: res.resolvers, clipBoardData: res.frontEnd, url: ""});
+            $('.clipboard').click;
+            this.setState({ originalSchema: $('.clipboard').value })
           });
       })
       .catch(err => {
@@ -69,11 +97,11 @@ class App extends Component {
           connectionHandler={this.connectionHandler}
           placeholder={this.state.placeholder}
         />
-        <Navbar url={this.state.url} searchBarHandler={this.searchBarHandler} connectionHandler={this.connectionHandler} />
+        <Navbar persistedURL={this.state.persistedURL} resolvers={this.state.resolvers} schema={this.state.schema}  data={this.state.data} url={this.state.url} searchBarHandler={this.searchBarHandler} downloadZip={this.downloadZip} connectionHandler={this.connectionHandler} lambdaLess={this.state.lambdaLess} />
         <TextBox
           className="textbox"
           data={this.state.data}
-          clipboardData={this.state.clipboardData}
+          lambdaLess={this.state.lambdaLess}
         />
       </div>
     );

@@ -31,12 +31,9 @@ class Navbar extends Component {
             <h1>TentaQL</h1>
           </Menu.Item>
           <Menu.Item position="left">
-            <Button>TentaQL</Button>
-          </Menu.Item>
-          <Menu.Item position="left">
-            <Button size="small" color="green">
+            <Button onClick={this.props.downloadZip} size="small" color="green">
               <Icon name="download" />
-              Download
+              Download Your TentaQL 
             </Button>
           </Menu.Item>
         </Menu>
