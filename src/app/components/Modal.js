@@ -18,10 +18,11 @@ class ModalExampleDimmer extends Component {
                 <input
                   type="text"
                   name="url"
+                  id="modal"
                   placeholder={this.props.placeholder}
                   style = {this.props.placeholderColor}
                   value={this.props.data.url}
-                  onChange={this.props.credentialsHandler}
+                  onChange={this.props.searchBarHandler}
                 />
               </div>
             </form>

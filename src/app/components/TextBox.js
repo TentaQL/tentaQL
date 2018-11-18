@@ -1,56 +1,38 @@
 const React = require("react");
 const ReactDOM = require("react-dom");
+import { connect } from 'react-redux';
 import { Component } from "react";
 import { UnControlled as CodeMirror } from "react-codemirror2";
+import { codeMirrorUpdate } from '../actions/textBoxActions';
 
 import Clipboard from "react-clipboard.js";
 
 import {
   Button,
-  Icon,
-  Input,
-  Checkbox,
-  Form,
-  Menu,
-  Sticky
 } from "semantic-ui-react";
 import "codemirror/addon/hint/show-hint";
 import "codemirror/addon/lint/lint";
 import "codemirror-graphql/hint";
 import "codemirror-graphql/lint";
 import "codemirror-graphql/mode";
-// require('codemirror/mode/javascript/javascript');
 
 class TextBox extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: "",
-      value: ""
-    };
-  }
 
   render() {
-    let unStrung = this.props.data.replace(/['"]+/g, "");
-    unStrung = unStrung.replace(/\\r\\n/g, "λ");
-    unStrung = unStrung.replace(/\\n/g, "λ");
-    unStrung = unStrung.replace(/:/g, ": ");
-
-    let lambdaLess = this.state.value.replace(/\\r\\n/g, "λ");
-    lambdaLess = lambdaLess.replace(/λ/g, "\n");
+    
     return (
       <div>
         <Clipboard
           className="clipboard"
           component="a"
           button-href="#"
-          data-clipboard-text={lambdaLess}
+          data-clipboard-text={this.props.currentSchema}
         >
         <Button>Copy Changes To Clipboard</Button>
         </Clipboard>
         <CodeMirror
           className="codeeditor"
-          value={unStrung}
+          value={this.props.codeMirrorLambda}
           options={{
             // mode: 'javascript',
             lineSeparator: `λ`,
@@ -59,7 +41,7 @@ class TextBox extends Component {
             readOnly: false
           }}
           onChange={(editor, metadata, value) => {
-            this.setState({ value });
+            this.props.dispatch(codeMirrorUpdate(value));
           }}
         />
       </div>
@@ -67,4 +49,9 @@ class TextBox extends Component {
   }
 }
 
-export default TextBox;
+const mapStateToProps = (state) => {
+  return { currentSchema: state.currentSchema,
+            codeMirrorLambda: state.codeMirrorLambda };
+};
+
+export default connect(mapStateToProps)(TextBox);

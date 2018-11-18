@@ -1,7 +1,13 @@
 const React = require("react");
 const ReactDOM = require("react-dom");
+import { Provider } from 'react-redux';
+import store from './store';
 import { Component } from "react";
 import { ModalExampleDimmer } from "./components/Modal.js";
+import { searchUpdate } from './actions/searchActions';
+import { currentSearch } from './actions/searchActions';
+import { saveData } from './actions/searchActions';
+
 import Navbar from "./components/Navbar";
 const FileSaver = require('file-saver');
 const serverCreator = require("./boilerFunc/serverCreator");
@@ -21,21 +27,18 @@ class App extends Component {
       url: "",
       placeholder: "Enter Your Database URL Here...",
       persistedURL: "",
+      dummyCodeMirror: "",
       schema: "",
       resolvers: "",
-      lambdaLess: "",
     };
-    this.credentialsHandler = this.credentialsHandler.bind(this);
     this.connectionHandler = this.connectionHandler.bind(this);
     this.searchBarHandler = this.searchBarHandler.bind(this);
     this.downloadZip = this.downloadZip.bind(this);
   }
 
-  credentialsHandler(event) {
-    event.preventDefault();
-    this.setState({ [event.target.name]: event.target.value });
-  }
   searchBarHandler(event) {
+    event.preventDefault();
+    store.dispatch(searchUpdate(event.target.value, event.target.id));
     this.setState({ url: event.target.value });
   }
 
@@ -53,7 +56,9 @@ class App extends Component {
     });
   }
 
-  connectionHandler() {
+  connectionHandler(event) {
+    event.preventDefault();
+    store.dispatch(currentSearch());
     let credentials = {
       url: this.state.url
     };
@@ -73,6 +78,7 @@ class App extends Component {
           })
           .then(res => {
             let replaced = res.frontEnd.replace(/\r\n/g, "λ");
+            store.dispatch(saveData(res));
             this.setState({ data: replaced, modal: false, schema: res.schema, resolvers: res.resolvers, clipBoardData: res.frontEnd, url: ""});
           });
       })
@@ -84,11 +90,12 @@ class App extends Component {
 
   render() {
     return (
+      <Provider store={store}>
       <div>
         <ModalExampleDimmer
           data={this.state}
-          credentialsHandler={this.credentialsHandler}
           connectionHandler={this.connectionHandler}
+          searchBarHandler={this.searchBarHandler}
           placeholder={this.state.placeholder}
         />
         <Navbar persistedURL={this.state.persistedURL} resolvers={this.state.resolvers} schema={this.state.schema}  data={this.state.data} url={this.state.url} searchBarHandler={this.searchBarHandler} downloadZip={this.downloadZip} connectionHandler={this.connectionHandler} lambdaLess={this.state.lambdaLess} />
@@ -98,6 +105,7 @@ class App extends Component {
           lambdaLess={this.state.lambdaLess}
         />
       </div>
+      </Provider>
     );
   }
 }

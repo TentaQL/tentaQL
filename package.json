@@ -51,7 +51,8 @@
     "redux-thunk": "^2.3.0",
     "semantic-ui": "^2.4.2",
     "semantic-ui-css": "^2.4.1",
-    "semantic-ui-react": "^0.83.0"
+    "semantic-ui-react": "^0.83.0",
+    "thunk": "0.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.1.5",

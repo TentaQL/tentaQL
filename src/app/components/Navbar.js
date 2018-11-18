@@ -1,12 +1,11 @@
 const React = require("react");
 const ReactDOM = require("react-dom");
 import { Component } from "react";
+import { connect } from 'react-redux';
 import {
   Button,
   Icon,
   Input,
-  Checkbox,
-  Form,
   Menu,
   Sticky
 } from "semantic-ui-react";
@@ -23,6 +22,7 @@ class Navbar extends Component {
             <Input
               onChange={this.props.searchBarHandler}
               value={this.props.url}
+              id="navbar"
               placeholder="To setup additional databases, please enter the URL ..."
             />
             <Button onClick={this.props.connectionHandler}>Connect</Button>
@@ -31,6 +31,10 @@ class Navbar extends Component {
             <h1>TentaQL</h1>
           </Menu.Item>
           <Menu.Item position="left">
+          <Button size="small" color="green">
+              <Icon name="download" />
+             Test Store
+            </Button>
             <Button onClick={this.props.downloadZip} size="small" color="green">
               <Icon name="download" />
               Download Your TentaQL 
