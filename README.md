@@ -8,7 +8,7 @@
 
 TentaQL is an open-source automated PostgreSQL analyzer, creating backend simpified project structure based on user's database.
 
-With only one simple input - database uri, TentaQL connects to your database, recreates the structure of PostgreSQL schemas and creates a GraphQL-translated project base, available for download.
+With only one simple input - a database URI, TentaQL connects to your database, recreates the structure of PostgreSQL schemas and creates a GraphQL-translated project base, available for download.
 
 # Authors
 

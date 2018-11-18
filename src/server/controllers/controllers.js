@@ -7,8 +7,7 @@ const {
   queryResolver,
   mutationResolver
 } = require("../functions/typesCreator");
-const serverCreator = require("../functions/serverCreator");
-const schemaCreator = require("../functions/schemaCreator");
+
 
 const db = {};
 let tables = {};
@@ -34,7 +33,6 @@ db.connect = (req, res) => {
   client.connect(err => {
     if (err) return console.log("Could not connect to postgres ", err);
   });
-  // console.log(uri);
   res.json(uri);
 };
 

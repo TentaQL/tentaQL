@@ -6,9 +6,7 @@ import Navbar from "./components/Navbar";
 const FileSaver = require('file-saver');
 const serverCreator = require("./boilerFunc/serverCreator");
 const schemaCreator = require("./boilerFunc/schemaCreator");
-import $ from "jquery";
 import TextBox from "./components/TextBox";
-import { Button, Icon, Input, Checkbox, Form, Menu, Placeholder } from "semantic-ui-react";
 require("./index.css");
 const JSZip = require("jszip");
 require("../codemirror/lib/codemirror.css");
@@ -25,9 +23,7 @@ class App extends Component {
       persistedURL: "",
       schema: "",
       resolvers: "",
-
       lambdaLess: "",
-      originalSchema: ""
     };
     this.credentialsHandler = this.credentialsHandler.bind(this);
     this.connectionHandler = this.connectionHandler.bind(this);
@@ -78,8 +74,6 @@ class App extends Component {
           .then(res => {
             let replaced = res.frontEnd.replace(/\r\n/g, "λ");
             this.setState({ data: replaced, modal: false, schema: res.schema, resolvers: res.resolvers, clipBoardData: res.frontEnd, url: ""});
-            $('.clipboard').click;
-            this.setState({ originalSchema: $('.clipboard').value })
           });
       })
       .catch(err => {
