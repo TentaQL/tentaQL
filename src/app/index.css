@@ -7,10 +7,16 @@ input[type="text"] {
 }
 
 .clipboard {
+
   padding: 10px !important;
-  margin: 20px !important;
+  margin: 10px !important;
   float: right !important;
   line-height: 3em !important;
+}
+
+#mascot {
+  height: 75px;
+  width: 75px;
 }
 
 i.smallIcon {
@@ -23,7 +29,9 @@ i.smallIcon {
   margin-top:6%;
 }
 
-
+.buttonColl {
+  float: right;
+}
 
 .tab {
 	  cursor: pointer;

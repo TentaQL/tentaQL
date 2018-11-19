@@ -16,7 +16,6 @@ class Navbar extends Component {
   }
   render() {
     return (
-      <Sticky>
         <Menu>
           <Menu.Item position="left">
             <Input
@@ -25,13 +24,16 @@ class Navbar extends Component {
               id="navbar"
               placeholder="To setup additional databases, please enter the URL ..."
             />
-            <Button onClick={this.props.connectionHandler}>Connect</Button>
+            <Button animated='fade'>
+              <Button.Content visible>Connect</Button.Content>
+              <Button.Content hidden><Icon id="newURL" name="database" onClick={this.props.connectionHandler} /></Button.Content>
+            </Button>
           </Menu.Item>
-          <Menu.Item position="center">
+          <a href="https://github.com/TentaQL/tentaQL"><img id="mascot" src="../../../OctopusCircle.png" target="_blank"></img></a>
+          <Menu.Item position="right">
             <h1>TentaQL</h1>
           </Menu.Item>
           </Menu>
-      </Sticky>
     );
   }
 }

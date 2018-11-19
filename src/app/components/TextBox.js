@@ -26,13 +26,21 @@ class TextBox extends Component {
           button-href="#"
           data-clipboard-text={this.props.currentSchema}
         >
-        <Button><Icon name="copy outline" />Copy to Clipboard</Button>
+ <Button animated>
+      <Button.Content visible>Copy Tab</Button.Content>
+      <Button.Content hidden>
+        <Icon name='copy outline' />
+      </Button.Content>
+    </Button>
+        {/* <Button><Icon name="copy outline" />Copy to Clipboard</Button> */}
         </Clipboard>
+
+
         <TabProvider defaultTab="one">
         <section className="my-tabs">
 
           <TabList className="my-tablist">
-          <Button.Group>
+          <Button.Group className="buttonColl">
            <Button className="wrapperButton"><Tab className="tab" id="tab_1" tabFor="one">Schema</Tab></Button>
            <Button.Or text='</>' />
            <Button className="wrapperButton"><Tab className="tab" tabFor="two">Resolvers</Tab></Button>
@@ -46,8 +54,19 @@ class TextBox extends Component {
             <Button.Or text='</>' />
            <Button id="Edited" className="wrapperButton" animated='fade'>
               <Button.Content visible>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Edited Zip</Button.Content>
-              <Button.Content onClick={this.props.downloadZip} id="Updates" hidden>Are you sure?</Button.Content>
+              <Button.Content onClick={this.props.downloadZip} id="Updates" hidden>You sure?</Button.Content>
             </Button>
+            <Button.Or text='</>' />
+           <Button id="Reset" className="wrapperButton" animated='fade'>
+              <Button.Content visible>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reset Tab</Button.Content>
+              <Button.Content id="Original" hidden><Icon id="TabReset" name="redo" /></Button.Content>
+            </Button>
+            <Button.Or text='</>' />
+           <Button id="ResetAll" className="wrapperButton" animated='fade'>
+              <Button.Content visible>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reset All</Button.Content>
+              <Button.Content id="Original" hidden><Icon id="AllReset" name="history" /></Button.Content>
+            </Button>
+            
            </Button.Group>
           </TabList>
           <div className="wrapper">
