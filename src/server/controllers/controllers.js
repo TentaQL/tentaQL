@@ -5,9 +5,9 @@ const fs = require("fs");
 const {
   transform,
   queryResolver,
-  mutationResolver
+  mutationResolver,
+  returnResolvers
 } = require("../functions/typesCreator");
-
 
 const db = {};
 let tables = {};
@@ -134,13 +134,13 @@ db.filterAssociations = async (req, res) => {
 
   let frontEndVersion = transform(tables);
   let mutationResolvers = mutationResolver(frontEndVersion, tables);
-  let queryResolvers = queryResolver(frontEndVersion, tables);
-  let resolvers = queryResolvers + mutationResolvers;
+  let queryResolvers = queryResolver(tables);
+  let resolvers = returnResolvers(queryResolvers, mutationResolvers);
 
   let allFiles = {
     frontEnd: frontEndVersion,
-    resolvers: resolvers,
-  }
+    resolvers: resolvers
+  };
 
   res.end(JSON.stringify(allFiles));
 };

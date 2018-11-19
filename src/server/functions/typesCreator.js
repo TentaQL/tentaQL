@@ -224,6 +224,34 @@ const transform = obj => {
   let string = mergeToString(related);
   return "const typeDefs = ` " + string + "\r\n `;";
 };
+<<<<<<< HEAD
+
+function queryResolver(obj) {
+  let output = ``;
+  let tables = Object.keys(obj);
+
+  let query = tables.map(table => {
+    if (table !== "primaryKeys" && table !== "foreignTables") {
+      let idField = Object.keys(obj[table])[0];
+      output += `
+    ${table}(){
+      const query = \`SELECT * FROM ${table}\`;
+      return psql.manyOrNone(query);
+    },
+    `;
+
+      output += `
+    ${table}ByID(parent, args, ctx, info){
+      const query = \`SELECT * FROM ${table} WHERE ${idField} = $\{args.id}\`;
+      return psql.manyOrNone(query);
+    }, 
+    `;
+    }
+  });
+
+  return output;
+}
+=======
 // let transformedTostring = transform(allTypes);
 
 function queryResolver(str, obj) {
@@ -272,6 +300,7 @@ function queryResolver(str, obj) {
   return `const Query = { ${output} \n };`;
 }
 // console.log(queryResolver(transformedTostring, allTypes));
+>>>>>>> 7095f59a6e915e4edf0e94130e5598b0c0a6faad
 
 function mutationResolver(str, obj) {
   let splitted = str.split("type")[3];
@@ -343,8 +372,38 @@ function mutationResolver(str, obj) {
             `;
     }
   });
+<<<<<<< HEAD
+  return output;
+}
+
+function returnResolvers(str1, str2) {
+  return `
+const psql = require('../psqlAdapter').psql;
+
+const resolvers = {
+      Query:{
+            ${str1}
+        },
+
+      Mutation:{
+        ${str2}
+      }
+  };
+  
+  module.exports = resolvers;
+  `;
+}
+
+module.exports = {
+  transform,
+  queryResolver,
+  mutationResolver,
+  returnResolvers
+};
+=======
   return `const Mutation = { \r\n ${output} \r\n};
   module.exports = Mutation;`;
 }
 
 module.exports = { transform, queryResolver, mutationResolver };
+>>>>>>> 7095f59a6e915e4edf0e94130e5598b0c0a6faad

@@ -1,10 +1,11 @@
-import { SEARCH_UPDATE, ZIP_FILES, ZIP_CURRENT, CURRENT_SEARCH, CODEMIRROR_UPDATE, SAVE_DATA  } from '../actions/types';
+import { SEARCH_UPDATE, ZIP_FILES, ZIP_CURRENT, CURRENT_SEARCH, CODEMIRROR_UPDATE, SAVE_DATA, RESET_TAB, RESET_ALL } from '../actions/types';
 const serverCreator = require("../boilerFunc/serverCreator");
 const schemaCreator = require("../boilerFunc/schemaCreator");
 const psqlAdapterCreator = require("../boilerFunc/psqlAdapterCreator");
 const packageJSONCreator = require("../boilerFunc/packageJSONCreator");
 const JSZip = require("jszip");
 const FileSaver = require('file-saver');
+const store = require('../store')
 
 
 export default function reducer(state = {}, action) {
@@ -84,6 +85,19 @@ export default function reducer(state = {}, action) {
         return {
           ...state,
         };
+        case RESET_ALL: 
+        // Reset all not working -- currently only works for single tab
+          state.codeMirrorLambda += " ";
+          state.resolversLambda += " ";
+          return {
+            ...state
+          };
+        case RESET_TAB: 
+          state.codeMirrorLambda += " ";
+          state.resolversLambda += " ";
+            return {
+              ...state
+            };
       default:
         return state;
     }
