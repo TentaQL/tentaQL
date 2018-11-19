@@ -26,6 +26,9 @@ export default function reducer(state = {}, action) {
           codeMirrorLambda: "",
         }
       case SAVE_DATA:
+      let lambda_resolvers = action.payload.resolvers.replace(/\n/g, "λ");
+      lambda_resolvers = lambda_resolvers.replace(/\r\n/g, "λ");
+      lambda_resolvers = lambda_resolvers.replace(/\r/g, "λ");
         return {
           ...state,
           originalSchema: action.payload.frontEnd,
@@ -33,7 +36,7 @@ export default function reducer(state = {}, action) {
           originalResolvers: action.payload.resolvers,
           resolvers: action.payload.resolvers,
           currentResolvers: action.payload.resolvers,
-          resolversLambda: action.payload.resolvers.replace(/\n/g, "λ"),
+          resolversLambda: lambda_resolvers,
           codeMirrorLambda: action.payload.frontEnd.replace(/\r\n/g, "λ")
         }
       case ZIP_FILES:
