@@ -1,6 +1,8 @@
 import { SEARCH_UPDATE, ZIP_FILES, ZIP_CURRENT, CURRENT_SEARCH, CODEMIRROR_UPDATE, SAVE_DATA  } from '../actions/types';
 const serverCreator = require("../boilerFunc/serverCreator");
 const schemaCreator = require("../boilerFunc/schemaCreator");
+const psqlAdapterCreator = require("../boilerFunc/psqlAdapterCreator");
+const packageJSONCreator = require("../boilerFunc/packageJSONCreator");
 const JSZip = require("jszip");
 const FileSaver = require('file-saver');
 
@@ -53,10 +55,11 @@ export default function reducer(state = {}, action) {
           resolvers = state.originalResolvers
         };
         zip.folder("tentaQL").folder("client").folder("graphql").file("schema.js", schemaCreator());
-        zip.folder("tentaQL").file("server.js", serverCreator(state.saved_url));
+        zip.folder("tentaQL").file("server.js", serverCreator());
+        zip.folder("tentaQL").folder("client").folder("graphql").file("psqlAdapter.js", psqlAdapterCreator(state.saved_url));
         zip.folder("tentaQL").folder("client").folder("graphql").file("resolvers.js", resolvers);
-        zip.folder("tentaQL").folder("client").folder("graphql").file("schema.graphql", schema);
-
+        zip.folder("tentaQL").folder("client").folder("graphql").folder("schema").file("typeDefs.js", schema);
+        zip.folder("tentaQL").file("package.json", packageJSONCreator());
         zip.generateAsync({type:"blob"}).then(function (blob) { 
             saveAs(blob, "TentaQL.zip");                          
         });
