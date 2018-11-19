@@ -1,5 +1,49 @@
 const pluralize = require("pluralize");
 
+<<<<<<< HEAD
+=======
+// TESTING DATABASE
+// const allTypes = {
+//   players: {
+//     player_id: "integer",
+//     firstname: "character varying",
+//     lastname: "character varying",
+//     birthdate: "date",
+//     country: "character varying"
+//   },
+//   dogs: {
+//     dog_id: "integer",
+//     firstname: "character varying",
+//     lastname: "character varying",
+//     birthdate: "date"
+//   },
+//   students: {
+//     student_id: "integer",
+//     player_name: "text"
+//   },
+//   cats: {
+//     cat_id: "integer",
+//     firstname: "character varying",
+//     lastname: "character varying",
+//     birthdate: "date"
+//   },
+//   tests: {
+//     subject_id: "integer",
+//     subject_name: "text",
+//     higheststudent_id: "integer"
+//   },
+//   foreignTables: {
+//     tests: "students"
+//   },
+//   primaryKeys: {
+//     players: "player_id",
+//     dogs: "dog_id",
+//     cats: "cat_id",
+//     students: "student_id"
+//   }
+// };
+
+>>>>>>> 7095f59a6e915e4edf0e94130e5598b0c0a6faad
 function initialCapitalizer(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
@@ -86,9 +130,12 @@ function transformObj(obj) {
           singular
         );
         output["type Query"][key] = `[${initialCapitalizer(singular)}]`;
+<<<<<<< HEAD
         output["type Query"][`${key}byID(id:ID)`] = `[${initialCapitalizer(
           singular
         )}]`;
+=======
+>>>>>>> 7095f59a6e915e4edf0e94130e5598b0c0a6faad
       }
   }
   return output;
@@ -186,6 +233,7 @@ const transform = obj => {
   let string = mergeToString(related);
   return "const typeDefs = ` " + string + "\r\n `;";
 };
+<<<<<<< HEAD
 
 function queryResolver(obj) {
   let output = ``;
@@ -212,6 +260,56 @@ function queryResolver(obj) {
 
   return output;
 }
+=======
+// let transformedTostring = transform(allTypes);
+
+function queryResolver(str, obj) {
+  //PROCESSING QUERY PORTION
+  let splittedTypes = str.split("type");
+  let query = splittedTypes[2];
+
+  let fields = query
+    .replace(/Query {/g, "")
+    .replace(/]/g, "")
+    .replace(/]/g, "")
+    .replace(/\}/g, "")
+    .replace(/\[/g, "")
+    .replace(/\r\n/g, "")
+    .replace(/  +/g, " ")
+    .trim();
+  let splitted = fields.split(" ");
+  let final = splitted.map(el => el.split(":"));
+
+  let output = ``;
+  final.map((el, index) => {
+    if (index % 2 === 0) {
+      output += `
+      ${el[0]}(parent, {id}, ctx, info) {
+        client.query("SELECT*FROM ${pluralize(el[0].toString())} where ${
+        obj.primaryKeys[pluralize(el[0].toString())]
+      }= id", 
+        (err,result)=> {
+          if(err) throw new Error("Error querying all ${el[0]}")
+          return result;
+        });
+      },
+      `;
+    } else {
+      output += `
+      ${el[0]}(parent, args, ctx, info) {
+          client.query("SELECT*FROM ${el[0]}", (err,result)=>{
+            if(err) throw new Error("Error querying all ${el[0]}")
+            return result;
+          })
+      
+      },
+      `;
+    }
+  });
+  return `const Query = { ${output} \n };`;
+}
+// console.log(queryResolver(transformedTostring, allTypes));
+>>>>>>> 7095f59a6e915e4edf0e94130e5598b0c0a6faad
 
 function mutationResolver(str, obj) {
   let splitted = str.split("type")[3];
@@ -283,6 +381,7 @@ function mutationResolver(str, obj) {
             `;
     }
   });
+<<<<<<< HEAD
   return output;
 }
 
@@ -310,3 +409,10 @@ module.exports = {
   mutationResolver,
   returnResolvers
 };
+=======
+  return `const Mutation = { \r\n ${output} \r\n};
+  module.exports = Mutation;`;
+}
+
+module.exports = { transform, queryResolver, mutationResolver };
+>>>>>>> 7095f59a6e915e4edf0e94130e5598b0c0a6faad
