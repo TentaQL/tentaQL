@@ -27,20 +27,10 @@ class Navbar extends Component {
             />
             <Button onClick={this.props.connectionHandler}>Connect</Button>
           </Menu.Item>
-          <Menu.Item position="left">
+          <Menu.Item position="center">
             <h1>TentaQL</h1>
           </Menu.Item>
-          <Menu.Item position="left">
-          <Button size="small" color="green">
-              <Icon name="download" />
-             Test Store
-            </Button>
-            <Button onClick={this.props.downloadZip} size="small" color="green">
-              <Icon name="download" />
-              Download Your TentaQL 
-            </Button>
-          </Menu.Item>
-        </Menu>
+          </Menu>
       </Sticky>
     );
   }

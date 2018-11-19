@@ -84,12 +84,12 @@ class TextBox extends Component {
             this.props.dispatch(codeMirrorUpdate(value, "resolversTab"));
           }}
           onClick={(editor, metadata, value) => {
-            value = this.props.resolversLambda;
+            this.editor.value = this.props.resolversLambda;
           }}
         />
             </TabPanel>
             <TabPanel tabId="three">
-              <p>Tab 3 content</p>
+              <p>More Files To Come!</p>
             </TabPanel>
           </div>
         </section>

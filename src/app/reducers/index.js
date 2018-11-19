@@ -33,22 +33,25 @@ export default function reducer(state = {}, action) {
           originalResolvers: action.payload.resolvers,
           resolvers: action.payload.resolvers,
           currentResolvers: action.payload.resolvers,
-          resolversLambda: action.payload.resolvers.replace(/\r\n/g, "λ"),
+          resolversLambda: action.payload.resolvers.replace(/\n/g, "λ"),
           codeMirrorLambda: action.payload.frontEnd.replace(/\r\n/g, "λ")
         }
       case ZIP_FILES:
         var zip = new JSZip();
-        let schema; 
+        let schema;
+        let resolvers; 
         console.log("Zip payload:");
         console.log(action.payload);
         if (action.payload === "Updates"){
           schema = state.currentSchema;
+          resolvers = state.currentResolvers;
         } else {
           schema = state.originalSchema;
+          resolvers = state.originalResolvers
         };
         zip.folder("tentaQL").folder("client").folder("graphql").file("schema.js", schemaCreator());
         zip.folder("tentaQL").file("server.js", serverCreator(state.saved_url));
-        zip.folder("tentaQL").folder("client").folder("graphql").file("resolvers.js", state.resolvers);
+        zip.folder("tentaQL").folder("client").folder("graphql").file("resolvers.js", resolvers);
         zip.folder("tentaQL").folder("client").folder("graphql").file("schema.graphql", schema);
 
         zip.generateAsync({type:"blob"}).then(function (blob) { 
@@ -60,11 +63,18 @@ export default function reducer(state = {}, action) {
       case CODEMIRROR_UPDATE:
         let lambdaLess = action.payload[0].replace(/\\r\\n/g, "λ");
          lambdaLess = lambdaLess.replace(/λ/g, "\n");
-        if (action.payload[1] === "resolvers") {
-          state.currentResolvers = lambdaLess;
-        } else {
-          state.currentSchema = lambdaLess;
-        }
+         console.log(action.payload[1]);
+         switch(action.payload[1]) {
+           case "resolversTab":
+              state.currentResolvers = lambdaLess;
+              break;
+           case "schemaTab":
+              state.currentSchema = lambdaLess;
+              break;
+            default:
+              break
+         }
+
         return {
           ...state,
         };
