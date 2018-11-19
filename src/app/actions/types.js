@@ -3,3 +3,5 @@ export const CURRENT_SEARCH = 'CURRENT_SEARCH';
 export const SAVE_DATA = 'SAVE_DATA';
 export const SET_CODEMIRROR = 'SET_CODEMIRROR';
 export const CODEMIRROR_UPDATE = 'CODEMIRROR_UPDATE';
+export const ZIP_FILES = 'ZIP_FILES';
+export const ZIP_CURRENT = 'ZIP_CURRENT';

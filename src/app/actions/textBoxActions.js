@@ -1,6 +1,6 @@
-export function codeMirrorUpdate(value) {
+export function codeMirrorUpdate(value, id) {
     return {
       type: "CODEMIRROR_UPDATE",
-      payload: value
+      payload: [value, id]
     }
   }

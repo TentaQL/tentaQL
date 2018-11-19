@@ -5,16 +5,14 @@ import store from './store';
 import { Component } from "react";
 import { ModalExampleDimmer } from "./components/Modal.js";
 import { searchUpdate } from './actions/searchActions';
+import { zipFiles } from './actions/zipActions';
 import { currentSearch } from './actions/searchActions';
 import { saveData } from './actions/searchActions';
 
 import Navbar from "./components/Navbar";
-const FileSaver = require('file-saver');
-const serverCreator = require("./boilerFunc/serverCreator");
-const schemaCreator = require("./boilerFunc/schemaCreator");
 import TextBox from "./components/TextBox";
 require("./index.css");
-const JSZip = require("jszip");
+
 require("../codemirror/lib/codemirror.css");
 require("codemirror/mode/javascript/javascript");
 
@@ -42,18 +40,9 @@ class App extends Component {
     this.setState({ url: event.target.value });
   }
 
-  downloadZip() {
-    console.log("Zip was clicked.")
-    var zip = new JSZip();
-    let schema = this.state.clipBoardData;
-    zip.folder("tentaQL").folder("client").folder("graphql").file("schema.js", schemaCreator());
-    zip.folder("tentaQL").file("server.js", serverCreator(this.state.persistedURL));
-    zip.folder("tentaQL").folder("client").folder("graphql").file("resolvers.js", this.state.resolvers);
-    zip.folder("tentaQL").folder("client").folder("graphql").file("schema.graphql", schema);
-
-    zip.generateAsync({type:"blob"}).then(function (blob) { 
-        saveAs(blob, "TentaQL.zip");                          
-    });
+  downloadZip(event) {
+    event.preventDefault();
+    store.dispatch(zipFiles(event.target.id));
   }
 
   connectionHandler(event) {
@@ -79,7 +68,7 @@ class App extends Component {
           .then(res => {
             let replaced = res.frontEnd.replace(/\r\n/g, "λ");
             store.dispatch(saveData(res));
-            this.setState({ data: replaced, modal: false, schema: res.schema, resolvers: res.resolvers, clipBoardData: res.frontEnd, url: ""});
+            this.setState({modal: false, url: ""});
           });
       })
       .catch(err => {
@@ -98,11 +87,10 @@ class App extends Component {
           searchBarHandler={this.searchBarHandler}
           placeholder={this.state.placeholder}
         />
-        <Navbar persistedURL={this.state.persistedURL} resolvers={this.state.resolvers} schema={this.state.schema}  data={this.state.data} url={this.state.url} searchBarHandler={this.searchBarHandler} downloadZip={this.downloadZip} connectionHandler={this.connectionHandler} lambdaLess={this.state.lambdaLess} />
+        <Navbar searchBarHandler={this.searchBarHandler} connectionHandler={this.connectionHandler}/>
         <TextBox
           className="textbox"
-          data={this.state.data}
-          lambdaLess={this.state.lambdaLess}
+          downloadZip={this.downloadZip}
         />
       </div>
       </Provider>

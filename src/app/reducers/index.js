@@ -1,7 +1,9 @@
-import { SEARCH_UPDATE } from '../actions/types';
-import { CURRENT_SEARCH } from '../actions/types';
-import { CODEMIRROR_UPDATE } from '../actions/types';
-import { SAVE_DATA } from '../actions/types';
+import { SEARCH_UPDATE, ZIP_FILES, ZIP_CURRENT, CURRENT_SEARCH, CODEMIRROR_UPDATE, SAVE_DATA  } from '../actions/types';
+const serverCreator = require("../boilerFunc/serverCreator");
+const schemaCreator = require("../boilerFunc/schemaCreator");
+const JSZip = require("jszip");
+const FileSaver = require('file-saver');
+
 
 export default function reducer(state = {}, action) {
     switch (action.type) {
@@ -18,6 +20,9 @@ export default function reducer(state = {}, action) {
           originalSchema: "",
           currentSchema: "",
           resolvers: "",
+          originalResolvers: "",
+          currentResolvers: "",
+          resolversLambda: "",
           codeMirrorLambda: "",
         }
       case SAVE_DATA:
@@ -25,17 +30,43 @@ export default function reducer(state = {}, action) {
           ...state,
           originalSchema: action.payload.frontEnd,
           currentSchema: action.payload.frontEnd,
+          originalResolvers: action.payload.resolvers,
           resolvers: action.payload.resolvers,
+          currentResolvers: action.payload.resolvers,
+          resolversLambda: action.payload.resolvers.replace(/\r\n/g, "λ"),
           codeMirrorLambda: action.payload.frontEnd.replace(/\r\n/g, "λ")
         }
+      case ZIP_FILES:
+        var zip = new JSZip();
+        let schema; 
+        console.log("Zip payload:");
+        console.log(action.payload);
+        if (action.payload === "Updates"){
+          schema = state.currentSchema;
+        } else {
+          schema = state.originalSchema;
+        };
+        zip.folder("tentaQL").folder("client").folder("graphql").file("schema.js", schemaCreator());
+        zip.folder("tentaQL").file("server.js", serverCreator(state.saved_url));
+        zip.folder("tentaQL").folder("client").folder("graphql").file("resolvers.js", state.resolvers);
+        zip.folder("tentaQL").folder("client").folder("graphql").file("schema.graphql", schema);
+
+        zip.generateAsync({type:"blob"}).then(function (blob) { 
+            saveAs(blob, "TentaQL.zip");                          
+        });
+        return {
+          ...state
+        }
       case CODEMIRROR_UPDATE:
-        let lambda = action.payload;
-        let lambdaLess = lambda.replace(/\\r\\n/g, "λ");
- 		    lambdaLess = lambdaLess.replace(/λ/g, "\n");
+        let lambdaLess = action.payload[0].replace(/\\r\\n/g, "λ");
+         lambdaLess = lambdaLess.replace(/λ/g, "\n");
+        if (action.payload[1] === "resolvers") {
+          state.currentResolvers = lambdaLess;
+        } else {
+          state.currentSchema = lambdaLess;
+        }
         return {
           ...state,
-          codeMirrorLambda: lambda,
-          currentSchema: lambdaLess,
         };
       default:
         return state;
