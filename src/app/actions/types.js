@@ -5,3 +5,5 @@ export const SET_CODEMIRROR = 'SET_CODEMIRROR';
 export const CODEMIRROR_UPDATE = 'CODEMIRROR_UPDATE';
 export const ZIP_FILES = 'ZIP_FILES';
 export const ZIP_CURRENT = 'ZIP_CURRENT';
+export const RESET_TAB = 'RESET_TAB';
+export const RESET_ALL = 'RESET_ALL';
