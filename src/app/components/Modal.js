@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Header, Modal } from "semantic-ui-react";
+import { Button, Header, Modal, Icon} from "semantic-ui-react";
 
 class ModalExampleDimmer extends Component {
   constructor(props) {
@@ -18,18 +18,24 @@ class ModalExampleDimmer extends Component {
                 <input
                   type="text"
                   name="url"
+                  id="modal"
                   placeholder={this.props.placeholder}
                   style = {this.props.placeholderColor}
                   value={this.props.data.url}
-                  onChange={this.props.credentialsHandler}
+                  onChange={this.props.searchBarHandler}
                 />
               </div>
             </form>
           </Modal.Content>
           <Modal.Actions>
-            <button className = "medium ui green button"
-              onClick={this.props.connectionHandler}
-              positive>Connect</button>
+          <Button animated='vertical' onClick={this.props.connectionHandler}>
+          <Button.Content hidden><Icon name='database' /></Button.Content>
+          <Button.Content visible>
+            Connect
+            
+          </Button.Content>
+          </Button>
+             
           </Modal.Actions>
         </Modal>
       </div>

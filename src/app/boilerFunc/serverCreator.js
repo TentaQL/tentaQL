@@ -1,7 +1,7 @@
-function serverCreator() {
+function serverCreator(uri) {
   const index = `
-  
   const express = require("express");
+  const postgresURI = "${uri}";
   const expressGraphQL = require("express-graphql");
   const bodyParser = require("body-parser");
   const cors = require("cors");

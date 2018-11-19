@@ -77,8 +77,14 @@ function valueChecker(str) {
     case "decimal":
       return "Float";
       break;
+    case "DECIMAL":
+      return "Float";
+      break;
     case "int":
       return "Int";
+      break;
+    default:
+      return "Float";
       break;
   }
 }
@@ -176,11 +182,13 @@ function changeValues(obj) {
         obj[key][field] = "Int";
       } else if (obj[key][field] === "date") {
         obj[key][field] = "String";
-      } else if (obj[key][field] === "real") {
+      } else if (obj[key][field].toLowerCase() === "real") {
         obj[key][field] = "Float";
       } else if (obj[key][field] === "boolean") {
         obj[key][field] = "Boolean";
       } else if (obj[key][field] === "numeric") {
+        obj[key][field] = "Float";
+      } else if (obj[key][field].toLowerCase() === "decimal") {
         obj[key][field] = "Float";
       }
     }

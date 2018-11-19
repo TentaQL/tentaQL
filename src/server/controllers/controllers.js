@@ -7,8 +7,7 @@ const {
   queryResolver,
   mutationResolver
 } = require("../functions/typesCreator");
-const serverCreator = require("../functions/serverCreator");
-const schemaCreator = require("../functions/schemaCreator");
+
 
 const db = {};
 let tables = {};
@@ -34,7 +33,6 @@ db.connect = (req, res) => {
   client.connect(err => {
     if (err) return console.log("Could not connect to postgres ", err);
   });
-  // console.log(uri);
   res.json(uri);
 };
 
@@ -139,29 +137,11 @@ db.filterAssociations = async (req, res) => {
   let queryResolvers = queryResolver(frontEndVersion, tables);
   let resolvers = queryResolvers + mutationResolvers;
 
-  //ZIPABILITY
-  // zip directory => client directory => graphql directory=>
-  fs.mkdirSync(path.join(PATH, "zip"));
-  fs.mkdirSync(path.join(PATH, "zip", "client"));
-  fs.mkdirSync(path.join(PATH, "zip", "client", "graphql"));
-  fs.mkdirSync(path.join(PATH, "zip", "client", "graphql", "schema"));
-  fs.mkdirSync(path.join(PATH, "zip", "client", "graphql", "resolvers"));
+  let allFiles = {
+    frontEnd: frontEndVersion,
+    resolvers: resolvers,
+  }
 
-  fs.writeFileSync(path.join(PATH, "zip", "server.js"), serverCreator());
-  fs.writeFileSync(
-    path.join(PATH, "zip/client/graphql", "index.js"),
-    schemaCreator()
-  );
-
-  fs.writeFileSync(
-    path.join(PATH, "zip/client/graphql/schema", `schema.js`),
-    frontEndVersion
-  );
-  fs.writeFileSync(
-    path.join(PATH, "zip/client/graphql/resolvers", `resolvers.js`),
-    resolvers
-  );
-
-  res.end(JSON.stringify(frontEndVersion));
+  res.end(JSON.stringify(allFiles));
 };
 module.exports = db;

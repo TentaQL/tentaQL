@@ -32,7 +32,9 @@
     "concurrently": "^4.0.1",
     "cors": "^2.8.5",
     "express": "^4.16.4",
+    "file-saver": "^2.0.0",
     "graphql": "^14.0.2",
+    "jszip": "^3.1.5",
     "less-loader": "^4.1.0",
     "nodemon": "^1.18.6",
     "pg": "^4.5.7",
@@ -42,13 +44,17 @@
     "react-clipboard.js": "^2.0.1",
     "react-codemirror": "^1.0.0",
     "react-codemirror2": "^5.1.0",
+    "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^16.6.1",
     "react-redux": "^5.1.1",
+    "react-spinners": "^0.4.7",
+    "react-web-tabs": "^1.0.1",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
     "semantic-ui": "^2.4.2",
     "semantic-ui-css": "^2.4.1",
-    "semantic-ui-react": "^0.83.0"
+    "semantic-ui-react": "^0.83.0",
+    "thunk": "0.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.1.5",

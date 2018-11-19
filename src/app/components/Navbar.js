@@ -1,12 +1,11 @@
 const React = require("react");
 const ReactDOM = require("react-dom");
 import { Component } from "react";
+import { connect } from 'react-redux';
 import {
   Button,
   Icon,
   Input,
-  Checkbox,
-  Form,
   Menu,
   Sticky
 } from "semantic-ui-react";
@@ -17,30 +16,24 @@ class Navbar extends Component {
   }
   render() {
     return (
-      <Sticky>
         <Menu>
           <Menu.Item position="left">
             <Input
               onChange={this.props.searchBarHandler}
               value={this.props.url}
+              id="navbar"
               placeholder="To setup additional databases, please enter the URL ..."
             />
-            <Button onClick={this.props.connectionHandler}>Connect</Button>
-          </Menu.Item>
-          <Menu.Item position="left">
-            <h1>TentaQL</h1>
-          </Menu.Item>
-          <Menu.Item position="left">
-            <Button>TentaQL</Button>
-          </Menu.Item>
-          <Menu.Item position="left">
-            <Button size="small" color="green">
-              <Icon name="download" />
-              Download
+            <Button animated='fade'>
+              <Button.Content visible>Connect</Button.Content>
+              <Button.Content hidden><Icon id="newURL" name="database" onClick={this.props.connectionHandler} /></Button.Content>
             </Button>
           </Menu.Item>
-        </Menu>
-      </Sticky>
+          <a href="https://github.com/TentaQL/tentaQL"><img id="mascot" src="../../../OctopusCircle.png" target="_blank"></img></a>
+          <Menu.Item position="right">
+            <h1>TentaQL</h1>
+          </Menu.Item>
+          </Menu>
     );
   }
 }
