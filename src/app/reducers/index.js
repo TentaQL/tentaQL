@@ -1,4 +1,4 @@
-import { SEARCH_UPDATE, ZIP_FILES, ZIP_CURRENT, CURRENT_SEARCH, CODEMIRROR_UPDATE, SAVE_DATA  } from '../actions/types';
+import { SEARCH_UPDATE, ZIP_FILES, ZIP_CURRENT, CURRENT_SEARCH, CODEMIRROR_UPDATE, SAVE_DATA, RESET_TAB  } from '../actions/types';
 const serverCreator = require("../boilerFunc/serverCreator");
 const schemaCreator = require("../boilerFunc/schemaCreator");
 const JSZip = require("jszip");
@@ -78,6 +78,11 @@ export default function reducer(state = {}, action) {
         return {
           ...state,
         };
+        case RESET_TAB: 
+        state.codeMirrorLambda += " ";
+          return {
+            ...state
+          };
       default:
         return state;
     }

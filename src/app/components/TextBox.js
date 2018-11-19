@@ -57,9 +57,9 @@ class TextBox extends Component {
               <Button.Content onClick={this.props.downloadZip} id="Updates" hidden>You sure?</Button.Content>
             </Button>
             <Button.Or text='</>' />
-           <Button id="Reset" className="wrapperButton" animated='fade'>
+           <Button onClick={this.props.resetTab} id="Reset" className="wrapperButton" animated='fade'>
               <Button.Content visible>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reset Tab</Button.Content>
-              <Button.Content id="Original" hidden><Icon id="TabReset" name="redo" /></Button.Content>
+              <Button.Content id="Original" hidden><Icon onClick={this.props.resetTab} id="TabReset" name="redo" /></Button.Content>
             </Button>
             <Button.Or text='</>' />
            <Button id="ResetAll" className="wrapperButton" animated='fade'>

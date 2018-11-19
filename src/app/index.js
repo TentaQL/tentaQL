@@ -6,6 +6,7 @@ import { Component } from "react";
 import { ModalExampleDimmer } from "./components/Modal.js";
 import { searchUpdate } from './actions/searchActions';
 import { zipFiles } from './actions/zipActions';
+import { resetTab } from './actions/textBoxActions';
 import { currentSearch } from './actions/searchActions';
 import { saveData } from './actions/searchActions';
 
@@ -32,6 +33,7 @@ class App extends Component {
     this.connectionHandler = this.connectionHandler.bind(this);
     this.searchBarHandler = this.searchBarHandler.bind(this);
     this.downloadZip = this.downloadZip.bind(this);
+    this.resetTab = this.resetTab.bind(this);
   }
 
   searchBarHandler(event) {
@@ -43,6 +45,13 @@ class App extends Component {
   downloadZip(event) {
     event.preventDefault();
     store.dispatch(zipFiles(event.target.id));
+  }
+
+  resetTab(event) {
+    event.preventDefault();
+    // console.log(this.props.originalSchema, "hi")
+    // this.setState({schema: this.props.originalSchema})
+    store.dispatch(resetTab(event.target.id))
   }
 
   connectionHandler(event) {
@@ -91,6 +100,7 @@ class App extends Component {
         <TextBox
           className="textbox"
           downloadZip={this.downloadZip}
+          resetTab={this.resetTab}
         />
       </div>
       </Provider>
