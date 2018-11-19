@@ -62,9 +62,9 @@ class TextBox extends Component {
               <Button.Content id="Original" hidden><Icon onClick={this.props.resetTab} id="TabReset" name="redo" /></Button.Content>
             </Button>
             <Button.Or text='</>' />
-           <Button id="ResetAll" className="wrapperButton" animated='fade'>
+           <Button onClick={this.props.resetAll} id="ResetAll" className="wrapperButton" animated='fade'>
               <Button.Content visible>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reset All</Button.Content>
-              <Button.Content id="Original" hidden><Icon id="AllReset" name="history" /></Button.Content>
+              <Button.Content id="Original" hidden><Icon onClick={this.props.resetAll} id="AllReset" name="history" /></Button.Content>
             </Button>
             
            </Button.Group>

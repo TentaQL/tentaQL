@@ -11,3 +11,10 @@ export function codeMirrorUpdate(value, id) {
       payload: value
     }
   }
+
+  export function resetAll() {
+    return {
+      type: "RESET_ALL",
+      payload: "Empty"
+    }
+  }
