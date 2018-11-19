@@ -1,5 +1,7 @@
 const pluralize = require("pluralize");
 
+<<<<<<< HEAD
+=======
 // TESTING DATABASE
 // const allTypes = {
 //   players: {
@@ -41,6 +43,7 @@ const pluralize = require("pluralize");
 //   }
 // };
 
+>>>>>>> 7095f59a6e915e4edf0e94130e5598b0c0a6faad
 function initialCapitalizer(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
@@ -127,6 +130,12 @@ function transformObj(obj) {
           singular
         );
         output["type Query"][key] = `[${initialCapitalizer(singular)}]`;
+<<<<<<< HEAD
+        output["type Query"][`${key}byID(id:ID)`] = `[${initialCapitalizer(
+          singular
+        )}]`;
+=======
+>>>>>>> 7095f59a6e915e4edf0e94130e5598b0c0a6faad
       }
   }
   return output;
@@ -372,38 +381,8 @@ function mutationResolver(str, obj) {
             `;
     }
   });
-<<<<<<< HEAD
-  return output;
-}
-
-function returnResolvers(str1, str2) {
-  return `
-const psql = require('../psqlAdapter').psql;
-
-const resolvers = {
-      Query:{
-            ${str1}
-        },
-
-      Mutation:{
-        ${str2}
-      }
-  };
-  
-  module.exports = resolvers;
-  `;
-}
-
-module.exports = {
-  transform,
-  queryResolver,
-  mutationResolver,
-  returnResolvers
-};
-=======
   return `const Mutation = { \r\n ${output} \r\n};
   module.exports = Mutation;`;
 }
 
 module.exports = { transform, queryResolver, mutationResolver };
->>>>>>> 7095f59a6e915e4edf0e94130e5598b0c0a6faad
