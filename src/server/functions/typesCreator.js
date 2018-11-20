@@ -47,9 +47,11 @@ function queriesCreator(obj) {
   let output = ``;
 
   allTables.map(table => {
-    output += `
+    if (table !== "primaryKeys" && table !== "foreignTables") {
+      output += `
         ${table}:[${initialCapitalizer(table)}]
         ${table}ByID(id:ID):[${initialCapitalizer(table)}]`;
+    }
   });
   return output;
 }
@@ -57,6 +59,7 @@ function queriesCreator(obj) {
 //ALL TYPES
 function allTypesCreator(obj) {
   let allTables = Object.keys(obj);
+
   //FINAL STRING OUTPUT
   let output = ``;
 
@@ -121,15 +124,14 @@ function mutationCreator(obj) {
 
 function typeDefsReturner(str1, str2, str3) {
   return `
-  const typeDefs = \`{
+  const typeDefs = \`
     type Query { ${str1}
     }
 
     type Mutation { ${str2}
     }
 
-      ${str3}
-  \`
+      ${str3}\`
   
 
   module.exports = typeDefs;
