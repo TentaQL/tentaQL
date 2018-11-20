@@ -50,7 +50,7 @@ function queriesCreator(obj) {
     if (table !== "primaryKeys" && table !== "foreignTables") {
       output += `
         ${table}:[${initialCapitalizer(table)}]
-        ${table}ByID(id:ID):[${initialCapitalizer(table)}]`;
+        ${table}ByID(id:ID):${initialCapitalizer(table)}`;
     }
   });
   return output;
@@ -109,15 +109,15 @@ function mutationCreator(obj) {
       }
     }
     output += `
-        create${initialCapitalizer(table)}(${input}): [${initialCapitalizer(
+        create${initialCapitalizer(table)}(${input}): ${initialCapitalizer(
       table
-    )}]
-        delete${initialCapitalizer(table)}(${input}): [${initialCapitalizer(
+    )}
+        delete${initialCapitalizer(table)}(${input}): ${initialCapitalizer(
       table
-    )}]
-        update${initialCapitalizer(table)}(${input}): [${initialCapitalizer(
+    )}
+        update${initialCapitalizer(table)}(${input}): ${initialCapitalizer(
       table
-    )}]`;
+    )}`;
   }
   return output;
 }
