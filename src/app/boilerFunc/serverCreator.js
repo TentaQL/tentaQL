@@ -6,7 +6,7 @@ function serverCreator(uri) {
   const bodyParser = require("body-parser");
   const cors = require("cors");
 
-  const schema = require("./graphql/schema");
+  const schema = require("./graphql/schema/typeDefs");
   const app = express();
 
 
