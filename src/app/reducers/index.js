@@ -1,3 +1,4 @@
+
 import {
   SEARCH_UPDATE,
   ZIP_FILES,
@@ -6,9 +7,13 @@ import {
   CODEMIRROR_UPDATE,
   SAVE_DATA
 } from "../actions/types";
+
 const serverCreator = require("../boilerFunc/serverCreator");
 const schemaCreator = require("../boilerFunc/schemaCreator");
+const psqlAdapterCreator = require("../boilerFunc/psqlAdapterCreator");
+const packageJSONCreator = require("../boilerFunc/packageJSONCreator");
 const JSZip = require("jszip");
+
 const FileSaver = require("file-saver");
 
 export default function reducer(state = {}, action) {
@@ -85,6 +90,7 @@ export default function reducer(state = {}, action) {
       zip.generateAsync({ type: "blob" }).then(function(blob) {
         saveAs(blob, "TentaQL.zip");
       });
+
 
       return {
         ...state
