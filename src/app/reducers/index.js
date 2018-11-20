@@ -55,27 +55,37 @@ export default function reducer(state = {}, action) {
         schema = state.originalSchema;
         resolvers = state.originalResolvers;
       }
+
       zip
         .folder("tentaQL")
         .folder("client")
         .folder("graphql")
         .file("schema.js", schemaCreator());
-      zip.folder("tentaQL").file("server.js", serverCreator(state.saved_url));
+      zip.folder("tentaQL").file("server.js", serverCreator());
+      zip
+        .folder("tentaQL")
+        .folder("client")
+        .folder("graphql")
+        .file("psqlAdapter.js", psqlAdapterCreator(state.saved_url));
+
       zip
         .folder("tentaQL")
         .folder("client")
         .folder("graphql")
         .folder("resolvers")
         .file("resolvers.js", resolvers);
+
       zip
         .folder("tentaQL")
         .folder("client")
         .folder("graphql")
-        .file("schema.graphql", schema);
-
+        .folder("schema")
+        .file("typeDefs.js", schema);
+      zip.folder("tentaQL").file("package.json", packageJSONCreator());
       zip.generateAsync({ type: "blob" }).then(function(blob) {
         saveAs(blob, "TentaQL.zip");
       });
+
       return {
         ...state
       };
