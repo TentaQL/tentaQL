@@ -3,10 +3,13 @@ const path = require("path");
 const PATH = path.join(__dirname, "../../");
 const fs = require("fs");
 const {
-  transform,
+  allTypesCreator,
+  queriesCreator,
+  mutationCreator,
+  typeDefsReturner,
+  returnResolvers,
   queryResolver,
-  mutationResolver,
-  returnResolvers
+  mutationResolver
 } = require("../functions/typesCreator");
 
 const db = {};
@@ -132,9 +135,12 @@ db.filterAssociations = async (req, res) => {
 
   console.log(tables);
 
-  let frontEndVersion = transform(tables);
-  let mutationResolvers = mutationResolver(frontEndVersion, tables);
+  let queries = queriesCreator(tables);
+  let mutations = mutationCreator(tables);
+  let types = allTypesCreator(tables);
+  let frontEndVersion = typeDefsReturner(queries, mutations, types);
   let queryResolvers = queryResolver(tables);
+  let mutationResolvers = mutationResolver(tables);
   let resolvers = returnResolvers(queryResolvers, mutationResolvers);
 
   let allFiles = {
