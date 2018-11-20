@@ -89,7 +89,7 @@ function mutationCreator(obj) {
     //GET ALL FIELDS FOR CURRENT TABLE
     let allFields = Object.keys(obj[allTables[i]]);
     //CREATE AN INPUT STRING
-    let input = `${allFields[0]}:ID, {`;
+    let input = `${allFields[0]}:ID, `;
 
     for (let j = 1; j <= allFields.length - 1; j++) {
       let field = allFields[j];
@@ -98,17 +98,15 @@ function mutationCreator(obj) {
       input += `${field}: ${valueOfField} `;
       if (j !== allFields.length - 1) {
         input += `, `;
-      } else if (j === allFields.length - 1) {
-        input += `}`;
       }
     }
     output += `
         create${initialCapitalizer(table)}(${input}): [${initialCapitalizer(
       table
     )}]
-        delete${initialCapitalizer(table)}(${
-      allFields[0]
-    }:ID): [${initialCapitalizer(table)}]
+        delete${initialCapitalizer(table)}(${input}): [${initialCapitalizer(
+      table
+    )}]
         update${initialCapitalizer(table)}(${input}): [${initialCapitalizer(
       table
     )}]`;
@@ -162,77 +160,78 @@ function queryResolver(obj) {
 }
 
 function mutationResolver(obj) {
-  // let splitted = str.split("type")[3];
-  // let fields = splitted
-  //   .replace(/Mutation {/g, "")
-  //   .replace(/}/g, "")
-  //   .replace(/  +/g, " ")
-  //   .replace(/\n/g, "")
-  //   .trim();
+  let allTables = Object.keys(obj);
+  let output = ``;
+  for (let i = 0; i < allTables.length - 2; i++) {
+    let table = allTables[i];
+    let allFields = Object.keys(obj[allTables[i]]).slice(1);
+    let idField = Object.keys(obj[allTables[i]])[0];
+    console.log(idField);
 
-  // let fieldsSplitted = fields.split("\r");
-  // let output = ``;
+    //CREATE RESOLVER
+    //DELETE RESOLVER
+    //UPDATE RESOLVER
+    output += `create${initialCapitalizer(table)}(parent, args, ctx, info){
+            let argsObj = Object.entries(args);
+            let literal = '';
+            let insertStr = \`INSERT INTO ${initialCapitalizer(table)}(\`;
+            let valuesStr = \`VALUES(\`
+          for (let i = 0; i < argsObj.length; i++) {
 
-  // fieldsSplitted.map((el, index) => {
-  //   let element = el.split("):");
-  //   let pluralized =
-  //     obj.primaryKeys[pluralize(element[1].trim()).toLowerCase()];
-  //   let singularized = obj.primaryKeys[element[1].trim().toLowerCase()];
-  //   let tableName = element[1].trim().toLowerCase();
-  //   let tableNamePl = pluralize(element[1].trim().toLowerCase());
-  //   let from;
-  //   if (obj[tableName]) {
-  //     from = tableName;
-  //   } else {
-  //     from = tableNamePl;
-  //   }
+              if (i > 0) {
+                insertStr += ', ';
+                valuesStr += ', ';
+              }
+              insertStr += \`$\{argsObj[i][0]}\`;
+              valuesStr += \`'$\{argsObj[i][1]}'\`;
+       }
+       literal = insertStr + ') ' + valuesStr + ') RETURNING *';
+     const query = literal;
+     console.log(query);
+       return psql.manyOrNone(query)
+       .then(data => {
+         let newData = {create${initialCapitalizer(table)}: data[0]};
+         return newData.create${initialCapitalizer(table)}})
+       .catch(error => {
+         console.log(error)
+       });
+     },
 
-  //   if (
-  //     element[0].toString().startsWith(" delete") &&
-  //     (pluralized || singularized)
-  //   ) {
-  //     output += `delete${element[
-  //       element.length - 1
-  //     ].trim()}(parent, args, {id}, info) {
-  //   client.query("DELETE FROM ${from} WHERE ${pluralized ||
-  //       singularized} = id", (err,result)=>{
-  //     if(err) throw new Error("Error deleting");
-  //     return result;
-  //   })
-  //   },
-  //   `;
-  //   } else if (
-  //     element[0].toString().startsWith(" create") &&
-  //     (pluralized || singularized)
-  //   ) {
-  //     output += `create${pluralize.singular(
-  //       element[element.length - 1].trim()
-  //     )}(parent, args, {id}, info) {
-  //   client.query("create FROM ${from} WHERE ${pluralized ||
-  //       singularized} = id", (err,result)=>{
-  //     if(err) throw new Error("Error creating");
-  //     return result;
-  //   })
-  //   },
-  //   `;
-  //   } else if (
-  //     element[0].toString().startsWith(" upda") &&
-  //     (pluralized || singularized)
-  //   ) {
-  //     output += `update${element[
-  //       element.length - 1
-  //     ].trim()}(parent, args, {id}, info) {
-  //         client.query("update FROM ${from} WHERE ${pluralized ||
-  //       singularized} = id", (err,result)=>{
-  //             if(err) throw new Error("Error creating");
-  //             return result;
-  //           })
-  //           },
-  //           `;
-  //   }
-  // });
-  // return output;
-  return "Should have some mutations here";
+        delete${initialCapitalizer(table)}(parent, args, ctx, info){
+          const query = \`DELETE FROM BILL WHERE ${idField} = $\{args.id} RETURNING *\`;
+            return psql.manyOrNone(query)
+            .then(data => {
+              let newData = { delete${initialCapitalizer(table)}: data[0]};
+              return newData.delete${initialCapitalizer(table)};
+          })
+        },
+
+      update${initialCapitalizer(table)}(parent, args, ctx, info) {
+      let argsObj = Object.entries(args);
+      let literal = \`UPDATE ${initialCapitalizer(table)}\`;
+     for (let i = 0; i < argsObj.length; i++) {
+       if (argsObj[i][0] !== 'id') {
+         if (argsObj[i][1].typeOf === "String") {
+           literal += \`SET \${argsObj[i][0]} = '\${argsObj[i][1]}'\`\;
+         } else {
+           literal += \`SET \$\{argsObj[i][0]} = '\${argsObj[i][1]}\'
+         \`;
+         }
+       }
+     }
+       literal += \`WHERE id = \${args.id} RETURNING *\`;
+       const query = literal;
+       console.log(query);
+       return psql.manyOrNone(query)
+       .then(data => {
+         let newData = {update${initialCapitalizer(table)}: data[0]};
+         return newData.update${initialCapitalizer(table)}})
+       .catch(error => {
+         console.log(error)
+       });
+   },`;
+  }
+  return output;
 }
 
 function returnResolvers(str1, str2) {
