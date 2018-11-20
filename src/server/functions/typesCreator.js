@@ -14,7 +14,7 @@ function valueChecker(str) {
       return "String";
       break;
     case "integer":
-      return "Integer";
+      return "Int";
       break;
     case "date":
       return "String";
@@ -26,11 +26,16 @@ function valueChecker(str) {
       return "String";
       break;
     case "real":
-      return "String";
+      return "Float";
       break;
     case "numeric":
-      return "Integer";
+      return "Float";
       break;
+    case "decimal":
+      return "Float";
+      break;
+    default:
+      return "Int";
   }
 }
 
