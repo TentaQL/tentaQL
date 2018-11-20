@@ -205,7 +205,7 @@ function mutationResolver(obj) {
      },
 
         delete${initialCapitalizer(table)}(parent, args, ctx, info){
-          const query = \`DELETE FROM BILL WHERE ${idField} = $\{args.id} RETURNING *\`;
+          const query = \`DELETE FROM ${table} WHERE ${idField} = $\{args.id} RETURNING *\`;
             return psql.manyOrNone(query)
             .then(data => {
               let newData = { delete${initialCapitalizer(table)}: data[0]};
@@ -214,19 +214,21 @@ function mutationResolver(obj) {
         },
 
       update${initialCapitalizer(table)}(parent, args, ctx, info) {
-      let argsObj = Object.entries(args);
-      let literal = \`UPDATE ${initialCapitalizer(table)}\`;
+     let argsObj = Object.entries(args);
+     let literal = \`UPDATE ${initialCapitalizer(table)}\`;
+     let counter = 0;
      for (let i = 0; i < argsObj.length; i++) {
        if (argsObj[i][0] !== 'id') {
-         if (argsObj[i][1].typeOf === "String") {
-           literal += \`SET \${argsObj[i][0]} = '\${argsObj[i][1]}'\`\;
+         if(counter > 0) {
+           literal += \`, $\{argsObj[i][0]}='$\{argsObj[i][1]}'\`;
          } else {
-           literal += \`SET \$\{argsObj[i][0]} = '\${argsObj[i][1]}\'
-         \`;
+           literal += \`SET $\{argsObj[i][0]}='$\{argsObj[i][1]}'\`;
          }
+         counter++;
        }
      }
-       literal += \`WHERE id = \${args.id} RETURNING *\`;
+       literal += \`
+       WHERE id = $\{args.id} RETURNING *\`;
        const query = literal;
        console.log(query);
        return psql.manyOrNone(query)
