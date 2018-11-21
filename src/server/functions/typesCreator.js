@@ -157,7 +157,14 @@ function queryResolver(obj) {
       output += `
     ${table}ByID(parent, args, ctx, info){
       const query = \`SELECT * FROM ${table} WHERE ${idField} = $\{args.id}\`;
-      return psql.manyOrNone(query);
+      return psql.manyOrNone(query)
+      .then(data=>{
+        let newData = {${table}ByID:data[0]};
+        return newData.${table}ByID})
+        .catch(err=>{
+          console.log(error)
+        
+      });
     }, 
     `;
     }
@@ -215,7 +222,7 @@ function mutationResolver(obj) {
 
       update${initialCapitalizer(table)}(parent, args, ctx, info) {
      let argsObj = Object.entries(args);
-     let literal = \`UPDATE ${initialCapitalizer(table)}\`;
+     let literal = \`UPDATE ${initialCapitalizer(table)} \`;
      let counter = 0;
      for (let i = 0; i < argsObj.length; i++) {
        if (argsObj[i][0] !== 'id') {

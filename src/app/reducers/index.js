@@ -45,7 +45,7 @@ export default function reducer(state = {}, action) {
         resolvers: action.payload.resolvers,
         currentResolvers: action.payload.resolvers,
         resolversLambda: action.payload.resolvers.replace(/\n/g, "λ"),
-        codeMirrorLambda: action.payload.frontEnd.replace(/\r\n/g, "λ")
+        codeMirrorLambda: action.payload.frontEnd.replace(/\n/g, "λ")
       };
     case ZIP_FILES:
       var zip = new JSZip();
