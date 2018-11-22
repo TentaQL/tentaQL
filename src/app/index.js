@@ -53,12 +53,12 @@ class App extends Component {
 
   resetTab(event) {
     event.preventDefault();
-    store.dispatch(resetTab())
+    store.dispatch(resetTab());
   }
 
   resetAll(event) {
     event.preventDefault();
-    store.dispatch(resetAll())
+    store.dispatch(resetAll());
   }
 
   connectionHandler(event) {
@@ -91,6 +91,7 @@ class App extends Component {
         console.log(err);
       });
     }
+    
   }
 
   render() {

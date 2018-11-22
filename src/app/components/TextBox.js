@@ -1,7 +1,6 @@
 const React = require("react");
-const ReactDOM = require("react-dom");
 import { connect } from "react-redux";
-import { Button, Header, Modal, Icon, Tab } from "semantic-ui-react";
+import { Button, Icon } from "semantic-ui-react";
 import { Component } from "react";
 import { UnControlled as CodeMirror } from "react-codemirror2";
 import { codeMirrorUpdate } from "../actions/textBoxActions";
@@ -130,6 +129,7 @@ class TextBox extends Component {
                     );
                   }}
                 />
+
             <div className="wrapper">
       </div>
       </div>

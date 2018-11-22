@@ -1,7 +1,5 @@
 const React = require("react");
-const ReactDOM = require("react-dom");
 import { Component } from "react";
-import { connect } from 'react-redux';
 import {
   Button,
   Icon,

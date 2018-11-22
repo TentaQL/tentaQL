@@ -23,11 +23,12 @@ With only one simple input - a database URI, TentaQL connects to your database, 
 
 
 # Technologies used:
-* Codemirror
-* SemanticUI-React
+* Redux
 * React
 * Javascript / ES6
 * NodeJS, ExpressJS
 * GraphQL
 * PostgreSQL
+* Codemirror
+* SemanticUI-React
 * Webpack, Babel
