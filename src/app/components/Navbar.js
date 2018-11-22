@@ -27,10 +27,7 @@ class Navbar extends Component {
               <Button.Content hidden><Icon id="newURL" name="database" onClick={this.props.connectionHandler} /></Button.Content>
             </Button>
           </Menu.Item>
-          <a href="https://github.com/TentaQL/tentaQL"><img id="mascot" src="../../../OctopusCircle.png" target="_blank"></img></a>
-          <Menu.Item position="right">
-            <h1>TentaQL</h1>
-          </Menu.Item>
+
           </Menu>
     );
   }

@@ -1,6 +1,6 @@
 const React = require("react");
 import { connect } from "react-redux";
-import { Button, Icon } from "semantic-ui-react";
+import { Button, Icon, Input } from "semantic-ui-react";
 import { Component } from "react";
 import { UnControlled as CodeMirror } from "react-codemirror2";
 import { codeMirrorUpdate } from "../actions/textBoxActions";
@@ -60,7 +60,7 @@ class TextBox extends Component {
                     id="Updates"
                     hidden
                   >
-                    Are you sure?
+                    &nbsp;Are you sure?
                   </Button.Content>
                 </Button>
                 <Button id="Reset" onClick={this.props.resetTab} className="wrapperButton" onMouseDown={e => e.preventDefault()} animated="fade">
@@ -81,6 +81,16 @@ class TextBox extends Component {
                   </Button.Content>
                 </Button>
               </Button.Group>
+              <Input
+              onChange={this.props.searchBarHandler}
+              value={this.props.url}
+              id="navbar"
+              placeholder="To setup additional databases, please enter the URL ..."
+            />
+            <Button id="connectButton" animated='fade'>
+              <Button.Content visible>Connect</Button.Content>
+              <Button.Content hidden><Icon id="newURL" name="database" onClick={this.props.connectionHandler} /></Button.Content>
+            </Button>
               <Clipboard
           className="clipboard"
           component="a"
