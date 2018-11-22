@@ -1,7 +1,7 @@
-export function searchUpdate(url, originatingInput) {
+export function searchUpdate(url) {
     return {
       type: "SEARCH_UPDATE",
-      payload: [url, originatingInput]
+      payload: url
     }
   }
 

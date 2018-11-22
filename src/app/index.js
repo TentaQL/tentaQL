@@ -12,7 +12,6 @@ import { currentSearch } from './actions/searchActions';
 import { saveData } from './actions/searchActions';
 import { switchTab } from './actions/textBoxActions';
 
-import Navbar from "./components/Navbar";
 import TextBox from "./components/TextBox";
 require("./index.css");
 
@@ -36,7 +35,7 @@ class App extends Component {
 
   searchBarHandler(event) {
     event.preventDefault();
-    store.dispatch(searchUpdate(event.target.value, event.target.id));
+    store.dispatch(searchUpdate(event.target.value));
     this.setState({ url: event.target.value });
   }
 
@@ -98,21 +97,36 @@ class App extends Component {
     return (
       <Provider store={store}>
       <div>
+      <div id="background-wrap">
+            <img src="https://s3-us-west-2.amazonaws.com/svgporn.com/logos/graphql.svg" className="bubble x1"></img>
+            <img src="https://s3-us-west-2.amazonaws.com/svgporn.com/logos/graphql.svg" className="bubble x2"></img>
+            <img src="https://s3-us-west-2.amazonaws.com/svgporn.com/logos/graphql.svg" className="bubble x3"></img>
+            <img src="https://s3-us-west-2.amazonaws.com/svgporn.com/logos/graphql.svg" className="bubble x4"></img>
+            <img src="https://s3-us-west-2.amazonaws.com/svgporn.com/logos/graphql.svg" className="bubble x5"></img>
+            <img src="https://s3-us-west-2.amazonaws.com/svgporn.com/logos/graphql.svg" className="bubble x6"></img>
+            <img src="https://s3-us-west-2.amazonaws.com/svgporn.com/logos/graphql.svg" className="bubble x7"></img>
+            <img src="https://s3-us-west-2.amazonaws.com/svgporn.com/logos/graphql.svg" className="bubble x8"></img>
+            <img src="https://s3-us-west-2.amazonaws.com/svgporn.com/logos/graphql.svg" className="bubble x9"></img>
+            <img src="https://s3-us-west-2.amazonaws.com/svgporn.com/logos/graphql.svg" className="bubble x10"></img>
+        </div>
         <ModalExampleDimmer
           data={this.state}
           connectionHandler={this.connectionHandler}
           searchBarHandler={this.searchBarHandler}
           placeholder={this.state.placeholder}
         />
-        <Navbar searchBarHandler={this.searchBarHandler} connectionHandler={this.connectionHandler}/>
+        <a href="https://github.com/TentaQL/tentaQL" target="blank"><img id="headerPic" src="../../SoftFillLogo.png"></img></a>
         <TextBox
           className="textbox"
           downloadZip={this.downloadZip}
           resetTab={this.resetTab}
           switchTab={this.switchTab}
           resetAll={this.resetAll}
+          searchBarHandler={this.searchBarHandler}
+          connectionHandler={this.connectionHandler}
         />
-      </div>
+        </div>
+      
       </Provider>
     );
   }
