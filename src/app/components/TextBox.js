@@ -22,12 +22,13 @@ class TextBox extends Component {
     return (
       <div id="textContainer">
               <Button.Group className="buttonColl">
+              
               <Button
                   onClick={this.props.switchTab}
                   className="wrapperButton"
                   id="schemaTabButton"
                 >
-                Schema
+                View Schema
                 </Button>
                 <Button.Or text="or" />
               <Button
@@ -35,7 +36,7 @@ class TextBox extends Component {
                   className="wrapperButton"
                   id="resolversTabButton"
                 >
-                Resolvers
+                View Resolvers
                 </Button>
                 <Button
                   onClick={this.props.downloadZip}
@@ -149,7 +150,8 @@ class TextBox extends Component {
 
 const mapStateToProps = state => {
   return {
-    currentTabText: state.currentTabText
+    currentTabText: state.currentTabText,
+    url: state.search_url
   };
 };
 

@@ -12,7 +12,6 @@ import { currentSearch } from './actions/searchActions';
 import { saveData } from './actions/searchActions';
 import { switchTab } from './actions/textBoxActions';
 
-import Navbar from "./components/Navbar";
 import TextBox from "./components/TextBox";
 require("./index.css");
 
@@ -116,7 +115,6 @@ class App extends Component {
           searchBarHandler={this.searchBarHandler}
           placeholder={this.state.placeholder}
         />
-        {/* <Navbar searchBarHandler={this.searchBarHandler} connectionHandler={this.connectionHandler}/> */}
         <TextBox
           className="textbox"
           downloadZip={this.downloadZip}
