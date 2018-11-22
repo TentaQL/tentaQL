@@ -2,10 +2,12 @@
 import {
   SEARCH_UPDATE,
   ZIP_FILES,
-  ZIP_CURRENT,
   CURRENT_SEARCH,
   CODEMIRROR_UPDATE,
-  SAVE_DATA
+  SAVE_DATA,
+  RESET_TAB,
+  RESET_ALL,
+  SWITCH_TAB
 } from "../actions/types";
 
 const serverCreator = require("../boilerFunc/serverCreator");
@@ -30,11 +32,13 @@ export default function reducer(state = {}, action) {
         search_url: "",
         originalSchema: "",
         currentSchema: "",
+        currentTab: "schema",
+        currentTabText: "",
         resolvers: "",
         originalResolvers: "",
         currentResolvers: "",
         resolversLambda: "",
-        codeMirrorLambda: ""
+        schemaLambda: ""
       };
     case SAVE_DATA:
       return {
@@ -43,9 +47,10 @@ export default function reducer(state = {}, action) {
         currentSchema: action.payload.frontEnd,
         originalResolvers: action.payload.resolvers,
         resolvers: action.payload.resolvers,
+        currentTabText: action.payload.frontEnd.replace(/\n/g, "λ"),
         currentResolvers: action.payload.resolvers,
         resolversLambda: action.payload.resolvers.replace(/\n/g, "λ"),
-        codeMirrorLambda: action.payload.frontEnd.replace(/\n/g, "λ")
+        schemaLambda: action.payload.frontEnd.replace(/\n/g, "λ")
       };
     case ZIP_FILES:
       var zip = new JSZip();
@@ -98,13 +103,71 @@ export default function reducer(state = {}, action) {
     case CODEMIRROR_UPDATE:
       let lambdaLess = action.payload[0].replace(/\\r\\n/g, "λ");
       lambdaLess = lambdaLess.replace(/λ/g, "\n");
+      state.currentTabText = action.payload[0];
       console.log(action.payload[1]);
-      switch (action.payload[1]) {
-        case "resolversTab":
+      switch (state.currentTab) {
+        case "resolvers":
           state.currentResolvers = lambdaLess;
           break;
-        case "schemaTab":
+        case "schema":
           state.currentSchema = lambdaLess;
+          
+          break;
+        default:
+          break;
+      }
+
+      return {
+        ...state
+      };
+    case SWITCH_TAB:
+      switch (action.payload) {
+        case "resolversTabButton":
+          state.schemaLambda = state.currentTabText;
+          state.currentTab = "resolvers";
+          state.currentTabText = state.resolversLambda;
+          break;
+        case "schemaTabButton":
+          state.resolversLambda = state.currentTabText;
+          state.currentTab = "schema";
+          state.currentTabText = state.schemaLambda;
+          break;
+        default:
+          break;
+      }
+      return {
+        ...state
+      };
+    case RESET_TAB:
+      switch (state.currentTab) {
+        case "resolvers":
+          let origResolvers = state.originalResolvers.replace(/\n/g, "λ");
+          state.currentTabText = origResolvers;
+          state.resolversLambda = origResolvers;
+          break;
+        case "schema":
+          let origSchema = state.originalSchema.replace(/\n/g, "λ");
+          state.schemaLambda = origSchema;
+          state.currentTabText = origSchema;
+          break;
+        default:
+          break;
+      }
+
+      return {
+        ...state
+      };
+    case RESET_ALL:
+      let origSchema = state.originalSchema.replace(/\n/g, "λ");
+      let origResolvers = state.originalResolvers.replace(/\n/g, "λ");
+      state.schemaLambda = origSchema;
+      state.resolversLambda = origResolvers;
+      switch (state.currentTab) {
+        case "resolvers":
+          state.currentTabText = state.resolversLambda;
+          break;
+        case "schema":
+          state.currentTabText = state.schemaLambda;
           break;
         default:
           break;
