@@ -246,6 +246,10 @@ input[type="text"] {
   margin: 10px;
 }
 
+#modalContent, #modalHeader, #modalActions {
+  background-color: #1e858f !important;
+}
+
 #navbar {
   margin-right: 10px;
 }

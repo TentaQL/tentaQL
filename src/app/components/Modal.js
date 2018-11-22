@@ -10,8 +10,8 @@ class ModalExampleDimmer extends Component {
     return (
       <div>
         <Modal open={this.props.data.modal}>
-          <Modal.Header color="blue">Welcome to TentaQL</Modal.Header>
-          <Modal.Content>
+          <Modal.Header id="modalHeader">Welcome to TentaQL</Modal.Header>
+          <Modal.Content id="modalContent">
             <form className="ui form">
               <div className="field">
                 <label>Database URL</label>
@@ -27,7 +27,7 @@ class ModalExampleDimmer extends Component {
               </div>
             </form>
           </Modal.Content>
-          <Modal.Actions>
+          <Modal.Actions id="modalActions">
           <Button animated='vertical' onClick={this.props.connectionHandler}>
           <Button.Content hidden><Icon name='database' /></Button.Content>
           <Button.Content visible>
