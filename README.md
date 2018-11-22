@@ -1,5 +1,4 @@
 # TentaQL
-<img src="https://github.com/TentaQL/tentaQL/blob/master/TentaQLteal.png" align="center" height="400">
 
 <p align="center">
 <img src="https://github.com/TentaQL/tentaQL/blob/master/Octopus.png" align="center" height="400">
