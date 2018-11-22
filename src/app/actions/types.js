@@ -7,3 +7,4 @@ export const ZIP_FILES = 'ZIP_FILES';
 export const ZIP_CURRENT = 'ZIP_CURRENT';
 export const RESET_TAB = 'RESET_TAB';
 export const RESET_ALL = 'RESET_ALL';
+export const SWITCH_TAB = 'SWITCH_TAB';

@@ -10,6 +10,7 @@ import { resetTab } from './actions/textBoxActions';
 import { resetAll } from './actions/textBoxActions';
 import { currentSearch } from './actions/searchActions';
 import { saveData } from './actions/searchActions';
+import { switchTab } from './actions/textBoxActions';
 
 import Navbar from "./components/Navbar";
 import TextBox from "./components/TextBox";
@@ -23,25 +24,26 @@ class App extends Component {
     super(props);
     this.state = {
       modal: true,
-      data: "",
-      url: "",
       placeholder: "Enter Your Database URL Here...",
-      persistedURL: "",
-      dummyCodeMirror: "",
-      schema: "",
-      resolvers: "",
     };
     this.connectionHandler = this.connectionHandler.bind(this);
     this.searchBarHandler = this.searchBarHandler.bind(this);
     this.downloadZip = this.downloadZip.bind(this);
     this.resetTab = this.resetTab.bind(this);
     this.resetAll = this.resetAll.bind(this);
+    this.switchTab = this.switchTab.bind(this);
   }
 
   searchBarHandler(event) {
     event.preventDefault();
     store.dispatch(searchUpdate(event.target.value, event.target.id));
     this.setState({ url: event.target.value });
+  }
+
+  switchTab(event) {
+    event.preventDefault();
+    store.dispatch(switchTab(event.target.id));
+    this.setState({currentPosition: {ch: 1, line: 1}});
   }
 
   downloadZip(event) {
@@ -51,9 +53,7 @@ class App extends Component {
 
   resetTab(event) {
     event.preventDefault();
-    // console.log(this.props.originalSchema, "hi")
-    // this.setState({schema: this.props.originalSchema})
-    store.dispatch(resetTab(event.target.id))
+    store.dispatch(resetTab())
   }
 
   resetAll(event) {
@@ -108,6 +108,7 @@ class App extends Component {
           className="textbox"
           downloadZip={this.downloadZip}
           resetTab={this.resetTab}
+          switchTab={this.switchTab}
           resetAll={this.resetAll}
         />
       </div>
