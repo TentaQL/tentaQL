@@ -35,7 +35,7 @@ db.connect = (req, res) => {
   client = new pg.Client(uri);
   client.connect(err => {
     if (err) return console.log("Could not connect to postgres ", err);
-  });s
+  });
   res.json(uri);
 };
 

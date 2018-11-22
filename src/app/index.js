@@ -115,6 +115,7 @@ class App extends Component {
           searchBarHandler={this.searchBarHandler}
           placeholder={this.state.placeholder}
         />
+        <a href="https://github.com/TentaQL/tentaQL" target="blank"><img id="headerPic" src="../../TentaQLName.png"></img></a>
         <TextBox
           className="textbox"
           downloadZip={this.downloadZip}
