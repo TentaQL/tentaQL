@@ -22,7 +22,7 @@ class Navbar extends Component {
               id="navbar"
               placeholder="To setup additional databases, please enter the URL ..."
             />
-            <Button animated='fade'>
+            <Button id="connectButton" animated='fade'>
               <Button.Content visible>Connect</Button.Content>
               <Button.Content hidden><Icon id="newURL" name="database" onClick={this.props.connectionHandler} /></Button.Content>
             </Button>

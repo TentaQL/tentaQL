@@ -10,6 +10,14 @@ input[type="text"] {
   float: right;
 }
 
+#navbar {
+  margin-right: 10px;
+}
+
+#connectButton {
+  padding-right: 10px !important;
+}
+
 #mascot {
   height: 75px;
   width: 75px;
