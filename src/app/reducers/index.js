@@ -28,7 +28,7 @@ export default function reducer(state = {}, action) {
     case CURRENT_SEARCH:
       return {
         ...state,
-        saved_url: state.search_url[0],
+        saved_url: state.search_url,
         search_url: "",
         originalSchema: "",
         currentSchema: "",

@@ -35,7 +35,7 @@ class App extends Component {
 
   searchBarHandler(event) {
     event.preventDefault();
-    store.dispatch(searchUpdate(event.target.value, event.target.id));
+    store.dispatch(searchUpdate(event.target.value));
     this.setState({ url: event.target.value });
   }
 
@@ -115,7 +115,7 @@ class App extends Component {
           searchBarHandler={this.searchBarHandler}
           placeholder={this.state.placeholder}
         />
-        <a href="https://github.com/TentaQL/tentaQL" target="blank"><img id="headerPic" src="../../TentaQLName.png"></img></a>
+        <a href="https://github.com/TentaQL/tentaQL" target="blank"><img id="headerPic" src="../../SoftFillLogo.png"></img></a>
         <TextBox
           className="textbox"
           downloadZip={this.downloadZip}

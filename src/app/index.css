@@ -291,6 +291,7 @@ i.smallIcon {
   width: 500px;
   display: block;
   margin: auto;
+  opacity:.5
 }
 
 .tab {
