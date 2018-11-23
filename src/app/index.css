@@ -292,13 +292,13 @@ i.smallIcon {
   display: block;
   margin: auto;
   opacity:.5;
-  animation: fader 5s ease-in-out infinite;
+  animation: fader 10s ease-in-out infinite;
 }
 
 @keyframes fader {
 	0% {
     transform: translatey(0px);
-    opacity: .5;
+    opacity: .4;
 	}
 	50% {
     transform: translatey(-5px);
@@ -306,7 +306,7 @@ i.smallIcon {
 	}
 	100% {
     transform: translatey(0px);
-    opacity: .5;
+    opacity: .4;
 	}
 }
 
