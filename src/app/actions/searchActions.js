@@ -5,10 +5,10 @@ export function searchUpdate(url) {
     }
   }
 
-export function currentSearch() {
+export function currentSearch(name) {
     return {
       type: "CURRENT_SEARCH",
-      payload: "Empty"
+      payload: name
     }
   }
 

@@ -26,9 +26,16 @@ export default function reducer(state = {}, action) {
         search_url: action.payload
       };
     case CURRENT_SEARCH:
+      let saved_url;
+      if (action.payload == "demo_database") {
+        saved_url = "postgres://tbpsxkue:TBTE6vwArK31H7dVlizemHoMn9LP_TWC@baasu.db.elephantsql.com:5432/tbpsxkue";
+      } else {
+        saved_url = state.search_url;
+      };
+      console.log(saved_url);
       return {
         ...state,
-        saved_url: state.search_url,
+        saved_url: saved_url,
         search_url: "",
         originalSchema: "",
         currentSchema: "",
