@@ -23,7 +23,7 @@ class App extends Component {
     super(props);
     this.state = {
       modal: true,
-      placeholder: "Enter Your Database URL Here...",
+      placeholder: "Enter Your Database URI Here...",
     };
     this.connectionHandler = this.connectionHandler.bind(this);
     this.searchBarHandler = this.searchBarHandler.bind(this);
@@ -62,11 +62,15 @@ class App extends Component {
 
   connectionHandler(event) {
     event.preventDefault();
-    store.dispatch(currentSearch());
+    store.dispatch(currentSearch(event.target.id));
     let credentials = {
       url: this.state.url
-    };
-    if (this.state.url === '') {
+    }
+    if (event.target.id === "demo_database") {
+      credentials.url = "postgres://tbpsxkue:TBTE6vwArK31H7dVlizemHoMn9LP_TWC@baasu.db.elephantsql.com:5432/tbpsxkue"
+    }
+    
+    if (credentials.url === '') {
       this.setState({placeholder: "Please input a valid database URL", })
     } else {
     fetch("http://localhost:8080/db", {
