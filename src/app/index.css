@@ -266,13 +266,17 @@ label {
   text-align: center;
   font-family: 'Casual';
   color: #fff;
-  font-size: 40px;
+  font-size: 30px;
 }
 
 #navbar {
-  margin-right: 10px;
+  margin-right: 5px;
 }
 
+#connectButton {
+  float: right;
+  margin-right: 25%;
+}
 
 #mascot {
   height: 75px;
@@ -368,8 +372,12 @@ i.smallIcon {
   border-width: 1px !important;
 }
 
+.ui.input {
+  float:right !important;
+}
+
 #octoLogo {
-  height: 250px;
+  height: 15rem;
   animation: animateImage 6s;
   animation: float 6s ease-in-out infinite;
   border-radius: 55%;

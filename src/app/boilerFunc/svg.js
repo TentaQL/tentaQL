@@ -1,5 +1,5 @@
 const svgContent = `<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-width="80%" height="80%" viewBox="0 0 1012 279.999" enable-background="new 0 0 1012 279.999" xml:space="preserve">
+width="60%" height="60%" viewBox="0 0 1012 279.999" enable-background="new 0 0 1012 279.999" xml:space="preserve">
 <g>
 <rect y="37.499" fill="none" width="1012" height="194"/>
 <path fill="none" stroke="#FFFFFF" stroke-width="3" stroke-miterlimit="10" d="M5,67.498v-30h147.5v30c0,4.336-1.086,6.5-3.25,6.5
