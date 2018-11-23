@@ -85,7 +85,7 @@ class ModalExampleDimmer extends Component {
    </svg>`} />
           </div>
           <img id="octoLogo" src="../../Octopus.png"></img>
-            Automatically Convert Legacy Databases to GraphQL
+            <div id="text">Automatically Convert Legacy Databases to GraphQL</div>
           </Modal.Header>
           <Modal.Content id="modalContent">
             <form className="ui form">

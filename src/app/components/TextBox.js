@@ -45,7 +45,7 @@ class TextBox extends Component {
                   onMouseDown={e => e.preventDefault()}
                 >
                   <Button.Content visible>
-                    Original Zip
+                    Download Original Zip
                   </Button.Content>
                   <Button.Content hidden>
                     <Icon id="Original" name="download" />
@@ -54,7 +54,7 @@ class TextBox extends Component {
                 <Button.Or text="or" />
                 <Button id="Edited" className="wrapperButton" animated="fade">
                   <Button.Content visible>
-                    Edited Zip
+                    Download Edited Zip
                   </Button.Content>
                   <Button.Content
                     onClick={this.props.downloadZip}
