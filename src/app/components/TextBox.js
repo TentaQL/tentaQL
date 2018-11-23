@@ -21,6 +21,16 @@ class TextBox extends Component {
   render() {
     return (
       <div id="textContainer">
+              <Button id="connectButton" animated='fade'>
+              <Button.Content visible>Connect</Button.Content>
+              <Button.Content hidden><Icon id="newURL" name="database" onClick={this.props.connectionHandler} /></Button.Content>
+            </Button>
+            <Input
+              onChange={this.props.searchBarHandler}
+              value={this.props.url}
+              id="navbar"
+              placeholder="To setup additional databases, please enter the URL ..."
+            />
               <Button.Group className="buttonColl">
               
               <Button
@@ -82,16 +92,7 @@ class TextBox extends Component {
                   </Button.Content>
                 </Button>
               </Button.Group>
-              <Input
-              onChange={this.props.searchBarHandler}
-              value={this.props.url}
-              id="navbar"
-              placeholder="To setup additional databases, please enter the URL ..."
-            />
-            <Button id="connectButton" animated='fade'>
-              <Button.Content visible>Connect</Button.Content>
-              <Button.Content hidden><Icon id="newURL" name="database" onClick={this.props.connectionHandler} /></Button.Content>
-            </Button>
+            
               <Clipboard
           className="clipboard"
           component="a"
