@@ -428,6 +428,10 @@ i.icon {
   width: 90%;
 } 
 
+.codeeditor {
+  margin-top: 20px;
+}
+
 path {
   stroke: #fff;
   fill: #fff;
