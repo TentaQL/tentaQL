@@ -74,10 +74,44 @@ controllerMongo.getDatabase = (req, res, next) => {
               if (err) {console.warn(err)}
               else { console.log('Closed Mongo Connection'); }
             });
+        let filteredCache = {};
+        schemasArr[0].forEach(collName => {
+          filteredCache[collName] = {
+            linkedRefs: [],
+            typeDefs: []
+          }
+        })
+
+        let collectionsNum = Object.keys(filteredCache);
+        console.log("Collections:", collectionsNum);
+        for (let i = 0; i < collectionsNum.length; i++) {
+          filteredCache[collectionsNum[i]].typeDefs = Object.entries(schemasArr[1][i]).filter(type => {
+            if (type[0] !== "_id" && type[0] !== "__v" && type[1].type == "ObjectId") {
+              let namedRef = type[0];
+              // Looping through the Collection looking for first instance of the linked Ref
+              for (let j = 0; j < respArr[i].response.length; j++) {
+                let collPre = respArr[i].response[j]["_doc"];
+                let schemaKeys = Object.keys(collPre);
+                if (schemaKeys.includes(namedRef)) {
+                  if (Array.isArray(collPre[namedRef])) {
+                    type[1].type = "Arr_ObjId";
+                    break;
+                  } else {
+                    type[1].type = "Single_ObjId";
+                    break;
+                  }
+                }
+                
+
+              }
+            }
+            return type[0] !== "_id" && type[0] !== "__v"
+          })
+        }
+        console.log("Filtered: ", filteredCache)
+
          res.end(JSON.stringify(schemasArr));
-        //   return res.json(schemasArr)
-        //   res.send(schemasArr);
-          
+
         })
         .catch(err => {
           console.log(err);
