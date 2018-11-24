@@ -3,6 +3,7 @@ const app = express();
 const PORT = process.env.PORT || "8080";
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const mongoController = require("./controllers/controllerMongo");
 const db = require("./controllers/controllers");
 // const mongo = require("./controllers/mongo");
 app.use(bodyParser.json());
@@ -15,7 +16,7 @@ app.get("/", (req, res) => {
 //this queries all tables and fields
 app.post("/db", db.connect);
 
-// app.get("/db/mongo", mongo.connect);
+app.get("/db/mongo", mongoController.getDatabase);
 
 app.get("/db/all", db.getTables, db.getFields, db.filterAssociations);
 

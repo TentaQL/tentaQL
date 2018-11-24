@@ -72,6 +72,15 @@ class App extends Component {
     
     if (credentials.url === '') {
       this.setState({placeholder: "Please input a valid database URL", })
+    } else if (credentials.url.includes("mongodb://")) {
+      console.log("Triggered Mongo");
+      let mongoURL = `http://localhost:8080/db/mongo?url=${credentials.url}`;
+      fetch(mongoURL)
+        .then(res => {
+          return res.json();
+        }).then(res => {
+          console.log("RES: ", res)
+        })
     } else {
     fetch("http://localhost:8080/db", {
       headers: { "Content-Type": "application/json; charset=utf-8" },
