@@ -23,7 +23,7 @@ let client;
 db.connect = (req, res) => {
   console.log("Body here");
   console.log(req.body.url);
-  uri = req.body.param;
+  uri = req.body.url;
 
   // DB that breaks the mutationZip file:
   // postgres://diojgcgl:BH7f4HBifxfq7Z3O1sGMHsedqZJcEYw5@pellefant.db.elephantsql.com:5432/diojgcgl
@@ -146,7 +146,7 @@ db.filterAssociations = async (req, res) => {
     frontEnd: frontEndVersion,
     resolvers: resolvers
   };
-
+  client.end();
   res.end(JSON.stringify(allFiles));
 };
 module.exports = db;
