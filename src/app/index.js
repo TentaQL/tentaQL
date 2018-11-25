@@ -66,7 +66,7 @@ class App extends Component {
     let credentials = {
       url: this.state.url
     }
-    if (event.target.id === "demo_database") {
+    if (event.target.id === "demo_database" || credentials.url === undefined) {
       credentials.url = "postgres://tbpsxkue:TBTE6vwArK31H7dVlizemHoMn9LP_TWC@baasu.db.elephantsql.com:5432/tbpsxkue"
     }
     

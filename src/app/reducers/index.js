@@ -11,6 +11,8 @@ import {
 } from "../actions/types";
 
 const serverCreator = require("../boilerFunc/serverCreator");
+const mongo_serverCreator = require("../boilerFunc/mongo_serverCreator");
+const mongoPackageJsonCreator = require("../boilerFunc/mongoPackageJSONCreator");
 const schemaCreator = require("../boilerFunc/schemaCreator");
 const psqlAdapterCreator = require("../boilerFunc/psqlAdapterCreator");
 const packageJSONCreator = require("../boilerFunc/packageJSONCreator");
@@ -72,48 +74,92 @@ export default function reducer(state = {}, action) {
       };
     case ZIP_FILES:
       var zip = new JSZip();
-      let schema;
-      let resolvers;
-      console.log("Zip payload:");
-      console.log(action.payload);
-      if (action.payload === "Updates") {
-        schema = state.currentSchema;
-        resolvers = state.currentResolvers;
-      } else {
-        schema = state.originalSchema;
-        resolvers = state.originalResolvers;
+      if (state.saved_url.includes("mongodb://")){
+        console.log("Triggered MongoDownload");
+        let fullText;
+        if (action.payload === "Updates") {
+          fullText = state.currentSchema;
+        } else {
+          fullText = state.originalSchema;
+        }
+        let splitArr = fullText.split(`/*****************************************************************************************************************************************************`);
+        console.log("SplitArr.length:\n", splitArr.length);
+        for (let i = 0; i < splitArr.length; i++) {
+          console.log(splitArr[i]);
+          console.log("\n\nNext Piece\n\n");
+        }
+      zip
+        .folder("tentaQL")
+        .folder("server")
+        .file("index.js", mongo_serverCreator(state.saved_url));
+      zip
+        .folder("tentaQL")
+        .file("package.json", mongoPackageJsonCreator());
+      zip
+        .folder("tentaQL")
+        .folder("server")
+        .folder("graphql-schema")
+        .file("index.js", splitArr[0])
+      
+      let i = 2; 
+      while (i < splitArr.length - 2){
+        var regex = /[^\n\s]+(?=\.js)/;
+        var found = splitArr[i].match(regex);
+        let pathName = `${found[0]}.js`;
+        zip
+          .folder("tentaQL")
+          .folder("server")
+          .folder("db")
+          .file(pathName, splitArr[i])
+        i++;
       }
-
-      zip
-        .folder("tentaQL")
-        .folder("client")
-        .folder("graphql")
-        .file("schema.js", schemaCreator());
-      zip.folder("tentaQL").file("server.js", serverCreator());
-      zip
-        .folder("tentaQL")
-        .folder("client")
-        .folder("graphql")
-        .file("psqlAdapter.js", psqlAdapterCreator(state.saved_url));
-
-      zip
-        .folder("tentaQL")
-        .folder("client")
-        .folder("graphql")
-        .folder("resolvers")
-        .file("resolvers.js", resolvers);
-
-      zip
-        .folder("tentaQL")
-        .folder("client")
-        .folder("graphql")
-        .folder("schema")
-        .file("typeDefs.js", schema);
-      zip.folder("tentaQL").file("package.json", packageJSONCreator());
       zip.generateAsync({ type: "blob" }).then(function(blob) {
         saveAs(blob, "TentaQL.zip");
       });
 
+      } else {
+          let schema;
+          let resolvers;
+          console.log("Zip payload:");
+          console.log(action.payload);
+          if (action.payload === "Updates") {
+            schema = state.currentSchema;
+            resolvers = state.currentResolvers;
+          } else {
+            schema = state.originalSchema;
+            resolvers = state.originalResolvers;
+          }
+
+          zip
+            .folder("tentaQL")
+            .folder("client")
+            .folder("graphql")
+            .file("schema.js", schemaCreator());
+          zip.folder("tentaQL").file("server.js", serverCreator());
+          zip
+            .folder("tentaQL")
+            .folder("client")
+            .folder("graphql")
+            .file("psqlAdapter.js", psqlAdapterCreator(state.saved_url));
+
+          zip
+            .folder("tentaQL")
+            .folder("client")
+            .folder("graphql")
+            .folder("resolvers")
+            .file("resolvers.js", resolvers);
+
+          zip
+            .folder("tentaQL")
+            .folder("client")
+            .folder("graphql")
+            .folder("schema")
+            .file("typeDefs.js", schema);
+          zip.folder("tentaQL").file("package.json", packageJSONCreator());
+          zip.generateAsync({ type: "blob" }).then(function(blob) {
+            saveAs(blob, "TentaQL.zip");
+          });
+        }
 
       return {
         ...state
