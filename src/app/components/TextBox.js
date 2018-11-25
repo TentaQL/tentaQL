@@ -1,12 +1,9 @@
 const React = require("react");
-const ReactDOM = require("react-dom");
 import { connect } from "react-redux";
-import { Button, Header, Modal, Icon } from "semantic-ui-react";
+import { Button, Icon, Input } from "semantic-ui-react";
 import { Component } from "react";
 import { UnControlled as CodeMirror } from "react-codemirror2";
 import { codeMirrorUpdate } from "../actions/textBoxActions";
-// import { Tab } from 'semantic-ui-react'
-import { TabProvider, Tab, TabPanel, TabList } from "react-web-tabs";
 import Clipboard from "react-clipboard.js";
 
 import "codemirror/addon/hint/show-hint";
@@ -16,14 +13,91 @@ import "codemirror-graphql/lint";
 import "codemirror-graphql/mode";
 
 class TextBox extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+    };
+  }
   render() {
     return (
       <div id="textContainer">
-        <Clipboard
+              <Button id="connectButton" animated='fade'>
+              <Button.Content visible>Connect</Button.Content>
+              <Button.Content hidden><Icon id="newURL" name="database" onClick={this.props.connectionHandler} /></Button.Content>
+            </Button>
+            <Input
+              onChange={this.props.searchBarHandler}
+              value={this.props.url}
+              id="navbar"
+              placeholder="To setup additional databases, please enter the URL ..."
+            />
+              <Button.Group className="buttonColl">
+              
+              <Button
+                  onClick={this.props.switchTab}
+                  className="wrapperButton"
+                  id="schemaTabButton"
+                >
+                View Schema
+                </Button>
+                <Button.Or text="or" />
+              <Button
+                  onClick={this.props.switchTab}
+                  className="wrapperButton"
+                  id="resolversTabButton"
+                >
+                View Resolvers
+                </Button>
+                <Button
+                  onClick={this.props.downloadZip}
+                  className="wrapperButton"
+                  animated="fade"
+                  onMouseDown={e => e.preventDefault()}
+                >
+                  <Button.Content visible>
+                    Download Original Zip
+                  </Button.Content>
+                  <Button.Content hidden>
+                    <Icon id="Original" name="download" />
+                  </Button.Content>
+                </Button>
+                <Button.Or text="or" />
+                <Button id="Edited" className="wrapperButton" animated="fade">
+                  <Button.Content visible>
+                    Download Edited Zip
+                  </Button.Content>
+                  <Button.Content
+                    onClick={this.props.downloadZip}
+                    id="Updates"
+                    hidden
+                  >
+                    &nbsp;Are you sure?
+                  </Button.Content>
+                </Button>
+                <Button id="Reset" onClick={this.props.resetTab} className="wrapperButton" onMouseDown={e => e.preventDefault()} animated="fade">
+                  <Button.Content visible>
+                    Reset Tab
+                  </Button.Content>
+                  <Button.Content id="Original" hidden>
+                    <Icon id="TabReset" name="redo" />
+                  </Button.Content>
+                </Button>
+                <Button.Or text="or" />
+                <Button onClick={this.props.resetAll} id="ResetAll" className="wrapperButton" onMouseDown={e => e.preventDefault()} animated="fade">
+                  <Button.Content visible>
+                    Reset All
+                  </Button.Content>
+                  <Button.Content id="Original" hidden>
+                    <Icon id="AllReset" name="history" />
+                  </Button.Content>
+                </Button>
+              </Button.Group>
+            
+              <Clipboard
           className="clipboard"
           component="a"
           button-href="#"
-          data-clipboard-text={this.props.currentSchema}
+          data-clipboard-text={String(this.props.currentTabText).replace(/λ/g, "\n")}
         >
           <Button animated>
             <Button.Content visible>Copy Tab</Button.Content>
@@ -31,122 +105,45 @@ class TextBox extends Component {
               <Icon name="copy outline" />
             </Button.Content>
           </Button>
-          {/* <Button><Icon name="copy outline" />Copy to Clipboard</Button> */}
         </Clipboard>
+              <CodeMirror
+                  className="codeeditor"
+                  value={this.props.currentTabText}
+                  options={{
+                    // mode: 'javascript',
+                    lineSeparator: `λ`,
+                    lineWrapping: false,
+                    lineNumbers: true,
+                    readOnly: false,
+                    autoCursor: true,
+                    autoScroll: true,
+                  }}
+                  cursor={this.state.currentPosition}
+                  onChange={(editor, metadata, value) => {
+                    let regex = /\S/g;
+                    let found = metadata.text[0].match(regex);
+                    let metaCopy = metadata['to'];
+                    if (metadata.origin === "+delete") {
+                      metaCopy['ch'] -= metadata.removed[0].length;
+                    } else if (metadata.origin === "+input" && found === null) {
+                      if (metaCopy.text[0] === " ") {
+                        metaCopy['ch'] += 1;
+                      } else {
+                        metaCopy['line'] += 1;
+                      }
+                    } else {
+                      metaCopy['ch'] += 1;
+                    }
 
-        <TabProvider defaultTab="one">
-          <section className="my-tabs">
-            <TabList className="my-tablist">
-              <Button.Group className="buttonColl">
-                <Button className="wrapperButton">
-                  <Tab className="tab" id="tab_1" tabFor="one">
-                    Schema
-                  </Tab>
-                </Button>
-                <Button.Or text="</>" />
-                <Button className="wrapperButton">
-                  <Tab className="tab" tabFor="two">
-                    Resolvers
-                  </Tab>
-                </Button>
-                <Button.Or text="</>" />
-                <Button className="wrapperButton">
-                  <Tab className="tab" tabFor="three">
-                    OtherFiles
-                  </Tab>
-                </Button>
-                <Button.Or text="</>" />
-                <Button
-                  onClick={this.props.downloadZip}
-                  className="wrapperButton"
-                  animated="fade"
-                >
-                  <Button.Content visible>
-                    &nbsp;&nbsp;&nbsp;&nbsp;Original Zip
-                  </Button.Content>
-                  <Button.Content hidden>
-                    <Icon id="Original" name="download" />
-                  </Button.Content>
-                </Button>
-                <Button.Or text="</>" />
-                <Button id="Edited" className="wrapperButton" animated="fade">
-                  <Button.Content visible>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Edited Zip{" "}
-                  </Button.Content>
-                  <Button.Content
-                    onClick={this.props.downloadZip}
-                    id="Updates"
-                    hidden
-                  >
-                    You sure?
-                  </Button.Content>
-                </Button>
-                <Button.Or text="</>" />
-                <Button id="Reset" className="wrapperButton" animated="fade">
-                  <Button.Content visible>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reset Tab
-                  </Button.Content>
-                  <Button.Content id="Original" hidden>
-                    <Icon id="TabReset" name="redo" />
-                  </Button.Content>
-                </Button>
-                <Button.Or text="</>" />
-                <Button id="ResetAll" className="wrapperButton" animated="fade">
-                  <Button.Content visible>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reset All
-                  </Button.Content>
-                  <Button.Content id="Original" hidden>
-                    <Icon id="AllReset" name="history" />
-                  </Button.Content>
-                </Button>
-              </Button.Group>
-            </TabList>
-            <div className="wrapper">
-              <TabPanel tabId="one">
-                <CodeMirror
-                  className="codeeditor"
-                  id="schemaTab"
-                  value={this.props.codeMirrorLambda}
-                  options={{
-                    // mode: 'javascript',
-                    lineSeparator: `λ`,
-                    lineWrapping: false,
-                    lineNumbers: true,
-                    readOnly: false
-                  }}
-                  onChange={(editor, metadata, value) => {
-                    this.props.dispatch(codeMirrorUpdate(value, "schemaTab"));
-                  }}
-                />
-              </TabPanel>
-              <TabPanel tabId="two">
-                <CodeMirror
-                  className="codeeditor"
-                  id="resolversTab"
-                  value={this.props.resolversLambda}
-                  options={{
-                    // mode: 'javascript',
-                    lineSeparator: `λ`,
-                    lineWrapping: false,
-                    lineNumbers: true,
-                    readOnly: false
-                  }}
-                  onChange={(editor, metadata, value) => {
+                    this.setState({currentPosition: metaCopy});
                     this.props.dispatch(
-                      codeMirrorUpdate(value, "resolversTab")
+                      codeMirrorUpdate(value)
                     );
                   }}
-                  onClick={(editor, metadata, value) => {
-                    this.editor.value = this.props.resolversLambda;
-                  }}
                 />
-              </TabPanel>
-              <TabPanel tabId="three">
-                <p>More Files To Come!</p>
-              </TabPanel>
-            </div>
-          </section>
-        </TabProvider>
+
+            <div className="wrapper">
+      </div>
       </div>
     );
   }
@@ -154,10 +151,8 @@ class TextBox extends Component {
 
 const mapStateToProps = state => {
   return {
-    currentSchema: state.currentSchema,
-    codeMirrorLambda: state.codeMirrorLambda,
-    currentResolvers: state.currentResolvers,
-    resolversLambda: state.resolversLambda
+    currentTabText: state.currentTabText,
+    url: state.search_url
   };
 };
 

@@ -156,8 +156,15 @@ function queryResolver(obj) {
 
       output += `
     ${table}ByID(parent, args, ctx, info){
-      const query = \`SELECT * FROM ${table} WHERE ${idField} = $\{args.id}\`;
-      return psql.manyOrNone(query);
+      const query = \`SELECT * FROM ${table} WHERE ${idField} = $\{args.${idField}}\`;
+      return psql.manyOrNone(query)
+      .then(data=>{
+        let newData = {${table}ByID:data[0]};
+        return newData.${table}ByID})
+        .catch(err=>{
+          console.log(error)
+        
+      });
     }, 
     `;
     }
@@ -205,7 +212,7 @@ function mutationResolver(obj) {
      },
 
         delete${initialCapitalizer(table)}(parent, args, ctx, info){
-          const query = \`DELETE FROM ${table} WHERE ${idField} = $\{args.id} RETURNING *\`;
+          const query = \`DELETE FROM ${table} WHERE ${idField} = $\{args.${idField}} RETURNING *\`;
             return psql.manyOrNone(query)
             .then(data => {
               let newData = { delete${initialCapitalizer(table)}: data[0]};
@@ -215,7 +222,7 @@ function mutationResolver(obj) {
 
       update${initialCapitalizer(table)}(parent, args, ctx, info) {
      let argsObj = Object.entries(args);
-     let literal = \`UPDATE ${initialCapitalizer(table)}\`;
+     let literal = \`UPDATE ${initialCapitalizer(table)} \`;
      let counter = 0;
      for (let i = 0; i < argsObj.length; i++) {
        if (argsObj[i][0] !== 'id') {
@@ -228,7 +235,7 @@ function mutationResolver(obj) {
        }
      }
        literal += \`
-       WHERE id = $\{args.id} RETURNING *\`;
+       WHERE ${idField} = $\{args.${idField}} RETURNING *\`;
        const query = literal;
        console.log(query);
        return psql.manyOrNone(query)

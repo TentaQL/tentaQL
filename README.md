@@ -1,8 +1,7 @@
 # TentaQL
 
-
 <p align="center">
-<img src="https://github.com/TentaQL/tentaQL/blob/master/OctopusCircle.png" align="center" height="400">
+<img src="https://github.com/TentaQL/tentaQL/blob/master/Octopus.png" align="center" height="400">
 </p>
 
 
@@ -23,11 +22,12 @@ With only one simple input - a database URI, TentaQL connects to your database, 
 
 
 # Technologies used:
-* Codemirror
-* SemanticUI-React
+* Redux
 * React
 * Javascript / ES6
 * NodeJS, ExpressJS
 * GraphQL
 * PostgreSQL
+* Codemirror
+* SemanticUI-React
 * Webpack, Babel

@@ -3,6 +3,7 @@ const app = express();
 const PORT = process.env.PORT || "8080";
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const mongoController = require("./controllers/controllerMongo");
 const db = require("./controllers/controllers");
 app.use(bodyParser.json());
 app.use(cors());
@@ -13,6 +14,7 @@ app.get("/", (req, res) => {
 
 //this queries all tables and fields
 app.post("/db", db.connect);
+
 
 app.get(
   "/db/all",
@@ -35,6 +37,9 @@ app.get(
       .catch(err => res.json(err));
   }
 );
+
+app.get("/db/mongo", mongoController.getDatabase);
+
 
 const server = app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);

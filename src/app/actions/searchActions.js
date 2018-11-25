@@ -1,14 +1,14 @@
-export function searchUpdate(url, originatingInput) {
+export function searchUpdate(url) {
     return {
       type: "SEARCH_UPDATE",
-      payload: [url, originatingInput]
+      payload: url
     }
   }
 
-export function currentSearch() {
+export function currentSearch(name) {
     return {
       type: "CURRENT_SEARCH",
-      payload: "Empty"
+      payload: name
     }
   }
 

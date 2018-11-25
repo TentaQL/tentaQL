@@ -76,8 +76,7 @@ describe("Middleware Tests", function() {
 
   it("should return all fields");
   it("should return associations");
-  it("should return types");
-  it("should return types");
+  it("should return types");å
   it("should return resolvers");
 });
 
