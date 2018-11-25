@@ -111,14 +111,6 @@ controllerMongo.getDatabase = (req, res, next) => {
           })
         }
         console.log("Filtered: ", filteredCache);
-      //   fs.writeFile("./output.txt", JSON.stringify(filteredCache), function(err) {
-      //     if(err) {
-      //         return console.log(err);
-      //     }
-      
-      //     console.log("The file was saved!");
-      // }); 
-        // let finalInput = JSON.stringify(filteredCache);
          res.end(JSON.stringify(mongoParser(filteredCache)));
 
         })
