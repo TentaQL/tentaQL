@@ -48,16 +48,27 @@ export default function reducer(state = {}, action) {
         schemaLambda: ""
       };
     case SAVE_DATA:
+      if (state.saved_url.includes("mongodb://")){
+        state.originalSchema = action.payload;
+        state.currentSchema = action.payload;
+        state.originalResolvers = action.payload;
+        state.resolvers = action.payload;
+        state.currentTabText = action.payload.replace(/\n/g, "λ");
+        state.currentResolvers = action.payload;
+        state.resolversLambda = action.payload.replace(/\n/g, "λ");
+        state.schemaLambda = action.payload.replace(/\n/g, "λ")
+      } else {
+        state.originalSchema = action.payload.frontEnd;
+        state.currentSchema = action.payload.frontEnd;
+        state.originalResolvers = action.payload.resolvers;
+        state.resolvers = action.payload.resolvers;
+        state.currentTabText = action.payload.frontEnd.replace(/\n/g, "λ");
+        state.currentResolvers = action.payload.resolvers;
+        state.resolversLambda = action.payload.resolvers.replace(/\n/g, "λ");
+        state.schemaLambda = action.payload.frontEnd.replace(/\n/g, "λ")
+      }
       return {
         ...state,
-        originalSchema: action.payload.frontEnd,
-        currentSchema: action.payload.frontEnd,
-        originalResolvers: action.payload.resolvers,
-        resolvers: action.payload.resolvers,
-        currentTabText: action.payload.frontEnd.replace(/\n/g, "λ"),
-        currentResolvers: action.payload.resolvers,
-        resolversLambda: action.payload.resolvers.replace(/\n/g, "λ"),
-        schemaLambda: action.payload.frontEnd.replace(/\n/g, "λ")
       };
     case ZIP_FILES:
       var zip = new JSZip();
