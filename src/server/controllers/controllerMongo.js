@@ -1,7 +1,10 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const GenerateSchema = require('generate-schema');
-
+const fs = require('fs');
+const {
+  mongoParser,
+} = require("../functions/typesCreatorMongo");
 
 const controllerMongo = {};
 
@@ -77,7 +80,6 @@ controllerMongo.getDatabase = (req, res, next) => {
         let filteredCache = {};
         schemasArr[0].forEach(collName => {
           filteredCache[collName] = {
-            linkedRefs: [],
             typeDefs: []
           }
         })
@@ -108,9 +110,16 @@ controllerMongo.getDatabase = (req, res, next) => {
             return type[0] !== "_id" && type[0] !== "__v"
           })
         }
-        console.log("Filtered: ", filteredCache)
-
-         res.end(JSON.stringify(schemasArr));
+        console.log("Filtered: ", filteredCache);
+      //   fs.writeFile("./output.txt", JSON.stringify(filteredCache), function(err) {
+      //     if(err) {
+      //         return console.log(err);
+      //     }
+      
+      //     console.log("The file was saved!");
+      // }); 
+        // let finalInput = JSON.stringify(filteredCache);
+         res.end(JSON.stringify(mongoParser(filteredCache)));
 
         })
         .catch(err => {
