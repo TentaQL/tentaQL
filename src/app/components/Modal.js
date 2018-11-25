@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Header, Modal, Icon} from "semantic-ui-react";
+import { Button, Header, Modal, Icon } from "semantic-ui-react";
 
 class ModalExampleDimmer extends Component {
   constructor(props) {
@@ -14,13 +14,13 @@ class ModalExampleDimmer extends Component {
           <Modal.Content>
             <form className="ui form">
               <div className="field">
-                <label>Database URL</label>
+                <label>PostgreSQL URL</label>
                 <input
                   type="text"
                   name="url"
                   id="modal"
-                  placeholder={this.props.placeholder}
-                  style = {this.props.placeholderColor}
+                  placeholder={this.props.data.placeholder}
+                  style={this.props.placeholderColor}
                   value={this.props.data.url}
                   onChange={this.props.searchBarHandler}
                 />
@@ -28,14 +28,12 @@ class ModalExampleDimmer extends Component {
             </form>
           </Modal.Content>
           <Modal.Actions>
-          <Button animated='vertical' onClick={this.props.connectionHandler}>
-          <Button.Content hidden><Icon name='database' /></Button.Content>
-          <Button.Content visible>
-            Connect
-            
-          </Button.Content>
-          </Button>
-             
+            <Button animated="vertical" onClick={this.props.connectionHandler}>
+              <Button.Content hidden>
+                <Icon name="database" />
+              </Button.Content>
+              <Button.Content visible>PostgreSQL</Button.Content>
+            </Button>
           </Modal.Actions>
         </Modal>
       </div>
@@ -44,8 +42,3 @@ class ModalExampleDimmer extends Component {
 }
 
 export { ModalExampleDimmer };
-
-
-// labelPosition="right"
-              // icon="checkmark"
-              // content="Connect"

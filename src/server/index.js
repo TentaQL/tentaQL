@@ -4,7 +4,6 @@ const PORT = process.env.PORT || "8080";
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const db = require("./controllers/controllers");
-// const mongo = require("./controllers/mongo");
 app.use(bodyParser.json());
 app.use(cors());
 
@@ -15,10 +14,30 @@ app.get("/", (req, res) => {
 //this queries all tables and fields
 app.post("/db", db.connect);
 
-// app.get("/db/mongo", mongo.connect);
+app.get(
+  "/db/all",
+  (req, res, next) => {
+    db.getTables(req, res)
+      .then(() => next())
+      .catch(err => res.json(err));
+  },
+  (req, res, next) => {
+    db.getFields(req, res)
+      .then(() => next())
+      .catch(err => res.json(err));
+  },
+  (req, res) => {
+    db.filterAssociations(req, res)
+      .then(response => {
+        console.log("RESPONSE, ", response);
+        res.end(JSON.stringify(response));
+      })
+      .catch(err => res.json(err));
+  }
+);
 
-app.get("/db/all", db.getTables, db.getFields, db.filterAssociations);
-
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });
+
+module.exports = server;

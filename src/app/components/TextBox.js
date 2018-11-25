@@ -71,7 +71,7 @@ class TextBox extends Component {
                 <Button.Or text="</>" />
                 <Button id="Edited" className="wrapperButton" animated="fade">
                   <Button.Content visible>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Edited Zip
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Edited Zip{" "}
                   </Button.Content>
                   <Button.Content
                     onClick={this.props.downloadZip}

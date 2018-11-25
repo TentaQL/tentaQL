@@ -16,9 +16,14 @@ module.exports = {
     ]
   },
   devServer: {
+    inline: true,
     port: 3000,
     proxy: {
-      "/db": "http://localhost:8080"
+      "/db/*": {
+        target: "http://localhost:8080",
+        secure: false,
+        changeOrigin: true
+      }
     }
   },
   mode: "development",

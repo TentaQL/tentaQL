@@ -21,7 +21,6 @@ let client;
 
 //CONNECT
 db.connect = (req, res) => {
-  console.log("Body here");
   console.log(req.body.url);
   uri = req.body.url;
 
@@ -34,48 +33,64 @@ db.connect = (req, res) => {
 
   client = new pg.Client(uri);
   client.connect(err => {
-    if (err) return console.log("Could not connect to postgres ", err);
+    if (err) {
+      console.log("Ooops, this url is invalid. Please enter valid url.");
+      res.json("Ooops, this url is invalid. Please enter valid url.");
+    } else {
+      res.json(uri);
+    }
   });
-  res.json(uri);
 };
 
-//GET DATA
-db.getTables = (req, res, next) => {
+//GET TABLES
+db.getTables = async (req, res) => {
+  console.log("GET TABLES");
   client = new pg.Client(uri);
-  console.log("Client: ", client);
   client.connect(err => {
     if (err) return console.log("Could not connect to postgres ", err);
   });
-  client.query(
-    "SELECT*FROM pg_catalog.pg_tables WHERE schemaname = 'public' AND tablename NOT LIKE 'spatial_ref_sys'",
-    (err, result) => {
-      if (err) throw new Error("Error querying database");
-      result.rows.map(table => (tables[table.tablename] = {}));
-      next();
+  new Promise(async (resolve, reject) => {
+    try {
+      let retrivedNames = await client.query(
+        "SELECT*FROM pg_catalog.pg_tables WHERE schemaname = 'public' AND tablename NOT LIKE 'spatial_ref_sys'",
+        (err, result) => {
+          if (err) throw new Error("Error querying database");
+          resolve(result.rows.map(table => (tables[table.tablename] = {})));
+          console.log("TABLES=>>>>>>>>>", tables);
+        }
+      );
+    } catch (error) {
+      reject({ message: "Could not retrive table names", error });
     }
-  );
+  });
 };
 
-db.getFields = (req, res, next) => {
-  Object.keys(tables).map((element, index) => {
-    client.query(
-      `SELECT column_name, data_type FROM information_schema.columns WHERE table_name = '${element}'`,
-      (err, result) => {
-        if (err) reject(err);
-
-        tables[element] = result.rows.reduce((acc, curr) => {
-          acc[curr.column_name] = curr.data_type;
-          return acc;
-        }, {});
-        if (index === Object.keys(tables).length - 1) {
-          next();
-        }
-      }
-    );
+// GET FIELDS
+db.getFields = async (req, res) => {
+  console.log("GET FIELDS");
+  new Promise(async (resolve, reject) => {
+    try {
+      let retrivedFields = Object.keys(tables).map((element, index) => {
+        client.query(
+          `SELECT column_name, data_type FROM information_schema.columns WHERE table_name = '${element}'`,
+          (err, result) => {
+            if (err) throw new Error(err);
+            tables[element] = result.rows.reduce((acc, curr) => {
+              acc[curr.column_name] = curr.data_type;
+              return acc;
+            }, {});
+            resolve(tables);
+          }
+        );
+      });
+    } catch (error) {
+      reject({ message: "Could not get keys", error });
+    }
   });
 };
 
 db.filterAssociations = async (req, res) => {
+  console.log("FILTER ASSOCIATIONS");
   let filteredResults = await new Promise((resolve, reject) => {
     client.query(
       "SELECT tc.table_schema, tc.constraint_name, tc.table_name, kcu.column_name, ccu.table_name AS foreign_table_name, ccu.column_name AS foreign_column_name FROM information_schema.table_constraints tc JOIN information_schema.key_column_usage kcu ON tc.constraint_name = kcu.constraint_name JOIN information_schema.constraint_column_usage ccu ON ccu.constraint_name = tc.constraint_name WHERE constraint_type = 'FOREIGN KEY';",
@@ -147,7 +162,6 @@ db.filterAssociations = async (req, res) => {
     frontEnd: frontEndVersion,
     resolvers: resolvers
   };
-
-  res.end(JSON.stringify(allFiles));
+  return allFiles;
 };
 module.exports = db;
