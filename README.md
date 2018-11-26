@@ -9,6 +9,21 @@ TentaQL is an open-source, automated SQL (Postrges) and NoSQL (MongoDB) introspe
 
 With just a simple database uri, TentaQL connects to the user's database, intuits the structure of  schemas and packages a GraphQL-powered suite of tools, available for download.
 
+<p align="center">
+<img src="https://github.com/TentaQL/tentaQL/blob/master/demo1.png" align="center" height="400">
+</p>
+
+
+
+<p align="center">
+<img src="https://github.com/TentaQL/tentaQL/blob/master/demo2.png" align="center" height="400">
+</p>
+
+
+<p align="center">
+<img src="https://github.com/TentaQL/tentaQL/blob/master/demo3.png" align="center" height="400">
+</p>
+
 # Authors
 
 [Anna Brakowska @AnnaBrakowska](https://github.com/AnnaBrakowska)
