@@ -9,16 +9,30 @@ TentaQL is an open-source, automated SQL (Postrges) and NoSQL (MongoDB) introspe
 
 With just a simple database uri, TentaQL connects to the user's database, intuits the structure of  schemas and packages a GraphQL-powered suite of tools, available for download.
 
+
+
+# How to use
+
+Paste your database address in the URL box, and click "Convert your DB".
+
 <p align="center">
 <img src="https://github.com/TentaQL/tentaQL/blob/master/demo1.png" align="center" height="400">
 </p>
 
 
+Your database is converted to GraphQL language. You should now see the schema.
 
 <p align="center">
 <img src="https://github.com/TentaQL/tentaQL/blob/master/demo2.png" align="center" height="400">
 </p>
 
+
+You can use tabs located above the code editor to switch the view between schema and resolvers.
+You can also:
+* download converted files by clicking on "Download Original Zip"
+* edit schema or resolvers and download edited files by clicking on "Download Edited Zip"
+* reset schema or resolvers to it's original state by clicking on "Reset Tab" or reset schema and resolvers by clicking on "Reset All"
+* copy chosen tab by clicking on "Copy Tab"
 
 <p align="center">
 <img src="https://github.com/TentaQL/tentaQL/blob/master/demo3.png" align="center" height="400">
