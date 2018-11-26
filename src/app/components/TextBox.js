@@ -35,15 +35,15 @@ class TextBox extends Component {
               
               <Button
                   onClick={this.props.switchTab}
-                  className="wrapperButton"
+                  className={`wrapperButton ${this.props.hiddenButtons}`}
                   id="schemaTabButton"
                 >
                 View Schema
                 </Button>
-                <Button.Or text="or" />
+                <Button.Or text="or" className={`wrapperButton ${this.props.hiddenButtons}`}/>
               <Button
                   onClick={this.props.switchTab}
-                  className="wrapperButton"
+                  className={`wrapperButton ${this.props.hiddenButtons}`}
                   id="resolversTabButton"
                 >
                 View Resolvers
@@ -74,7 +74,7 @@ class TextBox extends Component {
                     &nbsp;Are you sure?
                   </Button.Content>
                 </Button>
-                <Button id="Reset" onClick={this.props.resetTab} className="wrapperButton" onMouseDown={e => e.preventDefault()} animated="fade">
+                <Button id="Reset" onClick={this.props.resetTab} className={`wrapperButton ${this.props.hiddenButtons}`} onMouseDown={e => e.preventDefault()} animated="fade">
                   <Button.Content visible>
                     Reset Tab
                   </Button.Content>
@@ -152,7 +152,8 @@ class TextBox extends Component {
 const mapStateToProps = state => {
   return {
     currentTabText: state.currentTabText,
-    url: state.search_url
+    url: state.search_url,
+    hiddenButtons: state.hiddenButtons
   };
 };
 

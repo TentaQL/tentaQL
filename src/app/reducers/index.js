@@ -29,10 +29,12 @@ export default function reducer(state = {}, action) {
       };
     case CURRENT_SEARCH:
       let saved_url;
-      if (action.payload == "demo_database") {
+      if (action.payload == "demo_database_pg") {
         saved_url = "postgres://tbpsxkue:TBTE6vwArK31H7dVlizemHoMn9LP_TWC@baasu.db.elephantsql.com:5432/tbpsxkue";
+      } else if (action.payload == "demo_database_mongo"){
+        saved_url = "mongodb://admin1:admin1@ds055485.mlab.com:55485/datacenter";
       } else {
-        saved_url = state.search_url;
+        saved_url = "state.search_url";
       };
       console.log(saved_url);
       return {
@@ -47,10 +49,12 @@ export default function reducer(state = {}, action) {
         originalResolvers: "",
         currentResolvers: "",
         resolversLambda: "",
-        schemaLambda: ""
+        schemaLambda: "",
+        hiddenButtons: "",
       };
     case SAVE_DATA:
       if (state.saved_url.includes("mongodb://")){
+        state.hiddenButtons = "hideBtn"
         state.originalSchema = action.payload;
         state.currentSchema = action.payload;
         state.originalResolvers = action.payload;
@@ -60,6 +64,7 @@ export default function reducer(state = {}, action) {
         state.resolversLambda = action.payload.replace(/\n/g, "λ");
         state.schemaLambda = action.payload.replace(/\n/g, "λ")
       } else {
+        state.hiddenButtons = "showBtn"
         state.originalSchema = action.payload.frontEnd;
         state.currentSchema = action.payload.frontEnd;
         state.originalResolvers = action.payload.resolvers;

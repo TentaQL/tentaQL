@@ -299,6 +299,10 @@ i.smallIcon {
   animation: fader 10s ease-in-out infinite;
 }
 
+.hideBtn {
+  display: none !important;
+}
+
 @keyframes fader {
 	0% {
     transform: translatey(0px);
