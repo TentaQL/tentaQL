@@ -7,7 +7,7 @@
 
 TentaQL is an open-source, automated SQL (Postrges) and NoSQL (MongoDB) introspection and graphql conversion tool, providing users a highly customizable Graphql package to get their legacy databases up and running with GraphQL in minutes.  
 
-With just a simple database uri, TentaQL connects to the user's database, intuits the structure of  schemas and packages a GraphQL-powered suite of tools, available for download.
+With just a simple database URI, TentaQL connects to the user's database, intuits the structure of  schemas and packages a GraphQL-powered suite of tools, available for download.
 
 
 
