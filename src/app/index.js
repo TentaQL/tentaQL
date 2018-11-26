@@ -66,7 +66,10 @@ class App extends Component {
     let credentials = {
       url: this.state.url
     }
-    if (event.target.id === "demo_database" || credentials.url === undefined) {
+    if (event.target.id === "demo_database_mongo") {
+      credentials.url = "mongodb://admin1:admin1@ds055485.mlab.com:55485/datacenter"
+    }
+    if (event.target.id === "demo_database_pg" || credentials.url === undefined) {
       credentials.url = "postgres://tbpsxkue:TBTE6vwArK31H7dVlizemHoMn9LP_TWC@baasu.db.elephantsql.com:5432/tbpsxkue"
     }
     
