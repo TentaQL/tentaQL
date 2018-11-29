@@ -1,14 +1,14 @@
 //UNIT TESTING
 const pg = require("pg");
-const test = require("tape");
 const chai = require("chai");
 const chaiHTTP = require("chai-http");
 const expect = chai.expect;
-const httpMocks = require("node-mocks-http");
 const server = require("../src/server/index.js");
 const db = require("../src/server/controllers/controllers");
 const should = chai.should();
+const chaiAsPromised = require("chai-as-promised");
 chai.use(chaiHTTP);
+chai.use(chaiAsPromised);
 
 describe("Database Access Tests", function() {
   it("should connect", function(done) {
@@ -74,18 +74,13 @@ describe("Middleware Tests", function() {
       .catch(done);
   });
 
-  it("should return all fields");
+  // it("should return all table names", function() {
+  //   let result = db.getTables();
+  //   console.log("THIS IS RESULT=>>>>", result);
+  //   return expect(typeof result).to.eventually.deep.equal("object");
+  // });
+
   it("should return associations");
-  it("should return types");å
+  it("should return types");
   it("should return resolvers");
-});
-
-test("should return all tables", function(assert) {
-  const req = httpMocks.createRequest({});
-  const res = httpMocks.createResponse({});
-
-  return db.getTables(req, res).then(response => {
-    console.log("RESPONSE=>>>>>", response);
-    assert.equal(typeof response, "object");
-  });
 });

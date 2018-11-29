@@ -17,7 +17,8 @@
     "dev": "webpack-dev-server --open --hot",
     "server": "nodemon src/server/index.js",
     "build": "webpack",
-    "test": "mocha"
+    "test": "mocha",
+    "promise": "tape test/test-promise.js"
   },
   "keywords": [],
   "author": "",
@@ -28,6 +29,7 @@
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
     "chai-http": "^4.2.0",
     "classnames": "^2.2.6",
     "codemirror": "^5.41.0",
@@ -40,7 +42,9 @@
     "graphql": "^14.0.2",
     "jszip": "^3.1.5",
     "less-loader": "^4.1.0",
+    "mocha": "^5.2.0",
     "mongoose": "^5.3.13",
+    "node-mocks-http": "^1.7.3",
     "nodemon": "^1.18.6",
     "pg": "^4.5.7",
     "pluralize": "^7.0.0",
@@ -60,6 +64,7 @@
     "semantic-ui": "^2.4.2",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.83.0",
+    "tape": "^4.9.1",
     "thunk": "0.0.1",
     "url-loader": "^1.1.2"
   },

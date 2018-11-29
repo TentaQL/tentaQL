@@ -11,21 +11,26 @@ const {
   queryResolver,
   mutationResolver
 } = require("../functions/typesCreator");
-
+const { urlValidator } = require("../functions/urlValidator");
 const db = {};
 let tables = {};
 let foreignTables = {};
 let requiredTables = {};
 let uri;
+
+//testing promise
+//
 let client;
 
 //CONNECT
 db.connect = (req, res) => {
-  console.log(req.body.url);
-  uri = req.body.url;
+  if (urlValidator(req.body.url)) {
+    uri = req.body.url;
+  }
 
   // DB that breaks the mutationZip file:
-  // postgres://diojgcgl:BH7f4HBifxfq7Z3O1sGMHsedqZJcEYw5@pellefant.db.elephantsql.com:5432/diojgcgl
+  // uri =
+  //   "postgres://diojgcgl:BH7f4HBifxfq7Z3O1sGMHsedqZJcEYw5@pellefant.db.elephantsql.com:5432/diojgcgl";
   // AnnaHardcoded postgres://tbpsxkue:TBTE6vwArK31H7dVlizemHoMn9LP_TWC@baasu.db.elephantsql.com:5432/tbpsxkue
   // JonahHardcoded postgres://tbpsxkue:TBTE6vwArK31H7dVlizemHoMn9LP_TWC@baasu.db.elephantsql.com:5432/tbpsxkue
   // JonathanHardcoded postgres://cwfmwiaw:AHwoqc41Cx3L7nMV5oSfz-KQZewSqQGx@baasu.db.elephantsql.com:5432/cwfmwiaw
@@ -45,6 +50,7 @@ db.connect = (req, res) => {
 db.getTables = async (req, res) => {
   console.log("GET TABLES");
   client = new pg.Client(uri);
+  console.log("URI=>>>>", uri);
   client.connect(err => {
     if (err) return console.log("Could not connect to postgres ", err);
   });
@@ -161,8 +167,6 @@ db.filterAssociations = async (req, res) => {
     frontEnd: frontEndVersion,
     resolvers: resolvers
   };
-
-  
 
   client.end();
   return allFiles;
