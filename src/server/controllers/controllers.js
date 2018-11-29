@@ -158,6 +158,7 @@ db.filterAssociations = async (req, res) => {
   let queries = queriesCreator(tables);
   let mutations = mutationCreator(tables);
   let types = allTypesCreator(tables);
+  console.log(types);
   let frontEndVersion = typeDefsReturner(queries, mutations, types);
   let queryResolvers = queryResolver(tables);
   let mutationResolvers = mutationResolver(tables);

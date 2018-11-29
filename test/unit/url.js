@@ -8,6 +8,7 @@ describe("User's URL validation tests", function() {
       let invalidURL = "pasfdsgdfgd://fdvfbgcb@fsbgfbfh/dddd";
       urlValidator(invalidURL).should.equal(false);
     });
+
     it("should accept valid url", function() {
       let validUrl = "postgres://asdafsgdfhn@aesgrdht/sfsxfbc";
       urlValidator(validUrl).should.equal(true);
