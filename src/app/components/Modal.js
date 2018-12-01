@@ -30,7 +30,7 @@ class ModalExampleDimmer extends Component {
                   id="modal"
                   placeholder={this.props.placeholder}
                   style = {this.props.placeholderColor}
-                  value={this.props.data.url}
+                  value={this.props.url}
                   onChange={this.props.searchBarHandler}
                 />
               </div>
@@ -39,9 +39,9 @@ class ModalExampleDimmer extends Component {
           <Modal.Actions id="modalActions">
           <Button.Group>
           <Button animated='vertical' onClick={this.props.connectionHandler}>
-          <Button.Content hidden><Icon name='database' />Postgres | Mongo</Button.Content>
+          <Button.Content hidden><Icon name='database' />Postgres | Mongo | MySQL</Button.Content>
           <Button.Content visible>
-            Convert Your Database
+            Convert Your Database Now
           </Button.Content>
           </Button>
           <Button.Or text="or" />
@@ -78,8 +78,3 @@ export default connect(mapStateToProps)(ModalExampleDimmer);
 
 
 export { ModalExampleDimmer };
-
-
-// labelPosition="right"
-              // icon="checkmark"
-              // content="Connect"

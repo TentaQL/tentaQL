@@ -8,10 +8,8 @@ function serverCreator() {
   const bodyParser = require("body-parser");
   const cors = require("cors");
 
-
   const schema = require("./client/graphql/schema");
   const app = express();
-
 
   app.use("/graphql", expressGraphQL({ schema, graphiql: true }));
   app.use(cors(), bodyParser.json());
