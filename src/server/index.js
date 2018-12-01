@@ -5,21 +5,26 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongoController = require("./controllers/controllerMongo");
 const db = require("./controllers/controllers");
-// const mongo = require("./controllers/mongo");
+const mysqlController = require("./controllers/controllerMySQL"); 
 app.use(bodyParser.json());
 app.use(cors());
 
+// Test Route
 app.get("/", (req, res) => {
   res.end("Hello TentaQL");
 });
 
-//this queries all tables and fields
+// Postgres Controller Routes
 app.post("/db", db.connect);
-
-app.get("/db/mongo", mongoController.getDatabase);
-
 app.get("/db/all", db.getTables, db.getFields, db.filterAssociations);
 
+// MongoDB Controller Route
+app.get("/db/mongo", mongoController.getDatabase);
+//`mysql://root:test@localhost/tentaql`
+// MySQL Controller Route
+app.get("/db/mysql", mysqlController.getDatabase);
+
+// Start the Server
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });

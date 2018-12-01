@@ -23,7 +23,7 @@ class App extends Component {
     super(props);
     this.state = {
       modal: true,
-      placeholder: "Enter Your Database URI Here...",
+      placeholder: "Enter Your Database URI Here, e.g., mysql://root:test@localhost/tentaql",
     };
     this.connectionHandler = this.connectionHandler.bind(this);
     this.searchBarHandler = this.searchBarHandler.bind(this);
@@ -66,24 +66,42 @@ class App extends Component {
     let credentials = {
       url: this.state.url
     }
+    // Checking if user requested demo databases 
     if (event.target.id === "demo_database_mongo") {
       credentials.url = "mongodb://admin1:admin1@ds055485.mlab.com:55485/datacenter"
     }
     if (event.target.id === "demo_database_pg" || credentials.url === undefined) {
       credentials.url = "postgres://tbpsxkue:TBTE6vwArK31H7dVlizemHoMn9LP_TWC@baasu.db.elephantsql.com:5432/tbpsxkue"
     }
-    
+    // URL error-checking
     if (credentials.url === '') {
       this.setState({placeholder: "Please input a valid database URL", })
+    // Mongo URL check to trigger Mongo Server Routing
     } else if (credentials.url.includes("mongodb://")) {
         let mongoURL = `http://localhost:8080/db/mongo?url=${credentials.url}`;
         fetch(mongoURL)
           .then(res => {
             return res.json();
           }).then(res => {
+            console.log("Received Data: ", res);
             store.dispatch(saveData(res));
             this.setState({modal: false, url: ""});
           })
+    // MySQL URL check to trigger MySQL Server Routing
+    } else if (credentials.url.includes("mysql://")) {
+      console.log("Triggered MySQL call")
+      let mysqlURL = `http://localhost:8080/db/mysql?url=${credentials.url}`;
+        fetch(mysqlURL, {
+          headers: { "Content-Type": "application/json; charset=utf-8" },
+        //`mysql://root:test@localhost/tentaql`
+        }).then(res => {
+            return res.text();
+          }).then(res => {
+            console.log("Res from mySQL call: ", res);
+            store.dispatch(saveData(res));
+            this.setState({modal: false, url: ""});
+          })
+    // URI will default to trigger Postgres Server Routing
     } else {
     fetch("http://localhost:8080/db", {
       headers: { "Content-Type": "application/json; charset=utf-8" },
@@ -102,7 +120,7 @@ class App extends Component {
           });
       })
       .catch(err => {
-        console.log(err);
+        console.log("connectionHandler error during initial database Fetch: ", err);
       });
     }
     

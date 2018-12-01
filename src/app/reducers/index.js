@@ -13,6 +13,8 @@ import {
 const serverCreator = require("../boilerFunc/serverCreator");
 const mongo_serverCreator = require("../boilerFunc/mongo_serverCreator");
 const mongoPackageJsonCreator = require("../boilerFunc/mongoPackageJSONCreator");
+const mysql_serverCreator = require("../boilerFunc/mysql_serverCreator");
+const mysqlPackageJSONCreator = require("../boilerFunc/mysql_packageJSONCreator");
 const schemaCreator = require("../boilerFunc/schemaCreator");
 const psqlAdapterCreator = require("../boilerFunc/psqlAdapterCreator");
 const packageJSONCreator = require("../boilerFunc/packageJSONCreator");
@@ -28,15 +30,13 @@ export default function reducer(state = {}, action) {
         search_url: action.payload
       };
     case CURRENT_SEARCH:
-      let saved_url;
+      let saved_url = state.search_url;
       if (action.payload == "demo_database_pg") {
         saved_url = "postgres://tbpsxkue:TBTE6vwArK31H7dVlizemHoMn9LP_TWC@baasu.db.elephantsql.com:5432/tbpsxkue";
       } else if (action.payload == "demo_database_mongo"){
         saved_url = "mongodb://admin1:admin1@ds055485.mlab.com:55485/datacenter";
-      } else {
-        saved_url = "state.search_url";
-      };
-      console.log(saved_url);
+      }
+      console.log("Saved_url: ", saved_url);
       return {
         ...state,
         saved_url: saved_url,
@@ -53,8 +53,9 @@ export default function reducer(state = {}, action) {
         hiddenButtons: "",
       };
     case SAVE_DATA:
+      // Toggles Class (aka, hides) Codemirror Tabs/Buttons if using Mongo or MySQL
       if (state.saved_url.includes("mongodb://")){
-        state.hiddenButtons = "hideBtn"
+        state.hiddenButtons = "hideBtn";
         state.originalSchema = action.payload;
         state.currentSchema = action.payload;
         state.originalResolvers = action.payload;
@@ -62,7 +63,17 @@ export default function reducer(state = {}, action) {
         state.currentTabText = action.payload.replace(/\n/g, "λ");
         state.currentResolvers = action.payload;
         state.resolversLambda = action.payload.replace(/\n/g, "λ");
-        state.schemaLambda = action.payload.replace(/\n/g, "λ")
+        state.schemaLambda = action.payload.replace(/\n/g, "λ");
+      } else if (state.saved_url.includes("mysql://")) {
+        state.hiddenButtons = "hideBtn";
+        state.originalSchema = action.payload;
+        state.currentSchema = action.payload;
+        state.originalResolvers = action.payload;
+        state.resolvers = action.payload;
+        state.currentTabText = action.payload.replace(/\n/g, "λ");
+        state.currentResolvers = action.payload;
+        state.resolversLambda = action.payload.replace(/\n/g, "λ");
+        state.schemaLambda = action.payload.replace(/\n/g, "λ");
       } else {
         state.hiddenButtons = "showBtn"
         state.originalSchema = action.payload.frontEnd;
@@ -78,6 +89,7 @@ export default function reducer(state = {}, action) {
         ...state,
       };
     case ZIP_FILES:
+      console.log("Triggered ZIP_FILES");
       var zip = new JSZip();
       if (state.saved_url.includes("mongodb://")){
         console.log("Triggered MongoDownload");
@@ -95,14 +107,12 @@ export default function reducer(state = {}, action) {
         }
       zip
         .folder("tentaQL")
-        .folder("server")
         .file("index.js", mongo_serverCreator(state.saved_url));
       zip
         .folder("tentaQL")
         .file("package.json", mongoPackageJsonCreator());
       zip
         .folder("tentaQL")
-        .folder("server")
         .folder("graphql-schema")
         .file("index.js", splitArr[0])
       
@@ -119,9 +129,31 @@ export default function reducer(state = {}, action) {
         i++;
       }
       zip.generateAsync({ type: "blob" }).then(function(blob) {
-        saveAs(blob, "TentaQL.zip");
+        saveAs(blob, "TentaQL_mongo.zip");
       });
+      } else if (state.saved_url.includes("mysql://")) {
+        console.log("Triggered mySQL Database Zip");
+        let fullText;
+        if (action.payload === "Updates") {
+          fullText = state.currentSchema;
+        } else {
+          fullText = state.originalSchema;
+        }
+      zip
+        .folder("tentaQL")
+        .folder("server")
+        .file("index.js", mysql_serverCreator(state.saved_url));
+      zip
+        .folder("tentaQL")
+        .file("package.json", mysqlPackageJSONCreator());
+      zip
+        .folder("tentaQL")
+        .folder("graphql-schema")
+        .file("index.js", fullText);
 
+      zip.generateAsync({ type: "blob" }).then(function(blob) {
+        saveAs(blob, `TentaQL_mysql.zip`);
+      });
       } else {
           let schema;
           let resolvers;
@@ -162,7 +194,7 @@ export default function reducer(state = {}, action) {
             .file("typeDefs.js", schema);
           zip.folder("tentaQL").file("package.json", packageJSONCreator());
           zip.generateAsync({ type: "blob" }).then(function(blob) {
-            saveAs(blob, "TentaQL.zip");
+            saveAs(blob, `TentaQL_postgres.zip`);
           });
         }
 
