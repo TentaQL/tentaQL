@@ -16,6 +16,7 @@
     "start": "concurrently \"npm run server\" \"npm run dev\"",
     "dev": "webpack-dev-server --open --hot",
     "server": "nodemon src/server/index.js",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install",
     "build": "webpack"
   },
   "keywords": [],
