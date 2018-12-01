@@ -9,20 +9,25 @@ const mysqlController = require("./controllers/controllerMySQL");
 app.use(bodyParser.json());
 app.use(cors());
 
-if (process.env.NODE_ENV === 'production') {
+// if (process.env.NODE_ENV === 'production') {
 
-  app.use(express.static('dist'));
+//   app.use(express.static('dist'));
 
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
-  });
-}
+//   app.get('*', (req, res) => {
+//     res.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
+//   });
+// }
 
 // Test Route
 // app.get("/", (req, res) => {
 //   res.end("Hello TentaQL");
 // });
 
+
+// app.use(express.static('dist'));
+// app.get('*', (req, res) => {
+//       res.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
+//   });
 // Postgres Controller Routes
 app.post("/db", db.connect);
 app.get("/db/all", db.getTables, db.getFields, db.filterAssociations);
