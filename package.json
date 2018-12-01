@@ -13,7 +13,7 @@
     ]
   },
   "scripts": {
-    "start": "webpack && concurrently \"npm run server\" \"npm run dev\"",
+    "start": "concurrently \"npm run server\" \"npm run dev\"",
     "dev": "webpack-dev-server --open --hot",
     "server": "nodemon src/server/index.js",
     "build": "webpack"
