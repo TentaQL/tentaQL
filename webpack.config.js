@@ -13,7 +13,10 @@ module.exports = {
     rules: [
       { test: /\.(js)$/, use: "babel-loader" },
       { test: /\.(css)$/, use: ["style-loader", "css-loader"] },
-      { test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000' }
+      {
+        test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+        loader: "url-loader?limit=100000"
+      }
     ]
   },
   devServer: {
@@ -24,7 +27,6 @@ module.exports = {
   },
   mode: "development",
   plugins: [
-    new CleanWebPackPlugin([outputDir]),
     new HtmlWebpackPlugin({
       template: "./src/app/index.html"
     })
