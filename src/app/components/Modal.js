@@ -17,7 +17,7 @@ class ModalExampleDimmer extends Component {
           <div className="wrapper">
             <SVGInline svg={svgContent} />
           </div>
-          <img id="octoLogo" src="../../Octopus.png"></img>
+          <img id="octoLogo" src="https://i.ibb.co/0K7fV9S/Octopus.png"></img>
             <div id="text">Automatically Convert Legacy Databases to GraphQL</div>
           </Modal.Header>
           <Modal.Content id="modalContent">

@@ -190,7 +190,7 @@ class App extends Component {
             placeholder={this.state.placeholder}
           />
           <a href="https://github.com/TentaQL/tentaQL" target="blank">
-            <img id="headerPic" src="../../SoftFillLogo.png" />
+            <img id="headerPic" src="https://i.ibb.co/LnSwJK1/Soft-Fill-Logo.png"/>
           </a>
           <TextBox
             className="textbox"
