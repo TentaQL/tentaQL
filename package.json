@@ -8,9 +8,6 @@
       "@babel/preset-env",
       "@babel/preset-react"
     ],
-    "engines": {
-      "node": "8.11.3"
-    },
     "plugins": [
       "@babel/plugin-proposal-class-properties"
     ]
