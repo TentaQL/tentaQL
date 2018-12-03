@@ -41,7 +41,7 @@
     "codemirror-graphql": "^0.8.3",
     "concurrently": "^4.0.1",
     "cors": "^2.8.5",
-    "event-stream": "^4.0.0",
+    "event-stream": "^2.2.1",
     "express": "^4.16.4",
     "file-saver": "^2.0.0",
     "generate-schema": "^2.6.0",
