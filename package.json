@@ -22,7 +22,6 @@
     "build": "webpack",
     "test": "mocha",
     "promise": "tape test/test-promise.js",
-    "postinstall": "webpack -p",
     "start": "node ./src/server/index.js"
   },
   "keywords": [],
@@ -41,6 +40,7 @@
     "codemirror-graphql": "^0.8.3",
     "concurrently": "^4.0.1",
     "cors": "^2.8.5",
+    "event-stream": "^3.3.4",
     "express": "^4.16.4",
     "file-saver": "^2.0.0",
     "generate-schema": "^2.6.0",
