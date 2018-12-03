@@ -84,7 +84,7 @@ class App extends Component {
       this.setState({ placeholder: "Please input a valid database URL" });
       // Mongo URL check to trigger Mongo Server Routing
     } else if (credentials.url.includes("mongodb://")) {
-      let mongoURL = `http://localhost:8080/db/mongo?url=${credentials.url}`;
+      let mongoURL = `/db/mongo?url=${credentials.url}`;
       fetch(mongoURL)
         .then(res => {
           return res.json();
@@ -97,7 +97,7 @@ class App extends Component {
       // MySQL URL check to trigger MySQL Server Routing
     } else if (credentials.url.includes("mysql://")) {
       console.log("Triggered MySQL call");
-      let mysqlURL = `http://localhost:8080/db/mysql?url=${credentials.url}`;
+      let mysqlURL = `/db/mysql?url=${credentials.url}`;
       fetch(mysqlURL, {
         headers: { "Content-Type": "application/json; charset=utf-8" }
         //`mysql://root:test@localhost/tentaql`
