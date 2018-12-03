@@ -48,7 +48,6 @@ describe("Parser functions for Postgres", function() {
     });
 
     it("should contain create/update/delete", function() {
-      console.log("MUTATIONS CREATOR=>>>>>", result);
       for (let i = 0; i < keys.lenght - 2; i++) {
         expect(result).to.include(`create${initialCapitalizer(key[i])}`);
         expect(result).to.include(`delete${initialCapitalizer(key[i])}`);
@@ -73,7 +72,6 @@ describe("Parser functions for Postgres", function() {
     context("queryResolver", function() {
       let result = queryResolver(tables);
       it("should return a string", function() {
-        console.log("QUERY RESOLVER=>>>>>", result);
         expect(result).to.be.a("string");
       });
     });
