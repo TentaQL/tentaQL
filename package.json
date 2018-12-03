@@ -38,7 +38,7 @@
     "codemirror-graphql": "^0.8.3",
     "concurrently": "^4.0.1",
     "cors": "^2.8.5",
-    "event-stream": "^2.2.1",
+    "event-stream": "2.2.1",
     "express": "^4.16.4",
     "file-saver": "^2.0.0",
     "generate-schema": "^2.6.0",
@@ -64,9 +64,6 @@
     "react-web-tabs": "^1.0.1",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
-    "semantic-ui": "^2.4.2",
-    "semantic-ui-css": "^2.4.1",
-    "semantic-ui-react": "^0.83.0",
     "tape": "^4.9.1",
     "thunk": "0.0.1",
     "url-loader": "^1.1.2"
