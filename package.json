@@ -13,12 +13,14 @@
     ]
   },
   "scripts": {
-    "start": "concurrently \"npm run server\" \"npm run dev\"",
+    "dev-start": "concurrently \"npm run server\" \"npm run dev\"",
     "dev": "webpack-dev-server --open --hot",
     "server": "nodemon src/server/index.js",
     "build": "webpack",
     "test": "mocha",
-    "promise": "tape test/test-promise.js"
+    "promise": "tape test/test-promise.js",
+    "postinstall": "webpack -p",
+    "start": "node ./src/server/index.js"
   },
   "keywords": [],
   "author": "",
