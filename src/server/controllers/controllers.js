@@ -21,10 +21,8 @@ let client;
 
 //CONNECT
 db.connect = (req, res) => {
-  console.log("Body here");
-  console.log(req.body.url);
   uri = req.body.url;
-  
+
   client = new pg.Client(uri);
   client.connect(err => {
     if (err) return console.log("Could not connect to postgres ", err);
@@ -35,7 +33,6 @@ db.connect = (req, res) => {
 //GET DATA
 db.getTables = (req, res, next) => {
   client = new pg.Client(uri);
-  console.log("Client: ", client);
   client.connect(err => {
     if (err) return console.log("Could not connect to postgres ", err);
   });
@@ -76,19 +73,11 @@ db.filterAssociations = async (req, res) => {
         if (err) {
           reject(err);
         } else {
-          console.log(
-            "******************************Result.rows_FilterAssociations******************************"
-          );
-          console.log(result.rows);
           resolve(result.rows);
         }
       }
     );
   });
-  console.log(
-    "******************************FILTERED RESULTS******************************"
-  );
-  console.log(filteredResults);
   await filteredResults.map(el => {
     foreignTables[el.table_name] = el.foreign_table_name;
   });
@@ -99,10 +88,6 @@ db.filterAssociations = async (req, res) => {
         if (err) {
           reject(err);
         } else {
-          console.log(
-            "******************************Result.rowsAfterFilterResults******************************"
-          );
-          console.log(result.rows);
           resolve(result.rows);
         }
       }
@@ -113,20 +98,11 @@ db.filterAssociations = async (req, res) => {
   let filteredKeys = await primaryKeys.map(el => {
     filter[el.table_name] = el.column_name;
   });
-  console.log(
-    "******************************FILTER******************************"
-  );
-  console.log(filter);
 
   tables.primaryKeys = filter;
   tables.foreignTables = foreignTables;
 
   // tables.requiredTables = requiredTables;
-  console.log(
-    "******************************TABLES FINAL******************************"
-  );
-
-  console.log(tables);
 
   let queries = queriesCreator(tables);
   let mutations = mutationCreator(tables);
