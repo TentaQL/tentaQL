@@ -5,6 +5,7 @@
 </p>
 
 <a href="http://www.tentaql.com"><img src="https://github.com/TentaQL/tentaQL/blob/master/First10.gif" alt="firstGif"/></a>
+<a href="http://www.tentaql.com"><img src="https://github.com/TentaQL/tentaQL/blob/master/SecondGif.gif" alt="secondGif"/></a>
 
 TentaQL is an open-source, automated SQL (Postrges and MySQL) and NoSQL (MongoDB) introspection and GraphQL conversion tool, providing users a highly customizable GraphQL package to get their legacy databases up and running with GraphQL in minutes.  
 
