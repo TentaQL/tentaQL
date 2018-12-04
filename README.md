@@ -5,15 +5,15 @@
 </p>
 
 
-TentaQL is an open-source, automated SQL (Postrges) and NoSQL (MongoDB) introspection and GraphQL conversion tool, providing users a highly customizable GraphQL package to get their legacy databases up and running with GraphQL in minutes.  
+TentaQL is an open-source, automated SQL (Postrges and MySQL) and NoSQL (MongoDB) introspection and GraphQL conversion tool, providing users a highly customizable GraphQL package to get their legacy databases up and running with GraphQL in minutes.  
 
-With just a simple database URI, TentaQL connects to the user's database, intuits the structure of  schemas and packages a GraphQL-powered suite of tools, available for download.
+With just a simple database URI, TentaQL connects to the user's database, intuits the structure of schemas and packages a GraphQL-powered suite of tools, available for download.
 
 
 
 # How to use
 
-Paste your database address in the URL box, and click "Convert your DB".
+Paste your database address in the URL box, and click "Convert your DB". (Note: If running your Database locally, please use your IP address as 'host' and allow all remote connections)
 
 <p align="center">
 <img src="https://github.com/TentaQL/tentaQL/blob/master/demo1.png" align="center" height="400">
@@ -56,6 +56,7 @@ You can also:
 * Javascript / ES6
 * NodeJS, ExpressJS
 * GraphQL
+* MySQL
 * MongoDB
 * PostgreSQL
 * Codemirror
