@@ -24,7 +24,8 @@ class App extends Component {
     this.state = {
       modal: true,
       placeholder:
-        "Enter Your Database URI Here, e.g., mysql://root:test@localhost/tentaql"
+        "Enter Your Database URI Here"
+        // mysql://newuser2:password@localhost/tentaql
     };
     this.connectionHandler = this.connectionHandler.bind(this);
     this.searchBarHandler = this.searchBarHandler.bind(this);
@@ -93,7 +94,12 @@ class App extends Component {
           console.log("Received Data: ", res);
           store.dispatch(saveData(res));
           this.setState({ modal: false, url: "" });
-        });
+        }).catch(err => {
+          console.log(
+            "connectionHandler error during initial database Fetch MONGO: ",
+            err
+          );
+        });;
       // MySQL URL check to trigger MySQL Server Routing
     } else if (credentials.url.includes("mysql://")) {
       console.log("Triggered MySQL call");
@@ -109,7 +115,12 @@ class App extends Component {
           console.log("Res from mySQL call: ", res);
           store.dispatch(saveData(res));
           this.setState({ modal: false, url: "" });
-        });
+        }).catch(err => {
+          console.log(
+            "connectionHandler error during initial database Fetch MYSQL: ",
+            err
+          );
+        });;
       // URI will default to trigger Postgres Server Routing
     } else {
       fetch("/db", {
@@ -124,8 +135,14 @@ class App extends Component {
               return res.json();
             })
             .then(res => {
+              console.log("Res from mySQL call: ", res);
               store.dispatch(saveData(res));
               this.setState({ modal: false, url: "" });
+            }).catch(err => {
+              console.log(
+                "connectionHandler error during initial database Fetch MYSQL: ",
+                err
+              );
             });
         })
         .catch(err => {
