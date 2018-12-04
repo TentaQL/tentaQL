@@ -4,7 +4,7 @@
 <img src="https://github.com/TentaQL/tentaQL/blob/master/Octopus.png" align="center" height="400">
 </p>
 
-<a href="https://gifs.com/gif/tentaql-kZyG2K"><img src="https://gifs.com/gif/tentaql-kZyG2K" alt="gifs website"/></a><br/><a href="http://www.freegifmaker.me/">FreeGifMaker.me<a/>
+<a href="gifs.com/gif/tentaql-kZyG2K"><img src="gifs.com/gif/tentaql-kZyG2K" alt="gifs website"/></a><br/><a href="http://www.freegifmaker.me/">FreeGifMaker.me<a/>
 
 <iframe src="//gifs.com/embed/tentaql-kZyG2K" frameborder="0" scrolling="no" width="640px" height="360px" style="-webkit-backface-visibility: hidden;-webkit-transform: scale(1);"></iframe>
 
