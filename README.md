@@ -4,9 +4,10 @@
 <img src="https://github.com/TentaQL/tentaQL/blob/master/assets/Octopus.png" align="center" height="400">
 </p>
 
-<a href="http://www.tentaql.com"><img src="https://github.com/TentaQL/tentaQL/blob/master/assets/InitialGIF.gif" alt="InitialGIF"/></a>
+TentaQL is an open-source, automated SQL (Postrges and MySQL) and NoSQL (MongoDB) introspection and GraphQL conversion tool, providing users a highly customizable GraphQL package to get their legacy databases up and running with GraphQL in minutes. 
+__
 
-TentaQL is an open-source, automated SQL (Postrges and MySQL) and NoSQL (MongoDB) introspection and GraphQL conversion tool, providing users a highly customizable GraphQL package to get their legacy databases up and running with GraphQL in minutes.  
+<a href="http://www.tentaql.com"><img src="https://github.com/TentaQL/tentaQL/blob/master/assets/InitialGIF.gif" alt="InitialGIF"/></a> 
 
 <a href="http://www.tentaql.com"><img src="https://github.com/TentaQL/tentaQL/blob/master/assets/SecondGif.gif" alt="secondGif"/></a>
 
