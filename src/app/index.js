@@ -24,7 +24,8 @@ class App extends Component {
     this.state = {
       modal: true,
       placeholder:
-        "Enter Your Database URI Here, e.g., mysql://root:test@localhost/tentaql"
+        "Enter Your Database URI Here"
+        // mysql://newuser2:password@localhost/tentaql
     };
     this.connectionHandler = this.connectionHandler.bind(this);
     this.searchBarHandler = this.searchBarHandler.bind(this);
@@ -84,7 +85,7 @@ class App extends Component {
       this.setState({ placeholder: "Please input a valid database URL" });
       // Mongo URL check to trigger Mongo Server Routing
     } else if (credentials.url.includes("mongodb://")) {
-      let mongoURL = `http://localhost:8080/db/mongo?url=${credentials.url}`;
+      let mongoURL = `/db/mongo?url=${credentials.url}`;
       fetch(mongoURL)
         .then(res => {
           return res.json();
@@ -93,11 +94,16 @@ class App extends Component {
           console.log("Received Data: ", res);
           store.dispatch(saveData(res));
           this.setState({ modal: false, url: "" });
-        });
+        }).catch(err => {
+          console.log(
+            "connectionHandler error during initial database Fetch MONGO: ",
+            err
+          );
+        });;
       // MySQL URL check to trigger MySQL Server Routing
     } else if (credentials.url.includes("mysql://")) {
       console.log("Triggered MySQL call");
-      let mysqlURL = `http://localhost:8080/db/mysql?url=${credentials.url}`;
+      let mysqlURL = `/db/mysql?url=${credentials.url}`;
       fetch(mysqlURL, {
         headers: { "Content-Type": "application/json; charset=utf-8" }
         //`mysql://root:test@localhost/tentaql`
@@ -109,41 +115,44 @@ class App extends Component {
           console.log("Res from mySQL call: ", res);
           store.dispatch(saveData(res));
           this.setState({ modal: false, url: "" });
-        });
+        }).catch(err => {
+          console.log(
+            "connectionHandler error during initial database Fetch MYSQL: ",
+            err
+          );
+        });;
       // URI will default to trigger Postgres Server Routing
     } else {
-      fetch("http://localhost:8080/db", {
+      fetch("/db", {
         headers: { "Content-Type": "application/json; charset=utf-8" },
         method: "POST",
         body: JSON.stringify(credentials)
       })
         .then(res => {
           this.setState({ persistedURL: this.state.url });
-          fetch("http://localhost:8080/db/all")
+          fetch("/db/all")
             .then(res => {
               return res.json();
             })
             .then(res => {
+              console.log("Res from mySQL call: ", res);
               store.dispatch(saveData(res));
               this.setState({ modal: false, url: "" });
-            });
-        })
-        .then(res => {
-          this.setState({ persistedURL: this.state.url });
-          fetch("http://localhost:8080/db/all")
-            .then(res => {
-              return res.json();
-            })
-            .then(res => {
-              let replaced = res.frontEnd.replace(/\r\n/g, "λ");
-              store.dispatch(saveData(res));
-              this.setState({ modal: false, url: "" });
+            }).catch(err => {
+              console.log(
+                "connectionHandler error during initial database Fetch MYSQL: ",
+                err
+              );
             });
         })
         .catch(err => {
-          console.log(err);
+          console.log(
+            "connectionHandler error during initial database Fetch: ",
+            err
+          );
         });
     }
+    connection.end();
   }
 
   render() {
@@ -199,7 +208,7 @@ class App extends Component {
             placeholder={this.state.placeholder}
           />
           <a href="https://github.com/TentaQL/tentaQL" target="blank">
-            <img id="headerPic" src="../../SoftFillLogo.png" />
+            <img id="headerPic" src="https://i.ibb.co/LnSwJK1/Soft-Fill-Logo.png"/>
           </a>
           <TextBox
             className="textbox"

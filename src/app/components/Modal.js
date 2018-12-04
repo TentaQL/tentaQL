@@ -14,13 +14,11 @@ class ModalExampleDimmer extends Component {
       <div>
         <Modal open={this.props.data.modal}>
           <Modal.Header id="modalHeader">
-            <div className="wrapper">
-              <SVGInline svg={svgContent} />
-            </div>
-            <img id="octoLogo" src="../../Octopus.png" />
-            <div id="text">
-              Automatically Convert Legacy Databases to GraphQL
-            </div>
+          <div className="wrapper">
+            <SVGInline svg={svgContent} />
+          </div>
+          <img id="octoLogo" src="https://i.ibb.co/0K7fV9S/Octopus.png"></img>
+            <div id="text">Automatically Convert Legacy Databases to GraphQL</div>
           </Modal.Header>
           <Modal.Content id="modalContent">
             <form className="ui form">
