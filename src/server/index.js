@@ -9,7 +9,6 @@ const mysqlController = require("./controllers/controllerMySQL");
 app.use(bodyParser.json());
 app.use(cors());
 
-
 app.use(express.static("dist"));
 
 // Postgres Controller Routes
@@ -31,7 +30,6 @@ app.get(
   (req, res) => {
     db.filterAssociations(req, res)
       .then(response => {
-        console.log("RESPONSE, ", response);
         res.end(JSON.stringify(response));
       })
       .catch(err => res.json(err));
@@ -47,5 +45,3 @@ app.get("/db/mysql", mysqlController.getDatabase);
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });
-
-module.exports = server;
