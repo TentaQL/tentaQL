@@ -24,13 +24,7 @@ db.connect = (req, res) => {
   console.log("Body here");
   console.log(req.body.url);
   uri = req.body.url;
-
-  // DB that breaks the mutationZip file:
-  // postgres://diojgcgl:BH7f4HBifxfq7Z3O1sGMHsedqZJcEYw5@pellefant.db.elephantsql.com:5432/diojgcgl
-  // AnnaHardcoded postgres://tbpsxkue:TBTE6vwArK31H7dVlizemHoMn9LP_TWC@baasu.db.elephantsql.com:5432/tbpsxkue
-  // JonahHardcoded postgres://tbpsxkue:TBTE6vwArK31H7dVlizemHoMn9LP_TWC@baasu.db.elephantsql.com:5432/tbpsxkue
-  // JonathanHardcoded postgres://cwfmwiaw:AHwoqc41Cx3L7nMV5oSfz-KQZewSqQGx@baasu.db.elephantsql.com:5432/cwfmwiaw
-  // postgres://tbpsxkue:TBTE6vwArK31H7dVlizemHoMn9LP_TWC@baasu.db.elephantsql.com:5432/tbpsxkue
+  
   client = new pg.Client(uri);
   client.connect(err => {
     if (err) return console.log("Could not connect to postgres ", err);
