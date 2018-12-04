@@ -4,11 +4,11 @@
 <img src="https://github.com/TentaQL/tentaQL/blob/master/assets/Octopus.png" align="center" height="400">
 </p>
 
-<a href="http://www.tentaql.com"><img src="https://github.com/TentaQL/tentaQL/blob/master/assets/SecondGif.gif" alt="InitialGIF"/></a>
-
-<a href="http://www.tentaql.com"><img src="https://github.com/TentaQL/tentaQL/blob/master/assets/SecondGif.gif" alt="secondGif"/></a>
+<a href="http://www.tentaql.com"><img src="https://github.com/TentaQL/tentaQL/blob/master/assets/InitialGIF.gif" alt="InitialGIF"/></a>
 
 TentaQL is an open-source, automated SQL (Postrges and MySQL) and NoSQL (MongoDB) introspection and GraphQL conversion tool, providing users a highly customizable GraphQL package to get their legacy databases up and running with GraphQL in minutes.  
+
+<a href="http://www.tentaql.com"><img src="https://github.com/TentaQL/tentaQL/blob/master/assets/SecondGif.gif" alt="secondGif"/></a>
 
 By visiting our easy-to-use browser app (currently Chrome-compatible) at Tentaql.com -- no complicated logins required, just a simple database URI -- TentaQL introspects schematic data and assembles a lightweight zip package for running a tailor-made GraphQL sandbox environment for the user's database. The zip comes complete with core CRUD query/mutation functionality and support for complex relationships, all while leveraging GraphiQL, an industry-leading visualization tool. For more experienced users, TentaQL also offers in-browser editibility to further customize queries/mutations/subscriptions prior to download.
 
