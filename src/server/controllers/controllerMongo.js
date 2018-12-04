@@ -11,8 +11,8 @@ const controllerMongo = {};
 // const url = "mongodb://toeshoe:123abc@ds145093.mlab.com:45093/toeshoe";
 // const url ="mongodb://tentaql1:tentaql1@ds045684.mlab.com:45684/tentaql"
 // const url ="mongodb://admin1:admin1@ds055485.mlab.com:55485/datacenter"
-let schemasArr = [[], []];
 controllerMongo.getDatabase = (req, res, next) => {
+  let schemasArr = [[], []];
   console.log('About to Connect to MongoDB')
   let url = req.query.url;
   let dbConn = mongoose.createConnection(
