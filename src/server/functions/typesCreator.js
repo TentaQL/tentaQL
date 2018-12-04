@@ -275,5 +275,6 @@ module.exports = {
   typeDefsReturner,
   returnResolvers,
   queryResolver,
-  mutationResolver
+  mutationResolver,
+  initialCapitalizer
 };
