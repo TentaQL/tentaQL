@@ -4,7 +4,6 @@
 <img src="https://github.com/TentaQL/tentaQL/blob/master/Octopus.png" align="center" height="400">
 </p>
 
-<a href="http://www.tentaql.com"><img src="https://github.com/TentaQL/tentaQL/blob/master/First10.gif" alt="firstGif"/></a>
 <a href="http://www.tentaql.com"><img src="https://github.com/TentaQL/tentaQL/blob/master/SecondGif.gif" alt="secondGif"/></a>
 
 TentaQL is an open-source, automated SQL (Postrges and MySQL) and NoSQL (MongoDB) introspection and GraphQL conversion tool, providing users a highly customizable GraphQL package to get their legacy databases up and running with GraphQL in minutes.  
@@ -40,7 +39,21 @@ You can also:
 <img src="https://github.com/TentaQL/tentaQL/blob/master/demo3.png" align="center" height="400">
 </p>
 
+Once downloaded, unzip the package, cd into the directory, then run:
+
+```run npm install```
+```npm start``` 
+
+Example TentaQL-created GraphQL directory:
+<a href="http://www.tentaql.com"><img src="https://github.com/TentaQL/tentaQL/blob/master/Final.gif" alt="finalGif"/></a>
+
+As soon as the server starts, a locahost will automatically launch in the browser using <a href="https://github.com/graphql/graphiql">GraphiQL</a>.  Now you can start querying your Database!
+
+<a href="http://www.tentaql.com"><img src="https://github.com/TentaQL/tentaQL/blob/master/First10.gif" alt="firstGif"/></a>
+
 Thank you so much for your time and consideration -- we're currently in Beta, and welcome any feedback / suggestions. Have a great day, and we hope you enjoy wrapping up your databases in TentaQL!
+
+
 
 # Authors
 
