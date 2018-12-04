@@ -73,14 +73,4 @@ describe("Middleware Tests", function() {
       })
       .catch(done);
   });
-
-  // it("should return all table names", function() {
-  //   let result = db.getTables();
-  //   console.log("THIS IS RESULT=>>>>", result);
-  //   return expect(typeof result).to.eventually.deep.equal("object");
-  // });
-
-  it("should return associations");
-  it("should return types");
-  it("should return resolvers");
 });
