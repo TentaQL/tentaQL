@@ -112,14 +112,14 @@ class App extends Component {
         });
       // URI will default to trigger Postgres Server Routing
     } else {
-      fetch("/db", {
+      fetch("http://localhost:8080/db", {
         headers: { "Content-Type": "application/json; charset=utf-8" },
         method: "POST",
         body: JSON.stringify(credentials)
       })
         .then(res => {
           this.setState({ persistedURL: this.state.url });
-          fetch("/db/all")
+          fetch("http://localhost:8080/db/all")
             .then(res => {
               return res.json();
             })
