@@ -1,10 +1,12 @@
 # TentaQL
 
 <p align="center">
-<img src="https://github.com/TentaQL/tentaQL/blob/master/Octopus.png" align="center" height="400">
+<img src="https://github.com/TentaQL/tentaQL/blob/master/assets/Octopus.png" align="center" height="400">
 </p>
 
-<a href="http://www.tentaql.com"><img src="https://github.com/TentaQL/tentaQL/blob/master/SecondGif.gif" alt="secondGif"/></a>
+<a href="http://www.tentaql.com"><img src="https://github.com/TentaQL/tentaQL/blob/master/assets/SecondGif.gif" alt="InitialGIF"/></a>
+
+<a href="http://www.tentaql.com"><img src="https://github.com/TentaQL/tentaQL/blob/master/assets/SecondGif.gif" alt="secondGif"/></a>
 
 TentaQL is an open-source, automated SQL (Postrges and MySQL) and NoSQL (MongoDB) introspection and GraphQL conversion tool, providing users a highly customizable GraphQL package to get their legacy databases up and running with GraphQL in minutes.  
 
@@ -17,14 +19,14 @@ While there are currently several fantastic providers offering similar schema-in
 Paste your database address in the URL box, and click "Convert your DB". (Note: If running your Database locally, please use your IP address as 'host' and allow all remote connections)
 
 <p align="center">
-<img src="https://github.com/TentaQL/tentaQL/blob/master/demo1.png" align="center" height="400">
+<img src="https://github.com/TentaQL/tentaQL/blob/master/assets/demo1.png" align="center" height="400">
 </p>
 
 
 Your database is converted to GraphQL language. You should now see the schema.
 
 <p align="center">
-<img src="https://github.com/TentaQL/tentaQL/blob/master/demo2.png" align="center" height="400">
+<img src="https://github.com/TentaQL/tentaQL/blob/master/assets/demo2.png" align="center" height="400">
 </p>
 
 
@@ -36,7 +38,7 @@ You can also:
 * copy chosen tab by clicking on "Copy Tab"
 
 <p align="center">
-<img src="https://github.com/TentaQL/tentaQL/blob/master/demo3.png" align="center" height="400">
+<img src="https://github.com/TentaQL/tentaQL/blob/master/assets/demo3.png" align="center" height="400">
 </p>
 
 Once downloaded, unzip the package, cd into the directory, then run:
@@ -45,11 +47,12 @@ Once downloaded, unzip the package, cd into the directory, then run:
 ```npm start``` 
 
 Example TentaQL-created GraphQL directory:
-<a href="http://www.tentaql.com"><img src="https://github.com/TentaQL/tentaQL/blob/master/Final.gif" alt="finalGif"/></a>
+<a href="http://www.tentaql.com"><img src="https://github.com/TentaQL/tentaQL/blob/master/assets/Final.gif" alt="finalGif"/></a>
 
 As soon as the server starts, a locahost will automatically launch in the browser using <a href="https://github.com/graphql/graphiql">GraphiQL</a>.  Now you can start querying your Database!
 
-<a href="http://www.tentaql.com"><img src="https://github.com/TentaQL/tentaQL/blob/master/First10.gif" alt="firstGif"/></a>
+Launching the GraphQL server/GraphiQL:
+<a href="http://www.tentaql.com"><img src="https://github.com/TentaQL/tentaQL/blob/master/assets/First10.gif" alt="firstGif"/></a>
 
 Thank you so much for your time and consideration -- we're currently in Beta, and welcome any feedback / suggestions. Have a great day, and we hope you enjoy wrapping up your databases in TentaQL!
 
