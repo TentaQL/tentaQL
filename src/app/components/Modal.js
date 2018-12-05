@@ -58,12 +58,12 @@ class ModalExampleDimmer extends Component {
                 id="demo_database_pg"
                 onClick={this.props.connectionHandler}
               >
-                <Button.Content hidden>
-                  <Icon name="database" />
+                <Button.Content id="demo_database_pg" hidden>
+                  <Icon id="demo_database_pg" name="database" />
                   Postgres
                 </Button.Content>
 
-                <Button.Content visible>Try SQL Demo</Button.Content>
+                <Button.Content id="demo_database_pg" visible>Try SQL Demo</Button.Content>
               </Button>
               <Button.Or text="or" />
               <Button
@@ -71,12 +71,12 @@ class ModalExampleDimmer extends Component {
                 animated="vertical"
                 onClick={this.props.connectionHandler}
               >
-                <Button.Content hidden>
-                  <Icon name="database" />
+                <Button.Content id="demo_database_mongo" hidden>
+                  <Icon id="demo_database_mongo" name="database" />
                   MongoDB
                 </Button.Content>
 
-                <Button.Content visible>
+                <Button.Content id="demo_database_mongo" visible>
                   Try NoSQL Demo
                 </Button.Content>
               </Button>
