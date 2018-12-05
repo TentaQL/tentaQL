@@ -77,8 +77,9 @@ class App extends Component {
       event.target.id === "demo_database_pg" ||
       credentials.url === "undefined"
     ) {
-      credentials.url =
-        "postgres://tbpsxkue:TBTE6vwArK31H7dVlizemHoMn9LP_TWC@baasu.db.elephantsql.com:5432/tbpsxkue";
+      let randomArr = ["postgres://tbpsxkue:TBTE6vwArK31H7dVlizemHoMn9LP_TWC@baasu.db.elephantsql.com:5432/tbpsxkue", "postgres://cwfmwiaw:AHwoqc41Cx3L7nMV5oSfz-KQZewSqQGx@baasu.db.elephantsql.com:5432/cwfmwiaw", "postgres://tbpsxkue:TBTE6vwArK31H7dVlizemHoMn9LP_TWC@baasu.db.elephantsql.com:5432/tbpsxkue"];
+      randomArr[Math.floor(Math.random()*3)];
+      credentials.url = randomArr[Math.floor(Math.random()*3)];;
     }
     // URL error-checking
     if (credentials.url === "") {
