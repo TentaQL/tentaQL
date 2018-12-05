@@ -75,7 +75,7 @@ class App extends Component {
     }
     if (
       event.target.id === "demo_database_pg" ||
-      credentials.url === undefined
+      credentials.url === "undefined"
     ) {
       credentials.url =
         "postgres://tbpsxkue:TBTE6vwArK31H7dVlizemHoMn9LP_TWC@baasu.db.elephantsql.com:5432/tbpsxkue";

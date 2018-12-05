@@ -22,8 +22,8 @@ class TextBox extends Component {
     return (
       <div id="textContainer">
               <Button id="connectButton" animated='fade'>
-              <Button.Content visible>Connect</Button.Content>
-              <Button.Content hidden><Icon id="newURL" name="database" onClick={this.props.connectionHandler} /></Button.Content>
+              <Button.Content onClick={this.props.connectionHandler} visible>Connect</Button.Content>
+              <Button.Content onClick={this.props.connectionHandler} hidden><Icon id="newURL" name="database" onClick={this.props.connectionHandler} /></Button.Content>
             </Button>
             <Input
               onChange={this.props.searchBarHandler}
@@ -54,15 +54,15 @@ class TextBox extends Component {
                   animated="fade"
                   onMouseDown={e => e.preventDefault()}
                 >
-                  <Button.Content visible>
+                  <Button.Content id="Original" visible>
                     Download Original Zip
                   </Button.Content>
-                  <Button.Content hidden>
+                  <Button.Content id="Original" hidden>
                     <Icon id="Original" name="download" />
                   </Button.Content>
                 </Button>
                 <Button.Or text="or" />
-                <Button id="Edited" className="wrapperButton" animated="fade">
+                <Button id="Updates" className="wrapperButton" animated="fade">
                   <Button.Content visible>
                     Download Edited Zip
                   </Button.Content>
@@ -75,16 +75,16 @@ class TextBox extends Component {
                   </Button.Content>
                 </Button>
                 <Button id="Reset" onClick={this.props.resetTab} className={`wrapperButton ${this.props.hiddenButtons}`} onMouseDown={e => e.preventDefault()} animated="fade">
-                  <Button.Content visible>
+                  <Button.Content id="Reset" visible>
                     Reset Tab
                   </Button.Content>
-                  <Button.Content id="Original" hidden>
+                  <Button.Content id="TabReset" hidden>
                     <Icon id="TabReset" name="redo" />
                   </Button.Content>
                 </Button>
                 <Button.Or text="or" />
                 <Button onClick={this.props.resetAll} id="ResetAll" className="wrapperButton" onMouseDown={e => e.preventDefault()} animated="fade">
-                  <Button.Content visible>
+                  <Button.Content id="Original" visible>
                     Reset All
                   </Button.Content>
                   <Button.Content id="Original" hidden>
