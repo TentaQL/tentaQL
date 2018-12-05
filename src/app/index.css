@@ -390,6 +390,7 @@ i.smallIcon {
 #modal_LoadingHeader {
   text-align: center;
   color: white;
+  font-size: 30px;
 }
 
 @keyframes animateImage {
