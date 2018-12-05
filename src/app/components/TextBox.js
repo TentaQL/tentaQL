@@ -22,8 +22,8 @@ class TextBox extends Component {
     return (
       <div id="textContainer">
               <Button onClick={this.props.connectionHandler} id="connectButton" animated='fade'>
-              <Button.Content onClick={this.props.connectionHandler} visible>Connect</Button.Content>
-              <Button.Content onClick={this.props.connectionHandler} hidden><Icon id="newURL" name="database" onClick={this.props.connectionHandler} /></Button.Content>
+              <Button.Content visible>Connect</Button.Content>
+              <Button.Content hidden><Icon id="newURL" name="database" /></Button.Content>
             </Button>
             <Input
               onChange={this.props.searchBarHandler}
