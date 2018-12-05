@@ -120,7 +120,7 @@ class App extends Component {
             "connectionHandler error during initial database Fetch MYSQL: ",
             err
           );
-        });;
+        });
       // URI will default to trigger Postgres Server Routing
     } else {
       fetch("/db", {

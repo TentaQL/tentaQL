@@ -98,7 +98,7 @@ db.filterAssociations = async (req, res) => {
       }
     );
   });
-
+  client.end();
   let filter = {};
   let filteredKeys = await primaryKeys.map(el => {
     filter[el.table_name] = el.column_name;
@@ -121,7 +121,7 @@ db.filterAssociations = async (req, res) => {
     frontEnd: frontEndVersion,
     resolvers: resolvers
   };
-  client.end();
+  
   res.end(JSON.stringify(allFiles));
 };
 module.exports = db;
