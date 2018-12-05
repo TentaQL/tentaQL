@@ -20,6 +20,7 @@ controllerMongo.getDatabase = (req, res, next) => {
     { useNewUrlParser: true },
     (err) => {
       if (err){
+        res.send(JSON.stringify(err));
         res.header(500);
         res.send({
           ConnectionError: 'Could not connect to Mongo'

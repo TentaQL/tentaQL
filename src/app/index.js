@@ -5,6 +5,7 @@ import store from "./store";
 import { Component } from "react";
 import { ModalExampleDimmer } from "./components/Modal.js";
 import { ModalLoader } from "./components/ModalLoader.js";
+import ModalError from "./components/ModalError";
 import { searchUpdate } from "./actions/searchActions";
 import { zipFiles } from "./actions/zipActions";
 import { resetTab } from "./actions/textBoxActions";
@@ -27,6 +28,7 @@ class App extends Component {
       modalLoader: false,
       placeholder:
         "Enter Your Database URI Here"
+        // mysql://newuser2:password@localhost/tentaql
     };
     this.connectionHandler = this.connectionHandler.bind(this);
     this.searchBarHandler = this.searchBarHandler.bind(this);
@@ -34,12 +36,17 @@ class App extends Component {
     this.resetTab = this.resetTab.bind(this);
     this.resetAll = this.resetAll.bind(this);
     this.switchTab = this.switchTab.bind(this);
+    this.errorModalRemove = this.errorModalRemove.bind(this);
   }
 
   searchBarHandler(event) {
     event.preventDefault();
     store.dispatch(searchUpdate(event.target.value));
     this.setState({ url: event.target.value });
+  }
+  errorModalRemove(event) {
+    event.preventDefault();
+    this.setState({ errorLoader: false });
   }
 
   switchTab(event) {
@@ -92,10 +99,15 @@ class App extends Component {
       this.setState({ modalLoader: true, modal: false });
       fetch(mongoURL)
         .then(res => {
+          console.log("In Mongo First Call")
           return res.json();
         })
         .then(res => {
           console.log("Received Data: ", res);
+          if (res.name === "MongoNetworkError") {
+            console.log("Triggered Mongo Error")
+                this.setState({ modalLoader: false, errorLoader: true, url: "" });
+          }
           store.dispatch(saveData(res));
           this.setState({ modalLoader: false, url: "" });
         }).catch(err => {
@@ -118,6 +130,12 @@ class App extends Component {
         })
         .then(res => {
           console.log("Res from mySQL call: ", res);
+          if (res === "MYSQL Error"){
+            console.log("Triggered MySQL Error")
+            this.setState({ modalLoader: false, errorLoader: true, url: "" });
+            res = "";
+            return res;
+          }
           store.dispatch(saveData(res));
           this.setState({ modalLoader: false, url: "" });
         }).catch(err => {
@@ -127,7 +145,7 @@ class App extends Component {
           );
         });
       // URI will default to trigger Postgres Server Routing
-    } else {
+    } else if (credentials.url.includes("postgres://")) {
       this.setState({ modalLoader: true, modal: false });
       fetch("/db", {
         headers: { "Content-Type": "application/json; charset=utf-8" },
@@ -141,7 +159,11 @@ class App extends Component {
               return res.json();
             })
             .then(res => {
-              console.log("Res from mySQL call: ", res);
+              console.log("Res from Postgres call: ", res);
+              if (res.name == "error" || res.errno) {
+                console.log("Triggered Postgres Error")
+                this.setState({ modalLoader: false, errorLoader: true, url: "" });
+              }
               store.dispatch(saveData(res));
               this.setState({ modalLoader: false, url: "" });
             }).catch(err => {
@@ -157,6 +179,10 @@ class App extends Component {
             err
           );
         });
+        // this.setState({ modalLoader: false, errorLoader: true, url: "" });
+    } else {
+      console.log("Triggered Unknown URL Error ...");
+      this.setState({ modalLoader: false, errorLoader: true, url: "" });
     }
   }
 
@@ -215,6 +241,10 @@ class App extends Component {
           />
           <ModalLoader
             data={this.state}
+          />
+          <ModalError
+            data={this.state}
+            errorModalRemove={this.errorModalRemove}
           />
           </div>
           <a href="https://github.com/TentaQL/tentaQL" target="blank">

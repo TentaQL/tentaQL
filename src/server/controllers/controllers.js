@@ -37,7 +37,7 @@ db.getTables = (req, res, next) => {
     
   client = new pg.Client(uri);
   client.connect(err => {
-    if (err) return console.log("Could not connect to postgres ", err);
+    if (err) return res.end(JSON.stringify(err));
   });
   client.query(
     "SELECT*FROM pg_catalog.pg_tables WHERE schemaname = 'public' AND tablename NOT LIKE 'spatial_ref_sys'",

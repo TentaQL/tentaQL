@@ -393,6 +393,14 @@ i.smallIcon {
   font-size: 30px;
 }
 
+#modal_ErrorHeader {
+  animation: animateImage 3s;
+  background-color: #990000 !important;
+  text-align: center;
+  color: white;
+  font-size: 30px;
+}
+
 @keyframes animateImage {
   0% {
       opacity: 0;
@@ -472,6 +480,10 @@ path {
 
 }
 
+footer {
+  text-align: center;
+}
+
 #copyrightText {
-  opacity: 0.3;
+  opacity: 0.15;
 }

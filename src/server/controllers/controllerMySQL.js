@@ -392,7 +392,9 @@ const {
 
     const traverseSchema = (req, url) => {
       
-      return mysql.createConnection(url).then(function(conn){
+      return mysql.createConnection(url).catch(err => {
+        res.json("MYSQL Error");
+      }).then(function(conn){
         connection = conn;
         const sql = `show tables;`;
         var result = conn.query(sql);
