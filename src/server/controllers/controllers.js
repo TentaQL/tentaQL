@@ -32,6 +32,11 @@ db.connect = (req, res) => {
 
 //GET DATA
 db.getTables = (req, res, next) => {
+  tables = {};
+  console.log("Wiped tables Object");
+  foreignTables = {};
+  console.log("Wiped foreignTables Object");
+    
   client = new pg.Client(uri);
   client.connect(err => {
     if (err) return console.log("Could not connect to postgres ", err);
