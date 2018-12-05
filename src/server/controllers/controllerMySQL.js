@@ -1,12 +1,14 @@
 var mysql = require('promise-mysql');
 var connection;
-const modelArr = [];
+let modelArr = [];
 let finalTables = [];
 let url = `mysql://root:test@localhost/tentaql`;
 
 const controllerMySQL = {};
 
 controllerMySQL.getDatabase = async (req, res) => {
+  modelArr = [];
+  finalTables = [];
   let finalOutput = ``;
 const tableParseHelper = (req, string, tableNames) => {
   console.log("Inside mySQL controller: tableParseHelper\n\n");
