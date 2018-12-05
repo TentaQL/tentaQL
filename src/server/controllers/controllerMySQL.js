@@ -11,7 +11,7 @@ controllerMySQL.getDatabase = async (req, res) => {
   finalTables = [];
   let finalOutput = ``;
 const tableParseHelper = (req, string, tableNames) => {
-  console.log("Inside mySQL controller: tableParseHelper\n\n");
+  
   let lines = string.split("\n");
   let tableName = lines[0].match(/`(.*?)`/g)[0].replace(/`/g, "");
   let tableObj = {};
@@ -77,26 +77,7 @@ const tableParseHelper = (req, string, tableNames) => {
 }
 
 const boilerplateHandler = (req, dbNames, dbArr, url) => {
-  console.log("Inside mySQL controller: boilerPlateHandler\n\n");
-  // REFERENCE SCHEMA VARIABLES:
-  // dbNames:  [ 'Dog', 'Human' ]
-  // dbArr:  [ { Dog:
-  //     [ [ 'id', 'GraphQLID' ],
-  //       [ 'collarID', 'GraphQLInt' ],
-  //       [ 'hasFleas', 'GraphQLBoolean' ],
-  //       [ 'species', 'GraphQLString' ],
-  //       [ 'ageDogYears', 'GraphQLInt' ],
-  //       [ 'name', 'GraphQLString' ],
-  //       [ 'favoriteFood', 'GraphQLString' ],
-  //       [ 'Owner', 'id', 'Human', 'GraphQLID' ] ] },
-  //   { Human:
-  //     [ [ 'id', 'GraphQLID' ],
-  //       [ 'name', 'GraphQLString' ],
-  //       [ 'dogs_owned', 'id', 'Dog', 'GraphQLID' ],
-  //       [ 'ownsCats', 'GraphQLBoolean' ],
-  //       [ 'Veternarian', 'GraphQLString' ],
-  //       [ 'ageHumanYears', 'GraphQLInt' ] ] } ]
-  // url:  mysql://root:test@localhost/tentaql
+  
   let boilerStr = `const graphql = require('graphql');
 var mysql = require('promise-mysql');
 let credentials = '${url}';
@@ -404,13 +385,13 @@ const {
       query: RootQuery,
       mutation: Mutation
     });`
-        // console.log("Final MySQL Conversion:\n\n\n\n\n\n\n", boilerStr);
+        // 
         res.end(boilerStr);
         return boilerStr;
       }
 
     const traverseSchema = (req, url) => {
-      console.log(`Inside mySQL traverseSchema func with ${url}\n\n`);
+      
       return mysql.createConnection(url).then(function(conn){
         connection = conn;
         const sql = `show tables;`;
@@ -467,7 +448,7 @@ const {
             return boilerplateHandler(req, tableNames, tables, url);
           });
     }
-      console.log("Triggered controllerMySQL.getDatabase ")
+      
 
         let filteredResults = await new Promise((resolve, reject) => {
           let final = traverseSchema(req, req.query.url);

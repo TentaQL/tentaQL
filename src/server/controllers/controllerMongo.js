@@ -68,7 +68,6 @@ controllerMongo.getDatabase = (req, res, next) => {
 
       Promise.all(promArr)
         .then(() => {
-          console.log('All promises resolved.', promArr);
           for (let i = 0; i < respArr.length; i++){
              let collSchema = GenerateSchema.mongoose(respArr[i].response[0]);
              schemasArr[1].push(collSchema["_doc"]);
@@ -85,7 +84,6 @@ controllerMongo.getDatabase = (req, res, next) => {
         })
 
         let collectionsNum = Object.keys(filteredCache);
-        console.log("Collections:", collectionsNum);
         for (let i = 0; i < collectionsNum.length; i++) {
           filteredCache[collectionsNum[i]].typeDefs = Object.entries(schemasArr[1][i]).filter(type => {
             if (type[0] !== "_id" && type[0] !== "__v" && type[1].type == "ObjectId") {
@@ -110,7 +108,6 @@ controllerMongo.getDatabase = (req, res, next) => {
             return type[0] !== "_id" && type[0] !== "__v"
           })
         }
-        console.log("Filtered: ", filteredCache);
          res.end(JSON.stringify(mongoParser(filteredCache)));
 
         })

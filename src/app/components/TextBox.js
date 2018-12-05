@@ -21,7 +21,7 @@ class TextBox extends Component {
   render() {
     return (
       <div id="textContainer">
-              <Button id="connectButton" animated='fade'>
+              <Button onClick={this.props.connectionHandler} id="connectButton" animated='fade'>
               <Button.Content onClick={this.props.connectionHandler} visible>Connect</Button.Content>
               <Button.Content onClick={this.props.connectionHandler} hidden><Icon id="newURL" name="database" onClick={this.props.connectionHandler} /></Button.Content>
             </Button>

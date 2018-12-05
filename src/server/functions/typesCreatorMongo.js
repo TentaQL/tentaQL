@@ -1,6 +1,4 @@
 
-// let input = {"authors":{"typeDefs":[["hasPublished",{"type":"Boolean"}],["stories",{"type":"Arr_ObjId"}],["name",{"type":"String"}],["age",{"type":"Number"}],["location",{"type":"String"}]]},"stories":{"typeDefs":[["isPaperBack",{"type":"Boolean"}],["title",{"type":"String"}],["isOnAmazon",{"type":"Boolean"}],["copyright",{"type":"Number"}],["author",{"type":"Single_ObjId"}]]}}
-
     const mongoParser = (input) => {
         console.log(input);
         let collKeys = Object.keys(input)
