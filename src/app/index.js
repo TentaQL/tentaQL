@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import store from "./store";
 import { Component } from "react";
 import { ModalExampleDimmer } from "./components/Modal.js";
+import { ModalLoader } from "./components/ModalLoader.js";
 import { searchUpdate } from "./actions/searchActions";
 import { zipFiles } from "./actions/zipActions";
 import { resetTab } from "./actions/textBoxActions";
@@ -23,9 +24,9 @@ class App extends Component {
     super(props);
     this.state = {
       modal: true,
+      modalLoader: false,
       placeholder:
         "Enter Your Database URI Here"
-        // mysql://newuser2:password@localhost/tentaql
     };
     this.connectionHandler = this.connectionHandler.bind(this);
     this.searchBarHandler = this.searchBarHandler.bind(this);
@@ -64,6 +65,7 @@ class App extends Component {
 
   connectionHandler(event) {
     event.preventDefault();
+    this.setState({ modalLoader: true, modal: false });
     store.dispatch(currentSearch(event.target.id));
     let credentials = {
       url: this.state.url
@@ -87,6 +89,7 @@ class App extends Component {
       // Mongo URL check to trigger Mongo Server Routing
     } else if (credentials.url.includes("mongodb://")) {
       let mongoURL = `/db/mongo?url=${credentials.url}`;
+      this.setState({ modalLoader: true, modal: false });
       fetch(mongoURL)
         .then(res => {
           return res.json();
@@ -94,7 +97,7 @@ class App extends Component {
         .then(res => {
           console.log("Received Data: ", res);
           store.dispatch(saveData(res));
-          this.setState({ modal: false, url: "" });
+          this.setState({ modalLoader: false, url: "" });
         }).catch(err => {
           console.log(
             "connectionHandler error during initial database Fetch MONGO: ",
@@ -103,6 +106,7 @@ class App extends Component {
         });;
       // MySQL URL check to trigger MySQL Server Routing
     } else if (credentials.url.includes("mysql://")) {
+      this.setState({ modalLoader: true, modal: false });
       console.log("Triggered MySQL call");
       let mysqlURL = `/db/mysql?url=${credentials.url}`;
       fetch(mysqlURL, {
@@ -115,7 +119,7 @@ class App extends Component {
         .then(res => {
           console.log("Res from mySQL call: ", res);
           store.dispatch(saveData(res));
-          this.setState({ modal: false, url: "" });
+          this.setState({ modalLoader: false, url: "" });
         }).catch(err => {
           console.log(
             "connectionHandler error during initial database Fetch MYSQL: ",
@@ -124,6 +128,7 @@ class App extends Component {
         });
       // URI will default to trigger Postgres Server Routing
     } else {
+      this.setState({ modalLoader: true, modal: false });
       fetch("/db", {
         headers: { "Content-Type": "application/json; charset=utf-8" },
         method: "POST",
@@ -138,7 +143,7 @@ class App extends Component {
             .then(res => {
               console.log("Res from mySQL call: ", res);
               store.dispatch(saveData(res));
-              this.setState({ modal: false, url: "" });
+              this.setState({ modalLoader: false, url: "" });
             }).catch(err => {
               console.log(
                 "connectionHandler error during initial database Fetch MYSQL: ",
@@ -201,12 +206,17 @@ class App extends Component {
               className="bubble x10"
             />
           </div>
+          <div>
           <ModalExampleDimmer
             data={this.state}
             connectionHandler={this.connectionHandler}
             searchBarHandler={this.searchBarHandler}
             placeholder={this.state.placeholder}
           />
+          <ModalLoader
+            data={this.state}
+          />
+          </div>
           <a href="https://github.com/TentaQL/tentaQL" target="blank">
             <img id="headerPic" src="https://i.ibb.co/LnSwJK1/Soft-Fill-Logo.png"/>
           </a>

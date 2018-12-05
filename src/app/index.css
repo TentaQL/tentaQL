@@ -252,7 +252,7 @@ input[type="text"] {
   margin: 10px;
 }
 
-#modalContent, #modalHeader, #modalActions {
+#modalContent, #modalHeader, #modal_LoadingHeader, #modalActions {
   background-color: #1e858f !important;
   animation: animateImage 3s;
 }
@@ -385,6 +385,11 @@ i.smallIcon {
   animation: animateImage 6s;
   animation: float 6s ease-in-out infinite;
   border-radius: 55%;
+}
+
+#modal_LoadingHeader {
+  text-align: center;
+  color: white;
 }
 
 @keyframes animateImage {
