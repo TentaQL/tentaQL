@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import { Button, Header, Modal, Icon } from "semantic-ui-react";
-import SVGInline from "react-svg-inline";
+import { Modal } from "semantic-ui-react";
 import { connect } from "react-redux";
-import svgContent from "../boilerFunc/svg";
 
 class ModalLoader extends Component {
   constructor(props) {

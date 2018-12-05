@@ -3,11 +3,55 @@ import { Button, Header, Modal, Icon } from "semantic-ui-react";
 import SVGInline from "react-svg-inline";
 import { connect } from "react-redux";
 import svgContent from "../boilerFunc/svg";
+import instructionsBoiler from "../boilerFunc/instructions"
+import { Markup } from 'interweave';
+
+class NestedModal extends Component {
+  state = { open: false }
+
+  open = () => this.setState({ open: true })
+  close = () => this.setState({ open: false })
+
+  render() {
+    const { open } = this.state
+    const instructions = instructionsBoiler();
+    return (
+      <Modal
+        id = "modalInstructions"
+        open={open}
+        onOpen={this.open}
+        onClose={this.close}
+        size='small'
+        trigger={
+          <Button id="instructions_btn" animated="vertical">
+          <Button.Content hidden>
+                  <Icon name="help circle" />
+                  
+                </Button.Content>
+                <Button.Content visible>
+                  Instructions
+                </Button.Content>
+                </Button>
+        }
+      >
+        <Modal.Content id="modalInstructions">
+        <img id="octoLogo"    src="https://i.ibb.co/0K7fV9S/Octopus.png" />
+          <Markup content={instructions} />
+        </Modal.Content>
+        <Modal.Actions id="bottomModalPink">
+          <Button icon='check' content='Get Started' onClick={this.close} />
+        </Modal.Actions>
+      </Modal>
+    )
+  }
+}
 
 class ModalExampleDimmer extends Component {
   constructor(props) {
     super(props);
   }
+
+  
 
   render() {
     return (
@@ -39,6 +83,7 @@ class ModalExampleDimmer extends Component {
             </form>
           </Modal.Content>
           <Modal.Actions id="modalActions">
+            <NestedModal />
             <Button.Group>
               <Button
                 animated="vertical"
@@ -80,6 +125,7 @@ class ModalExampleDimmer extends Component {
                   Try NoSQL Demo
                 </Button.Content>
               </Button>
+
             </Button.Group>
           </Modal.Actions>
         </Modal>

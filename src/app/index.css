@@ -63,6 +63,26 @@ z-index: -5;
   }
 }
 
+p {
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  text-align: left;
+}
+
+a {
+  font-size: 20px;
+  font-weight: bold;
+  color: #e8f2f3;
+}
+
+h2 {
+  text-align: center;
+  font-family: 'Casual';
+  color: #fff;
+  font-size: 30px;
+}
+
 @-moz-keyframes sideWays { 
   0% { 
       margin-left:0px;
@@ -252,9 +272,19 @@ input[type="text"] {
   margin: 10px;
 }
 
-#modalContent, #modalHeader, #modal_LoadingHeader, #modalActions {
+#modalContent, #modalHeader, #modalInstructions, #modal_LoadingHeader, #modalActions {
   background-color: #1e858f !important;
-  animation: animateImage 3s;
+  animation: animateImage 1s;
+}
+
+#modalInstructions {
+  background-color: #F25278 !important;
+  animation: animateImage 1s;
+  text-align: center;
+}
+
+#bottomModalPink {
+  background-color: #F25278 !important;
 }
 
 label {
@@ -285,6 +315,10 @@ label {
 
 i.smallIcon {
   font-size: .8em !important; 
+}
+
+#instructions_btn {
+  float: left !important;
 }
 
 .buttonColl {
