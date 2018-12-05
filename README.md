@@ -6,6 +6,7 @@ TentaQL is an open-source, automated SQL (Postrges and MySQL) and NoSQL (MongoDB
 <img src="https://github.com/TentaQL/tentaQL/blob/master/assets/Octopus.png" align="center" height="400">
 </p>
 
+<a href="http://www.tentaql.com"><img src="https://github.com/TentaQL/tentaQL/blob/master/assets/InitialGIF.gif" alt="InitialGIF"/></a> 
 
 <p align="center"><a href="http://www.tentaql.com"><img src="https://github.com/TentaQL/tentaQL/blob/master/assets/InitialGIF.gif" alt="InitialGIF"/></a></p>
 
@@ -48,12 +49,20 @@ Once downloaded, unzip the package, cd into the directory, then run:
 ```npm start``` 
 
 Example TentaQL-created GraphQL directory:
+<<<<<<< HEAD
 <p align="center"><a href="http://www.tentaql.com"><img src="https://github.com/TentaQL/tentaQL/blob/master/assets/Final.gif" alt="finalGif"/></a></p>
+=======
+<a href="http://www.tentaql.com"><img src="https://github.com/TentaQL/tentaQL/blob/master/assets/Final.gif" alt="finalGif"/></a>
+>>>>>>> 2d165df7a9aea0bb76c477c86512e839efed33ab
 
 As soon as the server starts, a locahost will automatically launch in the browser using <a href="https://github.com/graphql/graphiql">GraphiQL</a>.  Now you can start querying your Database!
 
 Launching the GraphQL server/GraphiQL:
+<<<<<<< HEAD
 <p align="center"><a href="http://www.tentaql.com"><img src="https://github.com/TentaQL/tentaQL/blob/master/assets/First10.gif" alt="firstGif"/></a></p>
+=======
+<a href="http://www.tentaql.com"><img src="https://github.com/TentaQL/tentaQL/blob/master/assets/First10.gif" alt="firstGif"/></a>
+>>>>>>> 2d165df7a9aea0bb76c477c86512e839efed33ab
 
 Thank you so much for your time and consideration -- we're currently in Beta, and welcome any feedback / suggestions. Have a great day, and we hope you enjoy wrapping up your databases in TentaQL!
 
