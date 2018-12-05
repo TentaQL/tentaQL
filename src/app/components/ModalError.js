@@ -11,12 +11,12 @@ class ModalError extends Component {
   render() {
     return (
       <div>
-        <Modal onClick={this.props.errorModalRemove} size="mini" closeIcon open={this.props.data.errorLoader}>
+        <Modal onClick={this.props.errorModalRemove} size="small" closeIcon open={this.props.data.errorLoader}>
           <Modal.Header id="modal_ErrorHeader">
 
             <img id="octoLogo" src="https://i.ibb.co/0K7fV9S/Octopus.png" />
             <div id="loadingText">
-              We're having trouble wrapping our TentaQLs around this one ... try again!
+              Unable to wrap our TentaQLs around this URL ... please try again!
             </div>
           </Modal.Header>
         </Modal>
