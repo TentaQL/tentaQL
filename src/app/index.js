@@ -152,7 +152,6 @@ class App extends Component {
           );
         });
     }
-    connection.end();
   }
 
   render() {
