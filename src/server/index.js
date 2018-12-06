@@ -3,6 +3,7 @@ const app = express();
 const PORT = process.env.PORT || "8080";
 const bodyParser = require("body-parser");
 const cors = require("cors");
+var forceSsl = require('force-ssl-heroku');
 const mongoController = require("./controllers/controllerMongo");
 const db = require("./controllers/controllers");
 const mysqlController = require("./controllers/controllerMySQL");
@@ -12,7 +13,7 @@ app.use(cors());
 // if (process.env.NODE_ENV === 'production') {
 
 app.use(express.static("dist"));
-
+app.use(forceSsl);
 // Postgres Controller Routes
 app.post("/db", db.connect);
 app.get("/db/all", db.getTables, db.getFields, db.filterAssociations);
