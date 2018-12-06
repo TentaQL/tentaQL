@@ -3,6 +3,7 @@ const app = express();
 const PORT = process.env.PORT || "8080";
 const bodyParser = require("body-parser");
 const cors = require("cors");
+var sslRedirect = require('heroku-ssl-redirect');
 const mongoController = require("./controllers/controllerMongo");
 const db = require("./controllers/controllers");
 const mysqlController = require("./controllers/controllerMySQL");
@@ -10,7 +11,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // if (process.env.NODE_ENV === 'production') {
-
+app.use(sslRedirect());
 app.use(express.static("dist"));
 // Postgres Controller Routes
 app.post("/db", db.connect);
