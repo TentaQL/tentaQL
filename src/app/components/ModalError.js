@@ -14,7 +14,7 @@ class ModalError extends Component {
         <Modal onClick={this.props.errorModalRemove} size="small" closeIcon open={this.props.data.errorLoader}>
           <Modal.Header id="modal_ErrorHeader">
 
-            <img id="octoLogo" src="https://i.ibb.co/0K7fV9S/Octopus.png" />
+            <img id="octoLogo" src="https://i.ibb.co/P4bbpzz/Octopus-Scared.png" />
             <div id="loadingText">
               Unable to wrap our TentaQLs around this URL ... please try again!
             </div>
