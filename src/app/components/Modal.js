@@ -35,7 +35,7 @@ class NestedModal extends Component {
         }
       >
         <Modal.Content id="modalInstructions">
-        <img id="octoLogo"    src="https://i.ibb.co/0K7fV9S/Octopus.png" />
+        <img id="octoLogo"    src="https://i.ibb.co/P4bbpzz/Octopus-Scared.png" />
           <Markup content={instructions} />
         </Modal.Content>
         <Modal.Actions id="bottomModalPink">
