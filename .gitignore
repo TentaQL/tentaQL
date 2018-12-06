@@ -3,3 +3,7 @@ dist
 server.csr
 server.pass.key
 server.key
+server.crt
+www_tentaql_com.ca-bundle
+www_tentaql_com.crt
+www_tentaql_com.p7b
