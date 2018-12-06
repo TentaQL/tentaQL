@@ -1,2 +1,5 @@
 node_modules
 dist
+server.csr
+server.pass.key
+server.key
