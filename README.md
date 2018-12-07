@@ -6,13 +6,13 @@ TentaQL is an open-source, automated SQL (Postrges and MySQL) and NoSQL (MongoDB
 <img src="https://github.com/TentaQL/tentaQL/blob/master/assets/Octopus.png" align="center" height="400">
 </p>
 
-<p align="center"><a href="http://www.tentaql.com"><img src="https://github.com/TentaQL/tentaQL/blob/master/assets/InitialGIF.gif" alt="InitialGIF"/></a></p>
+<p align="center"><a href="http://www.tentaql.com"><img src="https://github.com/TentaQL/tentaQL/blob/master/assets/Gif_interface.gif" alt="InitialGIF"/></a></p>
 
 By visiting our easy-to-use browser app at Tentaql.com -- no complicated logins required, just a simple database URI -- TentaQL introspects schematic data and assembles a lightweight zip package for running a tailor-made GraphQL sandbox environment for the user's database. The zip comes complete with core CRUD query/mutation functionality and support for complex relationships, all while leveraging GraphiQL, an industry-leading visualization tool. For more experienced users, TentaQL also offers in-browser editibility to further customize queries/mutations/subscriptions prior to download.
 
 While there are currently several fantastic providers offering similar schema-introspection for legacy databases -- notably, Prisma and Postgraphile -- the initial setup for these services can be prohibitively time-consuming, involving heavy downloads, and a steep learning curve for teams new to the GraphQL environment looking for a simple, speedy experimentation tool for potential migration to GraphQL.
 
-<p align="center"><a href="http://www.tentaql.com"><img src="https://github.com/TentaQL/tentaQL/blob/master/assets/SecondGif.gif" alt="secondGif"/></a></p>
+<p align="center"><a href="http://www.tentaql.com"><img src="https://github.com/TentaQL/tentaQL/blob/master/assets/Gif_Scroll.gif" alt="Scrolled Gif"/></a></p>
 
 # How to use
 
@@ -43,17 +43,20 @@ You can also:
 
 Once downloaded, unzip the package, cd into the directory, then run:
 
-```run npm install```
+```npm install```
 
-```npm start``` 
+```npm run start``` 
 
-Example TentaQL-created GraphQL directory:
-<p align="center"><a href="http://www.tentaql.com"><img src="https://github.com/TentaQL/tentaQL/blob/master/assets/Final.gif" alt="finalGif"/></a></p>
+GraphQL server custom-built for MySQL database:
+<p align="center"><a href="http://www.tentaql.com"><img src="https://github.com/TentaQL/tentaQL/blob/master/assets/Gif_NPMinstall.gif" alt="finalGif"/></a></p>
 
+<p align="center"><a href="http://www.tentaql.com"><img src="https://github.com/TentaQL/tentaQL/blob/master/assets/Gif_npmrunStart.gif" alt="NPM start"/></a></p>
+
+Example GraphQL server created for MySQL:
 As soon as the server starts, a locahost will automatically launch in the browser using <a href="https://github.com/graphql/graphiql">GraphiQL</a>.  Now you can start querying your Database!
 
-Launching the GraphQL server/GraphiQL:
-<p align="center"><a href="http://www.tentaql.com"><img src="https://github.com/TentaQL/tentaQL/blob/master/assets/First10.gif" alt="firstGif"/></a></p>
+Making a Query on the GraphiQL interface:
+<p align="center"><a href="http://www.tentaql.com"><img src="https://github.com/TentaQL/tentaQL/blob/master/assets/Gif_GraphQLQuery.gif" alt="GraphiQL Query"/></a></p>
 
 Thank you so much for your time and consideration -- we're currently in Beta, and welcome any feedback / suggestions. Have a great day, and we hope you enjoy wrapping up your databases in TentaQL!
 
