@@ -50,6 +50,10 @@ Example GraphQL server created for MySQL:
 
 As soon as the server starts, a locahost will automatically launch in the browser using <a href="https://github.com/graphql/graphiql">GraphiQL</a>.  Now you can start querying your Database!
 
+<p align="center">
+<img src="https://github.com/TentaQL/tentaQL/blob/master/assets/GraphiQL.png" align="center" height="400">
+</p>
+
 Making a Query on the GraphiQL interface:
 <p align="center"><a href="http://www.tentaql.com"><img src="https://github.com/TentaQL/tentaQL/blob/master/assets/Gif_GraphQLQuery.gif" alt="GraphiQL Query"/></a></p>
 
