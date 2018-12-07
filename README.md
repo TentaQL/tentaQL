@@ -1,6 +1,6 @@
 # TentaQL
 
-TentaQL is an open-source, automated SQL (Postrges and MySQL) and NoSQL (MongoDB) introspection and GraphQL conversion tool, providing users a highly customizable GraphQL package to get their legacy databases up and running with GraphQL in minutes. 
+TentaQL is a fully automated tool for GraphQL data-abstraction-layer creation, with built-in support for PostgreSQL, Mongo, and MySQL. By visiting our easy-to-use browser app at tentaql.com -- no complicated logins required, just a simple database URI -- TentaQL introspects schematic data and assembles a lightweight zip package for running a tailor-made GraphQL sandbox environment for the user's database. The zip comes complete with core CRUD query/mutation functionality and support for complex relationships, all while leveraging GraphiQL, an industry-leading visualization tool. For more experienced users, TentaQL also offers in-browser editing to further customize queries/mutations/subscriptions prior to download.
 
 <p align="center">
 <img src="https://github.com/TentaQL/tentaQL/blob/master/assets/Octopus.png" align="center" height="400">
@@ -8,7 +8,7 @@ TentaQL is an open-source, automated SQL (Postrges and MySQL) and NoSQL (MongoDB
 
 <p align="center"><a href="http://www.tentaql.com"><img src="https://github.com/TentaQL/tentaQL/blob/master/assets/Gif_interface.gif" alt="InitialGIF"/></a></p>
 
-By visiting our easy-to-use browser app at Tentaql.com -- no complicated logins required, just a simple database URI -- TentaQL introspects schematic data and assembles a lightweight zip package for running a tailor-made GraphQL sandbox environment for the user's database. The zip comes complete with core CRUD query/mutation functionality and support for complex relationships, all while leveraging GraphiQL, an industry-leading visualization tool. For more experienced users, TentaQL also offers in-browser editibility to further customize queries/mutations/subscriptions prior to download.
+Why use TentaQL?
 
 While there are currently several fantastic providers offering similar schema-introspection for legacy databases -- notably, Prisma and Postgraphile -- the initial setup for these services can be prohibitively time-consuming, involving heavy downloads, and a steep learning curve for teams new to the GraphQL environment looking for a simple, speedy experimentation tool for potential migration to GraphQL.
 
@@ -22,7 +22,6 @@ Paste your database address in the URL box, and click "Convert your DB". (Note: 
 <img src="https://github.com/TentaQL/tentaQL/blob/master/assets/demo1.png" align="center" height="400">
 </p>
 
-
 Your database is converted to GraphQL language. You should now see the schema.
 
 <p align="center">
@@ -35,7 +34,7 @@ You can also:
 * download converted files by clicking on "Download Original Zip"
 * edit schema or resolvers and download edited files by clicking on "Download Edited Zip"
 * reset schema or resolvers to it's original state by clicking on "Reset Tab" or reset schema and resolvers by clicking on "Reset All"
-* copy chosen tab by clicking on "Copy Tab"
+* copy current tab view by clicking the "Copy" button
 
 <p align="center">
 <img src="https://github.com/TentaQL/tentaQL/blob/master/assets/demo3.png" align="center" height="400">
@@ -47,12 +46,11 @@ Once downloaded, unzip the package, cd into the directory, then run:
 
 ```npm run start``` 
 
-GraphQL server custom-built for MySQL database:
 <p align="center"><a href="http://www.tentaql.com"><img src="https://github.com/TentaQL/tentaQL/blob/master/assets/Gif_NPMinstall.gif" alt="finalGif"/></a></p>
 
+Example GraphQL server created for MySQL:
 <p align="center"><a href="http://www.tentaql.com"><img src="https://github.com/TentaQL/tentaQL/blob/master/assets/Gif_npmrunStart.gif" alt="NPM start"/></a></p>
 
-Example GraphQL server created for MySQL:
 As soon as the server starts, a locahost will automatically launch in the browser using <a href="https://github.com/graphql/graphiql">GraphiQL</a>.  Now you can start querying your Database!
 
 Making a Query on the GraphiQL interface:
