@@ -141,7 +141,6 @@ export default function reducer(state = {}, action) {
         }
       zip
         .folder("tentaQL")
-        .folder("server")
         .file("index.js", mysql_serverCreator(state.saved_url));
       zip
         .folder("tentaQL")
