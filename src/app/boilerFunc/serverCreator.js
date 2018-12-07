@@ -3,7 +3,7 @@ function serverCreator() {
   
   const express = require("express");
   
-  const PORT = "7000";
+  const PORT = "8642";
   const expressGraphQL = require("express-graphql");
   const bodyParser = require("body-parser");
   const cors = require("cors");
@@ -15,7 +15,7 @@ function serverCreator() {
   app.use(cors(), bodyParser.json());
   
   app.listen(PORT, () => {
-    console.log("Server running on port 7000");
+    console.log("console.log('Greetings from the TentalQL team! To get started with graphQL and your Postgres Database, please go to http://localhost:8642/graphql');");
   });
 
   `;

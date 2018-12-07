@@ -8,6 +8,7 @@ function mongo_serverCreator(uri) {
     const app = express();
     const mongoose = require('mongoose');
     const MongoDB = '${uri}';
+    const PORT = "8642";
     
     mongoose.connect(MongoDB, { useNewUrlParser: true }, () => console.log('We are now connected to your Mongo Database'));
     
@@ -18,8 +19,8 @@ function mongo_serverCreator(uri) {
         graphiql: true 
     }));
     
-    app.listen(2468, () => {
-      console.log('To get started, please head over to http://localhost:2468/graphql')
+    app.listen(PORT, () => {
+      console.log("console.log('Greetings from the TentalQL team! To get started with graphQL and your Mongo Database, please go to http://localhost:8642/graphql');");
     });
     `;
     return mongoAdapter;

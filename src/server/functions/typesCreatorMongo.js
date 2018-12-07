@@ -5,7 +5,7 @@
         let topOutput = `const graphql = require('graphql');`;
         collKeys.forEach(coll => {
         topOutput += `
-const ${coll}_model = require('../db/${coll}.js');`
+const ${coll}_model = require('../server/db/${coll}.js');`
         })
 
         topOutput += `
@@ -314,7 +314,6 @@ MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 */
 `
-// console.log(totalString);
 return totalString
 }
 

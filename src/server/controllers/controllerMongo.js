@@ -13,7 +13,6 @@ const controllerMongo = {};
 // const url ="mongodb://admin1:admin1@ds055485.mlab.com:55485/datacenter"
 controllerMongo.getDatabase = (req, res, next) => {
   let schemasArr = [[], []];
-  console.log('About to Connect to MongoDB')
   let url = req.query.url;
   let dbConn = mongoose.createConnection(
     url,

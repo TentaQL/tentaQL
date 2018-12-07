@@ -107,6 +107,7 @@ export default function reducer(state = {}, action) {
         }
       zip
         .folder("tentaQL")
+        .folder("server")
         .file("index.js", mongo_serverCreator(state.saved_url));
       zip
         .folder("tentaQL")

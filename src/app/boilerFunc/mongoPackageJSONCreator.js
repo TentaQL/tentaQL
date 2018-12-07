@@ -20,7 +20,7 @@ function mongo_packageJSONCreator() {
         },
         "keywords": [
           "GraphQL",
-          "Postgres",
+          "MongoDB",
           "Schema"
         ],
         "author": "Anna Brakowska, Jonathan Schwartz, Jonah Wilkoff, Alan Thompson",
