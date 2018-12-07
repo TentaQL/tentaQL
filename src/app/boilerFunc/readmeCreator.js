@@ -1,10 +1,14 @@
-function readmeCreator(database, uri) {
+function readmeCreator(database, url) {
+  if (url[url.length-1] === '/') {
+    url = url.slice(0, -1);
+  }
+  var dbName = url.substring(url.lastIndexOf('/') + 1);
   const readme = `
 # GraphQL, Meet ${database}!
 
-## Your Database URI: ${uri}
-
 ## Hello again from Tentaql!
+
+### Requested Database: *${dbName}*
 
 <p align="center">
 <img src="https://github.com/TentaQL/tentaQL/raw/master/assets/Octopus.png" align="center" height="400">
@@ -16,15 +20,15 @@ function readmeCreator(database, uri) {
 <img src="https://github.com/TentaQL/tentaQL/raw/master/assets/GraphiQL.png" align="center" height="400">
 </p>
 
-Your ${database} database is now linked up to GraphQL!
+Your ${database} database, *${dbName}*, is officially linked to a GraphQL playground environment!
 
-Please navigate into this directory in your terminal, then run the following commands:
+Please navigate into this directory in your terminal, then run the following commands to run the server:
 
-npm install
+*npm install*
 
-npm run start
+*npm run start*
 
-As soon as the server starts, a localhost will automatically launch your browser using <a href="https://github.com/graphql/graphiql">GraphiQL</a>.Now you can start querying/mutating your Database!
+As soon as the server starts, a localhost will automatically launch your browser using <a href="https://github.com/graphql/graphiql">GraphiQL</a>. Now you can start running queries and mutations on *${dbName}*!
 
 # Authors
 

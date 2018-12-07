@@ -3,7 +3,7 @@ function mongo_serverCreator(uri) {
   
     const express = require('express');
     const graphqlHTTP = require('express-graphql');
-    const schema = require('./graphql-schema');
+    const schema = require('./../graphql-schema');
     const path = require('path');
     const app = express();
     const mongoose = require('mongoose');

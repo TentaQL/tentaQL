@@ -4,6 +4,7 @@ function mysql_serverCreator() {
   const schema = require('./graphql-schema');
   const app = express();
   const open = require("open");
+  const PORT = "2468";
   
   app.use('/graphql', graphqlHTTP({
       schema,
