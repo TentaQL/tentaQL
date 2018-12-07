@@ -48,7 +48,7 @@ Once downloaded, unzip the package, cd into the directory, then run:
 Example GraphQL server created for MySQL:
 <p align="center"><a href="http://www.tentaql.com"><img src="https://github.com/TentaQL/tentaQL/blob/master/assets/Gif_npmrunStart.gif" alt="NPM start"/></a></p>
 
-As soon as the server starts, a locahost will automatically launch in the browser using <a href="https://github.com/graphql/graphiql">GraphiQL</a>.  Now you can start querying your Database!
+As soon as the server starts, a localhost will automatically launch in the browser using <a href="https://github.com/graphql/graphiql">GraphiQL</a>.  Now you can start querying your Database!
 
 <p align="center">
 <img src="https://github.com/TentaQL/tentaQL/blob/master/assets/GraphiQL.png" align="center" height="400">
