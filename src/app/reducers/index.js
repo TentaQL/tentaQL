@@ -117,9 +117,9 @@ export default function reducer(state = {}, action) {
         .folder("tentaQL")
         .folder("graphql-schema")
         .file("index.js", splitArr[0])
-      zip
-        .folder("tentaQL")
-        .file("README.md", readmeCreator("MongoDB", state.saved_url));
+      // zip
+      //   .folder("tentaQL")
+      //   .file("README.md", readmeCreator("MongoDB", state.saved_url));
       let i = 2; 
       while (i < splitArr.length - 2){
         var regex = /[^\n\s]+(?=\.js)/;
@@ -153,9 +153,9 @@ export default function reducer(state = {}, action) {
         .folder("tentaQL")
         .folder("graphql-schema")
         .file("index.js", fullText);
-      zip
-        .folder("tentaQL")
-        .file("README.md", readmeCreator("MySQL", state.saved_url));
+      // zip
+      //   .folder("tentaQL")
+      //   .file("README.md", readmeCreator("MySQL", state.saved_url));
 
       zip.generateAsync({ type: "blob" }).then(function(blob) {
         saveAs(blob, `TentaQL_mysql.zip`);
@@ -198,9 +198,9 @@ export default function reducer(state = {}, action) {
             .folder("graphql")
             .folder("schema")
             .file("typeDefs.js", schema);
-          zip
-            .folder("tentaQL")
-            .file("README.md", readmeCreator("Postgres", state.saved_url));
+          // zip
+          //   .folder("tentaQL")
+          //   .file("README.md", readmeCreator("Postgres", state.saved_url));
           zip.folder("tentaQL").file("package.json", packageJSONCreator());
           zip.generateAsync({ type: "blob" }).then(function(blob) {
             saveAs(blob, `TentaQL_postgres.zip`);
