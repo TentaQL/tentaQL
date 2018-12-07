@@ -15,6 +15,7 @@ const mongo_serverCreator = require("../boilerFunc/mongo_serverCreator");
 const mongoPackageJsonCreator = require("../boilerFunc/mongoPackageJSONCreator");
 const mysql_serverCreator = require("../boilerFunc/mysql_serverCreator");
 const mysqlPackageJSONCreator = require("../boilerFunc/mysql_packageJSONCreator");
+const readmeCreator = require("../boilerFunc/readmeCreator");
 const schemaCreator = require("../boilerFunc/schemaCreator");
 const psqlAdapterCreator = require("../boilerFunc/psqlAdapterCreator");
 const packageJSONCreator = require("../boilerFunc/packageJSONCreator");
