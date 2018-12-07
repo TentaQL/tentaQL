@@ -180,7 +180,6 @@ function mutationResolver(obj) {
     let table = allTables[i];
     let allFields = Object.keys(obj[allTables[i]]).slice(1);
     let idField = Object.keys(obj[allTables[i]])[0];
-    console.log(idField);
 
     //CREATE RESOLVER
     //DELETE RESOLVER

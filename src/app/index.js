@@ -99,13 +99,10 @@ class App extends Component {
       this.setState({ modalLoader: true, modal: false });
       fetch(mongoURL)
         .then(res => {
-          console.log("In Mongo First Call")
           return res.json();
         })
         .then(res => {
-          console.log("Received Data: ", res);
           if (res.name === "MongoNetworkError") {
-            console.log("Triggered Mongo Error")
                 this.setState({ modalLoader: false, errorLoader: true, url: "" });
           }
           store.dispatch(saveData(res));
@@ -119,7 +116,6 @@ class App extends Component {
       // MySQL URL check to trigger MySQL Server Routing
     } else if (credentials.url.includes("mysql://")) {
       this.setState({ modalLoader: true, modal: false });
-      console.log("Triggered MySQL call");
       let mysqlURL = `/db/mysql?url=${credentials.url}`;
       fetch(mysqlURL, {
         headers: { "Content-Type": "application/json; charset=utf-8" }
@@ -129,9 +125,7 @@ class App extends Component {
           return res.text();
         })
         .then(res => {
-          console.log("Res from mySQL call: ", res);
           if (res === "MYSQL Error"){
-            console.log("Triggered MySQL Error")
             this.setState({ modalLoader: false, errorLoader: true, url: "" });
             res = "";
             return res;
@@ -159,9 +153,7 @@ class App extends Component {
               return res.json();
             })
             .then(res => {
-              console.log("Res from Postgres call: ", res);
               if (res.name == "error" || res.errno) {
-                console.log("Triggered Postgres Error")
                 this.setState({ modalLoader: false, errorLoader: true, url: "" });
               }
               store.dispatch(saveData(res));
@@ -181,7 +173,6 @@ class App extends Component {
         });
         // this.setState({ modalLoader: false, errorLoader: true, url: "" });
     } else {
-      console.log("Triggered Unknown URL Error ...");
       this.setState({ modalLoader: false, errorLoader: true, url: "" });
     }
   }

@@ -57,7 +57,7 @@ As soon as the server starts, a locahost will automatically launch in the browse
 Making a Query on the GraphiQL interface:
 <p align="center"><a href="http://www.tentaql.com"><img src="https://github.com/TentaQL/tentaQL/blob/master/assets/Gif_GraphQLQuery.gif" alt="GraphiQL Query"/></a></p>
 
-# Why choose TentaQL?
+## Why choose TentaQL?
 
 While there are currently several fantastic providers offering similar schema-introspection for legacy databases -- notably, Prisma and Postgraphile -- the initial setup for these services can be prohibitively time-consuming, involving heavy downloads, and a steep learning curve for teams new to the GraphQL environment looking for a simple, speedy experimentation tool for potential migration to GraphQL.
 
