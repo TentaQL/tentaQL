@@ -3,15 +3,18 @@ function mysql_serverCreator() {
   const graphqlHTTP = require('express-graphql');
   const schema = require('./graphql-schema');
   const app = express();
+  const open = require("open");
   
   app.use('/graphql', graphqlHTTP({
       schema,
       graphiql: true 
   }));
   
-  app.listen(8642, () => {
-    console.log('Greetings from the TentalQL team! To get started with graphQL and your MySQL Database, please go to http://localhost:8642/graphql');
+  app.listen(PORT, () => {
+    console.log('Greetings from the TentalQL team! To get started with graphQL and your MySQL Database, please go to http://localhost:2468/graphql');
   });
+  
+  open("http://localhost:2468/graphql");
   `;
   return mysqlAdapter;
 }

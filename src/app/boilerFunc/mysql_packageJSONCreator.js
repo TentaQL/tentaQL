@@ -41,7 +41,8 @@ function mysqlPackageJSONCreator() {
       "graphql-server-express": "^1.4.0",
       "graphql-tools": "^4.0.3",
       "merge-graphql-schemas": "^1.5.8",
-      "promise-mysql": "^3.3.1"
+      "promise-mysql": "^3.3.1",
+      "open": "0.0.5"
     }
   }
 `;

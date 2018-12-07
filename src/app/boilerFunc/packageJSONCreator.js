@@ -45,7 +45,8 @@ function packageJSONCreator() {
     "nodemon": "^1.18.6",
     "pg": "^7.6.1",
     "pg-connection-string": "^2.0.0",
-    "pg-promise": "^8.5.2"
+    "pg-promise": "^8.5.2",
+    "open": "0.0.5"
   }
 }
 `;

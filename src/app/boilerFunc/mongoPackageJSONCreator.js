@@ -36,7 +36,8 @@ function mongo_packageJSONCreator() {
           "express": "^4.16.4",
           "express-graphql": "^0.7.1",
           "graphql": "^14.0.2",
-          "mongoose": "^5.3.13"
+          "mongoose": "^5.3.13",
+          "open": "0.0.5"
         }
       }
   `;
