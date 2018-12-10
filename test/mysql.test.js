@@ -7,26 +7,37 @@ const request = require('supertest')(url);
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 
-describe('GraphQL', () => {
+describe('GraphQL MySQL Server Testing:', () => {
   // Tests
-  console.log("Request: ", request)
-  it('Returns Dog name with id = 2', (done) => {
+  it('Returns an instance of Dog Type dog properties, even if null', (done) => {
     request.post('graphql')
     .send({ query: "query { Dog(id: 2) { name Owner species collarID id hasFleas favoriteFood } }"})
     .expect(200)
     .end((err, res) => {
       if (err) return done(err);
-      res.body.data.Dog.should.have.property('Owner')
-      res.body.data.Dog.should.have.property('species')
-      res.body.data.Dog.should.have.property('collarID')
-      res.body.data.Dog.should.have.property('hasFleas')
-      res.body.data.Dog.should.have.property('favoriteFood')
-      res.body.data.Dog.should.have.property('species')
+      let Dog = res.body.data.Dog;
+      Dog.should.have.property('Owner')
+      Dog.should.have.property('species')
+      Dog.should.have.property('collarID')
+      Dog.should.have.property('hasFleas')
+      Dog.should.have.property('favoriteFood')
       done();
     })
   })
 
-  it('Returns all Dogs', (done) => {
+  it('Returns a dog that does not have any human properties ', (done) => {
+    request.post('graphql')
+    .send({ query: "query { Dog(id: 2) { name Owner species collarID id hasFleas favoriteFood } }"})
+    .expect(200)
+    .end((err, res) => {
+      if (err) return done(err);
+      let Dog = res.body.data.Dog;
+      Dog.should.not.have.property('ageHumanYears')
+      done();
+    })
+  })
+
+  it('Return all Dogs', (done) => {
     request.post('graphql')
     .send({ query: "query { everyDog { name Owner species collarID id hasFleas favoriteFood }}"})
     .expect(200)
@@ -39,4 +50,5 @@ describe('GraphQL', () => {
       done();
     })
   })
+  
 });

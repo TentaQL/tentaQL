@@ -86,6 +86,6 @@ Thank you so much for your time and consideration -- we're currently in Beta, an
 * MongoDB
 * PostgreSQL
 * Codemirror
-* Mocha, Chai, Supertest
+* BDD/TDD using Mocha, Chai, Supertest
 * SemanticUI-React
 * Webpack, Babel
