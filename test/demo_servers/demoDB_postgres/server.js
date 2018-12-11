@@ -2,7 +2,7 @@
   
   const express = require("express");
   
-  const PORT = "2468";
+  const PORT = "2470";
   const expressGraphQL = require("express-graphql");
   const bodyParser = require("body-parser");
   const cors = require("cors");
@@ -16,8 +16,8 @@
   app.use(cors(), bodyParser.json());
   
   app.listen(PORT, () => {
-    console.log("console.log('Greetings from the TentalQL team! To get started with graphQL and your Postgres Database, please go to http://localhost:2468/graphql');");
+    console.log("console.log('Greetings from the TentalQL team! To get started with graphQL and your Postgres Database, please go to http://localhost:2470/graphql');");
   });
 
-  open("http://localhost:2468/graphql");
+  open("http://localhost:2470/graphql");
   

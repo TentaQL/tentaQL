@@ -22,7 +22,7 @@ function mongo_serverCreator(uri) {
     }));
     
     app.listen(PORT, () => {
-      console.log("console.log('Greetings from the TentalQL team! To get started with graphQL and your Mongo Database, please go to http://localhost:8642/graphql');");
+      console.log("console.log('Greetings from the TentalQL team! To get started with graphQL and your Mongo Database, please go to http://localhost:2468/graphql');");
     });
     open("http://localhost:2468/graphql");
     `;

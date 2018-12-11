@@ -1,5 +1,4 @@
-
-  {
+{
   "name": "tentaql",
   "version": "1.0.0",
   "description": "Automated GraphQL Schema Creator",
@@ -13,7 +12,7 @@
   },
   "babel": {
     "presets": [
-        "@babel/env"
+      "@babel/env"
     ]
   },
   "keywords": [

@@ -7,7 +7,7 @@
     const app = express();
     const mongoose = require('mongoose');
     const MongoDB = 'mongodb://admin1:admin1@ds055485.mlab.com:55485/datacenter';
-    const PORT = "2468";
+    const PORT = "2469";
     const open = require("open");
 
     
@@ -21,7 +21,7 @@
     }));
     
     app.listen(PORT, () => {
-      console.log("console.log('Greetings from the TentalQL team! To get started with graphQL and your Mongo Database, please go to http://localhost:8642/graphql');");
+      console.log("console.log('Greetings from the TentalQL team! To get started with graphQL and your Mongo Database, please go to http://localhost:2469/graphql');");
     });
-    open("http://localhost:2468/graphql");
+    open("http://localhost:2469/graphql");
     

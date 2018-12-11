@@ -213,7 +213,7 @@ describe('GraphQL Mutation Testing with MySQL:', () => {
     })
   })
 
-  it('Updated Dog is saved in Database', (done) => {
+  it('Updated Dog is saved in Database with updated values', (done) => {
     request.post('graphql')
     .send({ query: `query {
       Dog(id: 25) {
