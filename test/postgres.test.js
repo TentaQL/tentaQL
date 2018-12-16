@@ -10,17 +10,20 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
   describe('GraphQL Query Testing with Postgres:', () => {
     it('Query By ID returns a customer with all customer properties, even if null', (done) => {
       request.post('graphql')
-      .send({ query: `query { authorsById(id: "5bf85a116f4ae18093b6d2db" ) { name age hasPublished linked_stories { id } location stories} }`})
+      .send({ query: `query {
+        customersByID(customerid:2) {
+          lastname
+          firstname
+          phone
+        }
+      }`})
       .expect(200)
       .end((err, res) => {
         if (err) return done(err);
-        let author = res.body.data.authorsById;
-        author.should.have.property('name')
-        author.should.have.property('age')
-        author.should.have.property('hasPublished')
-        author.should.have.property('linked_stories')
-        author.should.have.property('location')
-        author.should.have.property('stories')
+        let customer = res.body.data.customersByID;
+        customer.should.have.property('lastname')
+        customer.should.have.property('firstname')
+        customer.should.have.property('phone')
         done();
       })
     })
@@ -256,4 +259,4 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
   //     })
   //   })
   // });
-
+  });
