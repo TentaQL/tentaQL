@@ -2,11 +2,11 @@
   const typeDefs = `
     type Query { 
         customers:[Customers]
-        customersByID(id:ID):Customers
+        customersByID(customerid:ID):Customers
         orders:[Orders]
-        ordersByID(id:ID):Orders
+        ordersByID(orderid:ID):Orders
         stores:[Stores]
-        storesByID(id:ID):Stores
+        storesByID(storeid:ID):Stores
     }
 
     type Mutation { 

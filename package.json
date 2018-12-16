@@ -17,7 +17,7 @@
     "server": "nodemon src/server/index.js",
     "build": "webpack",
     "postinstall": "webpack -p",
-    "testServers": "concurrently \"node test/demo_servers/demoDB_mysql/index.js\" \"node test/demo_servers/demoDB_postgres/server.js\" \"node test/demo_servers/demoDB_mongo/server/index.js\"",
+    "testServers": "concurrently \"node test/demo_servers/demoDB_mysql/index.js\" \"node test/demo_servers/postgres_demo_DB/server.js\" \"node test/demo_servers/demoDB_mongo/server/index.js\"",
     "start": "node ./src/server/index.js",
     "test": "mocha test/*.test.js"
   },

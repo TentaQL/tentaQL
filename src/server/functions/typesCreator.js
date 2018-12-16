@@ -1,4 +1,4 @@
-// const pluralize = require("pluralize");
+const pluralize = require("pluralize");
 
 //HELPER FUNCTIONS
 function initialCapitalizer(str) {
@@ -47,10 +47,11 @@ function queriesCreator(obj) {
   let output = ``;
 
   allTables.map(table => {
+    let tableSingular = pluralize.singular(table);
     if (table !== "primaryKeys" && table !== "foreignTables") {
       output += `
         ${table}:[${initialCapitalizer(table)}]
-        ${table}ByID(id:ID):${initialCapitalizer(table)}`;
+        ${table}ByID(${tableSingular}id:ID):${initialCapitalizer(table)}`;
     }
   });
   return output;
