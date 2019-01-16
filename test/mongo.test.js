@@ -33,6 +33,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
         if (err) return done(err);
         let author = res.body.data.authorsById;
         author.should.not.have.property('title')
+        author.should.not.have.property('isOnAmazon');
         done();
       })
     })
